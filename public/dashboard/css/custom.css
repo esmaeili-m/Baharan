@@ -1,0 +1,19 @@
+/*#43B0F1*/
+.active_route{
+    background-color: #e5e4e4 !important;
+}
+.border-radius-custom {
+    border-radius: 6px !important;
+}
+.form-control {
+    padding-right: 5px !important;
+}
+input {
+    transition: border 0s !important; /* غیرفعال کردن ترنزیشن برای بوردر */
+}
+.select2 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}
