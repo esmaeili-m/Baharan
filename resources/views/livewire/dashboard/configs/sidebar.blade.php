@@ -38,6 +38,12 @@
                         <span>دسته بندی ها</span>
                     </a>
                 </li>
+                <li  class="{{request()->routeIs('user.*') ? 'active active_route' : ''}}">
+                    <a href="{{route('user.list')}}">
+                        <i class="menu-icon ti-list"></i>
+                        <span>کاربران</span>
+                    </a>
+                </li>
                 <li  class="{{request()->routeIs('post.*') ? 'active active_route' : ''}}">
                     <a href="{{route('post.list')}}">
                         <i class="menu-icon ti-image"></i>

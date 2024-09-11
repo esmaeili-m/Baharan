@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/panel',\App\Livewire\Dashboard\Index::class)->name('dashboard');
 //-------------------------------------------------------{ UploadImage } ---------------------------------------
 Route::post('/upload-image-tinymce', [\App\Http\Controllers\UploadController::class, 'upload_image_tinymc']);
+//-------------------------------------------------------{ Users } ---------------------------------------
+Route::get('/user/list',\App\Livewire\Dashboard\Users\Index::class)->name('user.list');
+Route::get('/user/create',\App\Livewire\Dashboard\Users\Create::class)->name('user.create');
+Route::get('/user/update/{id}',\App\Livewire\Dashboard\Users\Update::class)->name('user.update');
+Route::get('/user/trash',\App\Livewire\Dashboard\Users\Trash::class)->name('user.trash');
 //-------------------------------------------------------{ Category } ---------------------------------------
 Route::get('/category/list',\App\Livewire\Dashboard\Category\Index::class)->name('category.list');
 Route::get('/category/create',\App\Livewire\Dashboard\Category\Create::class)->name('category.create');
