@@ -7,46 +7,35 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
-                    <a href="{{route('user.create')}}"><button class="btn-hover btn-border-radius color-7 border-radius-custom">افزودن کاربر</button></a>
-                    <a href="{{route('user.trash')}}"><button class="btn-hover btn-border-radius color-8 border-radius-custom">سطل آشغال ( {{\App\Models\User::onlyTrashed()->count()}} )</button></a>
+                    <a href="{{route('product.create')}}"><button class="btn-hover btn-border-radius color-7 border-radius-custom">افزودن محصول</button></a>
+                    <a href="{{route('product.trash')}}"><button class="btn-hover btn-border-radius color-8 border-radius-custom">سطل آشغال ( {{\App\Models\Product::onlyTrashed()->count()}} )</button></a>
                 </div>
                 <div class="row mt-3 mx-2">
                     <div class="col-2">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text"
-                                           wire:model.defer="name"
-                                           class="form-control"
-                                           placeholder="نام کاربر را وارد کنید">
-                                </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text"
+                                       wire:model.defer="name"
+                                       class="form-control"
+                                       placeholder="نام محصول را وارد کنید">
                             </div>
+                        </div>
                     </div>
                     <div class="col-2">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text"
-                                           wire:model.defer="phone"
-                                           class="form-control"
-                                           placeholder="شماره کاربر را وارد کنید">
-                                </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text"
+                                       wire:model.defer="barcode"
+                                       class="form-control"
+                                       placeholder="بارکد محصول را وارد کنید">
                             </div>
-                    </div>
-                    <div class="col-2">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text"
-                                           wire:model.defer="code_meli"
-                                           class="form-control"
-                                           placeholder="کدملی کاربر را وارد کنید">
-                                </div>
-                            </div>
+                        </div>
                     </div>
                     <div class="col-2">
                         <div wire:ignore class="select2 input-field col s12">
                             <select wire:model.defer="role_id">
-                                <option value="" disabled >نقش ها</option>
-                                <option value="0" selected>همه</option>
-                                @foreach(\App\Models\Role::where('status',2)->pluck('title','id') as $key => $item)
+                                <option value="" disabled >دسته محصول</option>
+                                @foreach(\App\Models\Category::where('status',2)->pluck('title','id') as $key => $item)
                                     <option value="{{$key}}">{{$item}}</option>
                                 @endforeach
                             </select>
@@ -55,17 +44,16 @@
                     <div class="col-2">
                         <div wire:ignore class="select2 input-field col s12">
                             <select wire:model.defer="status">
-                                <option value="" disabled >وضعیت کاربر</option>
+                                <option value="" disabled >وضعیت محصول</option>
                                 <option value="0" selected> همه</option>
-                                <option value="1">عدم تایید</option>
-                                <option value="2">درانتضار تایید نهایی</option>
-                                <option value="3">تایید شده</option>
+                                <option value="1">غیر فعال</option>
+                                <option value="2">فعال</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-2">
                         <div wire:loading.remove class="btn-group " role="group">
-                            <button wire:click="fillter()"  style="height: 55px;border-radius-: 5px" class="btn btn-outline-info"><i class="fa fa-search"></i></button>
+                            <button wire:click="fillter()"  style="height: 55px;border-radius: 5px" class="btn btn-outline-info"><i class="fa fa-search"></i></button>
                             <button wire:click="reset_search()" type="button" style="height: 55px;border-radius: 5px" class="btn btn-outline-warning"><i class="fa fa-times"></i></button>
 
                         </div>
@@ -78,10 +66,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>تصویر</th>
                             <th>نام</th>
-                            <th>شماره</th>
-                            <th>کدملی</th>
-                            <th>نقش</th>
+                            <th>بارکد</th>
+                            <th>قیمت</th>
+                            <th>موجودی</th>
                             <th>وضعیت</th>
                             <th>عملیات</th>
                         </tr>
@@ -93,22 +82,23 @@
                         @foreach($data ?? [] as $item)
                             <tr >
                                 <th scope="row">{{$counter}}</th>
+                                <td>
+                                    <img width="80px" height="80px" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 5px"
+                                         alt="{{$item->name}}" src="{{asset($item->image ?? 'uploads/default/categories/default.png')}}">
+                                </td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->phone}}</td>
-                                <td>{{$item->code_meli}}</td>
-                                <td>{{$item->role->title ?? 'Unknow'}}</td>
-
+                                <td>#{{$item->barcode}}</td>
+                                <td>{{number_format($item->price)}}</td>
+                                <td>{{number_format($item->stock)}}</td>
                                 <td>
                                     @if($item->status == 1)
-                                        <button  type="button" class="btn btn-outline-danger btn-border-radius">عدم تایید</button>
-                                    @elseif($item->status == 2)
-                                        <button  type="button" class="btn btn-outline-warning btn-border-radius">درانتظار تایید</button>
+                                        <button wire:click="change_status({{$item->id}})"  type="button" class="btn btn-outline-danger btn-border-radius">غیر فعال</button>
                                     @else
-                                        <button type="button" class="btn btn-outline-success btn-border-radius">تایید شده</button>
+                                        <button wire:click="change_status({{$item->id}})" type="button" class="btn btn-outline-success btn-border-radius">فعال</button>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('user.update',$item->id)}}"><button class="btn tblActnBtn">
+                                    <a href="{{route('product.update',$item->id)}}"><button class="btn tblActnBtn">
                                             <i class="material-icons">mode_edit</i>
                                         </button>
                                     </a>

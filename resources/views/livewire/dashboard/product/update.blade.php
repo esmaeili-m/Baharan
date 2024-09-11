@@ -7,23 +7,23 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
-                    <h2>ساخت دسته بندی</h2>
+                    <h2>ساخت محصول</h2>
                 </div>
                 <div class="body">
                     <form class="form-horizontal" wire:submit="save()">
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label>عنوان</label>
+                                <label>نام محصول</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text"
-                                               wire:model.defer="title"
+                                               wire:model.defer="name"
                                                class="form-control"
-                                               placeholder="عنوان دسته بندی را وارد کنید">
-                                        @error('title')
-                                         <p class="text-danger mt-1">{{$message}}</p>
+                                               placeholder="نام محصول را وارد کنید">
+                                        @error('name')
+                                        <p class="text-danger mt-1">{{$message}}</p>
                                         @enderror
                                     </div>
                                 </div>
@@ -31,10 +31,64 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">قیمت محصول</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text"
+                                               wire:model.lazy="price"
+                                               class="form-control"
+                                               placeholder="قیمت محصول را وارد کنید">
+                                        @error('price')
+                                        <p class="text-danger mt-1">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">موجودی</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text"
+                                               wire:model.lazy="stock"
+                                               class="form-control"
+                                               placeholder="موجودی محصول را وارد کنید">
+                                        @error('stock')
+                                        <p class="text-danger mt-1">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">دسته محصول</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="category_id">
+                                        <option value="" disabled selected>گزینه خود را انتخاب کنید</option>
+                                        @foreach(\App\Models\Category::where('status',2)->pluck('title','id') as $key => $item)
+                                            <option value="{{$key}}">{{$item}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('category_id')
+                                <p class="text-danger mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                 <label for="email_address_2">توضیحات</label>
                             </div>
                             <div wire:ignore class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <textarea></textarea>
+                                <textarea>{{$description}}</textarea>
                             </div>
                         </div>
                         <div class="row clearfix">
@@ -51,7 +105,7 @@
                                         <input wire:model="image" class="file-path  form-line" type="text">
                                     </div>
                                 </div>
-                                @if ($image)
+                                @if ($image ?? 0)
                                     <img width="100px" height="100" class="border-radius-per-12" alt="image" src="{{ asset($image) }}">
                                 @endif
                             </div>
@@ -61,7 +115,9 @@
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <input type="checkbox" id="remember_me_4" class="filled-in">
-                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">ثبت</button>
+                                <button wire:loading.remove type="submit" class="btn btn-primary m-t-15 waves-effect">ثبت</button>
+                                <div wire:loading class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                                </div>
                             </div>
                         </div>
                     </form>

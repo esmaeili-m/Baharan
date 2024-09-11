@@ -12,6 +12,11 @@ Route::get('/user/list',\App\Livewire\Dashboard\Users\Index::class)->name('user.
 Route::get('/user/create',\App\Livewire\Dashboard\Users\Create::class)->name('user.create');
 Route::get('/user/update/{id}',\App\Livewire\Dashboard\Users\Update::class)->name('user.update');
 Route::get('/user/trash',\App\Livewire\Dashboard\Users\Trash::class)->name('user.trash');
+//-------------------------------------------------------{ Products } ---------------------------------------
+Route::get('/product/list',\App\Livewire\Dashboard\Product\Index::class)->name('product.list');
+Route::get('/product/create',\App\Livewire\Dashboard\Product\Create::class)->name('product.create');
+Route::get('/product/update/{id}',\App\Livewire\Dashboard\Product\Update::class)->name('product.update');
+Route::get('/product/trash',\App\Livewire\Dashboard\Product\Trash::class)->name('product.trash');
 //-------------------------------------------------------{ Category } ---------------------------------------
 Route::get('/category/list',\App\Livewire\Dashboard\Category\Index::class)->name('category.list');
 Route::get('/category/create',\App\Livewire\Dashboard\Category\Create::class)->name('category.create');

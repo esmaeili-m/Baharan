@@ -11,7 +11,8 @@ class Index extends Component
 {
     use WithPagination, WithoutUrlPagination;
     protected $paginationTheme = 'bootstrap';
-    public $sort,$paginate_count=20;
+    public $title,$status,$categories;
+    public $sort,$paginate_count=20,$search;
     public function mount()
     {
         if (session()->has('message')){
@@ -19,23 +20,17 @@ class Index extends Component
         }
     }
 
-    public function UpdatedSort()
+    public function delete($id)
     {
-        $counter = 1;
-        foreach ($this->sort as $item) {
-            Category::find($item)->update([
-                'order' => $counter
-            ]);
-            $counter++;
-        }
-        $this->sort = [];
+        Category::find($id)->delete();
+        $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
     }
     public function change_status($id)
     {
         $item=Category::find($id);
-        if ($item->status){
+        if ($item->status == 1){
             $item->update([
-                'status'=>0
+                'status'=>2
             ]);
         }else{
             $item->update([
@@ -45,17 +40,37 @@ class Index extends Component
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بروزرسانی شد');
 
     }
-
-    public function delete($id)
+    public function fillter()
     {
-        Category::find($id)->delete();
-        $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
+        if ( $this->title || $this->status  ){
+            $this->search=1;
+            $this->categories=Category::query();
+            if ($this->title){
+                $this->categories->where('title','LIKE','%'.$this->title.'%');
+            }
+            if ($this->status){
+                $this->categories->where('status',$this->status);
+            }
+            $this->categories=$this->categories->pluck('id');
+        }else{
+            $this->search=0;
+
+        }
     }
 
-
+    public function reset_search()
+    {
+        $this->reset(['title','status']);
+        $this->search=null;
+    }
     public function render()
     {
-        $data=Category::with('category_parent')->orderBy('order')->paginate($this->paginate_count);
+        $data=Category::query();
+        if ($this->search){
+            $data=$data->whereIn("id",$this->categories)->paginate($this->paginate_count);
+        }else{
+            $data=$data->paginate($this->paginate_count);
+        }
         return view('livewire.dashboard.category.index',compact('data'));
     }
 }

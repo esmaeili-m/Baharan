@@ -44,6 +44,12 @@
                         <span>کاربران</span>
                     </a>
                 </li>
+                <li  class="{{request()->routeIs('product.*') ? 'active active_route' : ''}}">
+                    <a href="{{route('product.list')}}">
+                        <i class="menu-icon ti-list"></i>
+                        <span>محصولات</span>
+                    </a>
+                </li>
                 <li  class="{{request()->routeIs('post.*') ? 'active active_route' : ''}}">
                     <a href="{{route('post.list')}}">
                         <i class="menu-icon ti-image"></i>

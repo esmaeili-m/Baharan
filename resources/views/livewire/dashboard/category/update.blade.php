@@ -31,39 +31,6 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="email_address_2">لینک</label>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text"
-                                               wire:model.lazy="slug"
-                                               class="form-control"
-                                               placeholder="لینک دسته بندی را وارد کنید">
-                                        @error('slug')
-                                        <p class="text-danger mt-1">{{$message}}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="email_address_2">دسته بندی والد</label>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <div wire:ignore class="input-field col s12 select2">
-                                    <select wire:model.lazy="parent_id">
-                                        <option value="" disabled selected>گزینه خود را انتخاب کنید</option>
-                                        @foreach(\App\Models\Category::pluck('title','id') as $key => $item)
-                                            <option value="{{$key}}">{{$item}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                 <label for="email_address_2">توضیحات</label>
                             </div>
                             <div wire:ignore class="col-lg-10 col-md-10 col-sm-8 col-xs-7">

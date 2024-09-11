@@ -12,47 +12,32 @@ class Create extends Component
     public $title,$slug,$parent_id,$description,$image;
     protected $rules=[
        'title'=>'required',
-       'slug' => 'required|unique:categories,slug',
     ];
     protected $messages=[
       'title.required'=>' این فیلد الزامی می باشد',
-      'slug.required'=>'این فیلد الزامی می باشد',
-      'slug.unique'=>'این عنوان استفاده شده است لطفا عنوان دیگری را وارد کنید',
     ];
-
-    public function mount()
-    {
-        $this->parent_id=Category::first()->id ?? null;
-    }
     public function save()
     {
         $this->validate();
         Category::create([
            'title'=>$this->title,
-           'slug'=>$this->slug,
+           'slug'=>$this->create_slug($this->title),
            'image'=>$this->image,
+           'status'=>2,
            'description'=>$this->description,
-           'parent_id'=>$this->parent_id,
-           'order'=>$this->get_order()
         ]);
         session()->flash('message','دسته بندی با موفقیت ایجاد شد');
         return redirect()->route('category.list');
     }
-
-    public function UpdatedSlug()
+    public function create_slug($text)
     {
-        $this->slug=str_replace(' ','-',$this->slug);
+        return str_replace(' ','-',$text).'-'.Category::max('id')+1;
     }
     public function UpdatedImage()
     {
         $this->image=upload_file($this->image,'categories');
     }
 
-    public function get_order()
-    {
-        $max=Category::max('order');
-        return $max == 0 ? $max=1 : $max+1;
-    }
     public function render()
     {
         return view('livewire.dashboard.category.create');
