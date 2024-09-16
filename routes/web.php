@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::prefix('home')->group(function (){
+    Route::post('home/get_code',[\App\Http\Controllers\LoginController::class,'get_code'])->name('get_code');
+    Route::get('login/user',\App\Livewire\Home\Auth\Login::class)->name('user.login');
+
+    ///////////////////////////Shop//////////////////////////////////
+    Route::get('/shop',\App\Livewire\Home\Shop\Index::class)->name('shop.index');
+    ///
+});

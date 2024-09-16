@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@font-face {
+    font-family: 'Iransanse';
+    src: url('../../dashboard/fonts/iransans/IRANSans-Light-web.woff')format('woff');
+}
+@font-face {
+    font-family: 'Number';
+    src: url('../../dashboard/fonts/number/Montserrat-Black.ttf')format('truetype');
+}
+/* Reseting */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ecf0f3;
+    font-family: 'Iransanse', serif !important;
+    font-weight: bold;
+}
+
+.wrapper {
+    max-width: 350px;
+    font-family: 'Iransanse', serif !important;
+    min-height: 500px;
+    margin: 80px auto;
+    padding: 40px 30px 30px 30px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+
+.logo {
+    width: 80px;
+    margin: 40px auto;
+}
+
+.logo img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 0px 3px #5f5f5f,
+    0px 0px 0px 5px #ecf0f3,
+    8px 8px 15px #a7aaa7,
+    -8px -8px 15px #fff;
+}
+
+.wrapper .name {
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 1.3px;
+    padding-left: 10px;
+    color: #555;
+}
+
+.wrapper .form-field input {
+    width: 100%;
+    display: block;
+    border: none;
+    direction: rtl;
+    outline: none;
+    background: none;
+    font-size: 1.2rem;
+    color: #666;
+    padding: 10px 15px 10px 10px;
+    /* border: 1px solid red; */
+}
+
+.wrapper .form-field {
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+
+.wrapper .form-field .fas {
+    color: #555;
+}
+
+.wrapper .btn {
+    box-shadow: none;
+    width: 100%;
+    height: 40px;
+    background-color: #03A9F4;
+    color: #fff;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    letter-spacing: 1.3px;
+}
+
+.wrapper .btn:hover {
+    background-color: #039BE5;
+}
+
+.wrapper a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: #03A9F4;
+}
+
+.wrapper a:hover {
+    color: #039BE5;
+}
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* تنظیم ارتفاع به 100% */
+    padding-left: 100px; /* فاصله از چپ */
+    padding-right: 100px; /* فاصله از راست */
+    box-sizing: border-box;
+}
+/*///////*/
+.wrapper-register{
+    width: 1200px;
+    font-family: 'Iransanse', serif !important;
+    min-height: 500px;
+    margin: 80px auto;
+    padding: 40px 30px 30px 30px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.wrapper-register .form-field {
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+.wrapper-register .form-field input {
+    width: 100%;
+    display: block;
+    border: none;
+    direction: rtl;
+    outline: none;
+    background: none;
+    font-size: 1.2rem;
+    color: #666;
+    padding: 10px 15px 10px 10px;
+    /* border: 1px solid red; */
+}
+.invalid-form {
+    background-color: #fde6e6 !important;
+}
+.custom-primary{
+    width: 60%;
+    height: 40px;
+    background-color: #96d7f4;
+    color: #3a3939;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    letter-spacing: 1px;
+}
+.custom-primary-label{
+    width: 60%;
+    height: 40px;
+    padding: 20px;
+    color: #6d6c6c;
+    border-radius: 25px;
+    font-size: 17px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+    letter-spacing: 1px;
+}
+.custom-primary:hover {
+    background-color: #1ab1f4;
+    color: #faf9f9;
+}
+#image-label {
+    width: 100%;
+    display: block;
+    border: none;
+    direction: rtl;
+    outline: none;
+    background: none;
+    font-size: 1.2rem;
+    color: #acaaaa;
+    padding: 10px 15px 10px 10px;
+}
+.avatar{
+
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+
+}
+.custom-card{
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    width: 100%;
+    height: 90px;
+    background-color: #fbc17f;
+    color: #f4f1f1;
+    border-radius: 25px;
+    letter-spacing: 0.5px;
+}
+
+@keyframes shake-grow {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.3); /* بزرگ شدن */
+    }
+    50% {
+        transform: scale(0.8); /* کوچک شدن */
+    }
+    75% {
+        transform: scale(1.1); /* دوباره بزرگتر شدن */
+    }
+    100% {
+        transform: scale(1); /* بازگشت به اندازه عادی */
+    }
+}
+
+.error-message {
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity 0.5s ease-in-out;
+}
+
+.error-message.show {
+    opacity: 1;
+    animation: shake-grow 0.6s ease-in-out infinite; /* اجرای انیمیشن برای 0.6 ثانیه */
+}
+/* نقاط توقف برای عرض‌های مختلف */
+.sidebar-category{
+    font-family: 'Iransanse', serif !important;
+    min-height: 480px;
+    max-height: 480px;
+    margin: 20px auto 0px auto;
+    padding: 15px 15px 15px 15px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+    overflow-y: auto;
+}
+.sidebar-basket{
+    font-family: 'Iransanse', serif !important;
+    min-height: 580px;
+    margin: 80px auto;
+    padding: 40px 30px 30px 30px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.sidebar-profile{
+    font-family: 'Iransanse', serif !important;
+    min-height: 100px;
+    margin: 80px auto 0px auto;
+    padding: 20px 20px 20px 20px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.shop-category{
+    font-family: 'Iransanse', serif !important;
+    min-height: 620px;
+    margin: 80px auto;
+    padding: 10px 30px 30px 30px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.shop-container {
+    width: 100%;
+    display: flex;
+    min-height: 100vh; /* تنظیم ارتفاع به 100% */
+    padding-left: 100px; /* فاصله از چپ */
+    padding-right: 100px; /* فاصله از راست */
+    box-sizing: border-box;
+}
+.header-basket{
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    width: 100%;
+    border-radius: 25px;
+    padding: 0.2rem;
+
+}
+#remaining-time{
+    font-size: 30px;
+    color: #848383;
+    font-weight: bold;
+    font-family: 'Number', serif;
+}
+.card-category{
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    width: 100%;
+    border-radius: 10px;
+}
+.category-image{
+    width: 100%;
+    height: 104px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card-category-title{
+    font-size: 13px !important;
+    background-color: #e6f4ff !important;
+}
+.card-product-title{
+    font-size: 15px !important;
+    background-color: #f1f3b5 !important;
+}
+.card-category-content{
+    padding: 4px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-right: 5px;
+}
+.details-product{
+    padding: 100px 100px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+.category-product{
+    display: inline-block; /* یا از flexbox استفاده کنید */
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    padding: 5px 20px;
+    border-radius: 15px;
+    font-size: 10px;
+    margin: 4px 1px;
+    background-color: #f8ead0;
+    color: #4a4949;
+    text-align: center;
+}
+.checkout-button{
+    margin-right: auto;
+    background-color: #cefbe7;
+    cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+    .shop-container{
+        padding-left: 10px; /* فاصله از چپ */
+        padding-right: 10px;
+    }
+    .wrapper-register {
+        width: 100%; /* تنظیم برای موبایل‌ها */
+        margin: 10px auto;
+    }
+    .form-container {
+        padding: 0px;
+        margin: 0px 15px;
+    }
+    .fs-sm-20{
+        font-size: 15px;
+    }
+    .custom-card {
+        text-align: center;
+    }
+    .wrapper-register .form-field  {
+        margin-bottom: 40px;
+    }
+    .custom-primary{
+        width: 100%;
+    }
+    .w-sm-100{
+        width: 100%;
+        text-align: center;
+
+    }
+}
+
+
+
