@@ -20,14 +20,19 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'code_meli',
+        'father',
+        'birthday',
+        'address',
+        'type',
+        'license_number',
+        'license_date',
+        'license_image',
         'phone',
         'status',
         'description',
-        'role_id',
-        'password',
         'avatar',
-        'code_meli',
+        'role_id',
     ];
 
     /**
@@ -36,7 +41,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
@@ -47,7 +51,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
 
     public function role()

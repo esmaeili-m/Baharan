@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->integer('min');
+            $table->integer('max');
+            $table->integer('type');
             $table->bigInteger('order')->default(1);
             $table->bigInteger('barcode');
             $table->unsignedBigInteger('category_id')->nullable();

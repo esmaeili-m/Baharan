@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->string('code_meli');
-            $table->string('phone')->nullable();
+            $table->string('code_meli')->nullable();
+            $table->string('father')->nullable();
+            $table->string('birthday')->nullable();
+            $table->string('address')->nullable();
+            $table->string('type')->nullable();
+            $table->string('license_number')->nullable();
+            $table->string('license_date')->nullable();
+            $table->string('license_image')->nullable();
+            $table->string('phone');
+            $table->text('token')->nullable();
             $table->bigInteger('status')->default(1);
             $table->text('description')->nullable();
             $table->text('avatar')->nullable();
@@ -30,7 +35,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
+//]);
     /**
      * Reverse the migrations.
      */
