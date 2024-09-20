@@ -5,7 +5,7 @@
             <div class="card-category-content">
                 <div class="d-flex mb-2">
                     <p class="category-product card-category-title mb-0 ">{{$category->title}}</p>
-                    <span wire:loading.remove wire:click="set_category({{$category->id}})" class="category-product checkout-button" style="">سفارش <i class="fa fa-arrow-left"></i></span>
+                    <span wire:loading.remove wire:click="set_category({{$category->id}})" class="category-product checkout-button" style="">محصولات <i class="fa fa-arrow-left"></i></span>
                     <div wire:loading style="margin-right: auto;color: #72baf6" class="spinner-grow " role="status">
                         <span class="sr-only">Loading...</span>
                     </div>

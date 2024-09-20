@@ -236,7 +236,9 @@ body {
 }
 .sidebar-basket{
     font-family: 'Iransanse', serif !important;
-    min-height: 580px;
+    min-height: 620px;
+    max-height: 620px;
+    overflow-y: auto;
     margin: 80px auto;
     padding: 40px 30px 30px 30px;
     background-color: #ecf0f3;
@@ -255,6 +257,8 @@ body {
 .shop-category{
     font-family: 'Iransanse', serif !important;
     min-height: 620px;
+    max-height: 620px;
+    overflow-y: auto;
     margin: 80px auto;
     padding: 10px 30px 30px 30px;
     background-color: #ecf0f3;
@@ -293,9 +297,16 @@ body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+.w-80{
+    width: 80%;
+}
 .card-category-title{
     font-size: 13px !important;
     background-color: #e6f4ff !important;
+}
+.card-product-details{
+    font-size: 10px !important;
+    background-color: #f8f7dd !important;
 }
 .card-product-title{
     font-size: 15px !important;
@@ -308,7 +319,7 @@ body {
     margin-right: 5px;
 }
 .details-product{
-    padding: 100px 100px;
+    padding: 10px 5px 10px 5px;
     border-radius: 20px;
     box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
 }

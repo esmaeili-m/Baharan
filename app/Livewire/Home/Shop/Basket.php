@@ -4,16 +4,26 @@ namespace App\Livewire\Home\Shop;
 
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Basket extends Component
 {
     public $openingTime;  // ساعت باز شدن
+    public $products;  // ساعت باز شدن
     public $closingTime;  // ساعت بسته شدن
     public $remainingTime;
 
+    #[On('add_basket')]
+    public function add_basket()
+    {
+        $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
+        $this->products=\App\Models\Product::whereIn('id',$products ?? [])->get();
+    }
     public function mount()
     {
+        $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
+        $this->products=\App\Models\Product::whereIn('id',$products ?? [])->get();
         $today = Verta::now()->timezone('Asia/Tehran'); // گرفتن تاریخ امروز به وقت ایران
         $this->openingTime = Verta::create($today->year, $today->month, $today->day, 1, 0, 0, 'Asia/Tehran')->DateTime();
         $this->closingTime = Verta::create($today->year, $today->month, $today->day, 3, 0, 0, 'Asia/Tehran')->DateTime();
