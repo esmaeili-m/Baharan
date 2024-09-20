@@ -10,20 +10,33 @@ use Livewire\WithFileUploads;
 class Update extends Component
 {
     use WithFileUploads;
-    public $name,$status,$category_id,$price,$stock,$description,$image,$product;
+    public $name,$status,$category_id,$price,$stock,$description,$image,$product,$min,$max,$type=1;
     protected $rules=[
         'name'=>'required',
-        'stock'=>'required',
-        'price'=>'required',
+        'stock'=>'required|numeric',
+        'price'=>'required|numeric',
+        'min'=>'required|numeric|lte:stock',
+        'max'=>'required|numeric|lte:stock|gte:min',
         'category_id'=>'required',
         'description' => 'nullable',
         'image' => 'nullable',
     ];
-    protected $messages=[
-        'name.required'=>' این فیلد الزامی می باشد',
-        'stock.required'=>'این فیلد الزامی می باشد',
-        'price.required'=>'این فیلد الزامی می باشد',
-        'category_id.required'=>'این فیلد الزامی می باشد',
+    protected $messages = [
+        'name.required' => 'فیلد نام الزامی می‌باشد',
+        'stock.required' => 'فیلد موجودی الزامی می‌باشد',
+        'stock.numeric' => 'فیلد موجودی باید یک عدد باشد',
+        'price.required' => 'فیلد قیمت الزامی می‌باشد',
+        'price.numeric' => 'فیلد قیمت باید یک عدد باشد',
+        'min.required' => 'فیلد حداقل الزامی می‌باشد',
+        'min.numeric' => 'فیلد حداقل باید یک عدد یا قلولن باشد',
+        'min.lte' => 'فیلد حداقل نباید بیشتر از موجودی باشد',
+        'max.required' => 'فیلد حداکثر الزامی می‌باشد',
+        'max.numeric' => 'فیلد حداکثر باید یک عدد یا قلولن باشد',
+        'max.lte' => 'فیلد حداکثر نباید بیشتر از موجودی باشد',
+        'max.gte' => 'فیلد حداکثر نباید کمتر از فیلد حداقل باشد',
+        'category_id.required' => 'فیلد دسته‌بندی الزامی می‌باشد',
+        'description.nullable' => 'فیلد توضیحات می‌تواند خالی باشد',
+        'image.nullable' => 'فیلد تصویر می‌تواند خالی باشد',
     ];
     public function mount($id)
     {

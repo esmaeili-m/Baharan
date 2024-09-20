@@ -1,32 +1,46 @@
 <div class="sidebar-basket" >
-    <div id="time" class="header-basket d-flex justify-content-center align-items-center" >
-        <p id="remaining-time" class="mb-0">{{ $remainingTime }}</p>
-    </div>
-    <div class="mt-3">
-        @foreach($products ?? [] as $product)
-            <div  class="col-lg-12 col-sm-12 mb-1">
-                <div class="card-category mb-2">
-                    <div class="card-category-content">
-                        <div class="d-flex mb-2">
-                            <p class="category-product card-category-title mb-0 ">{{$product->name}}</p>
-                            <span wire:loading.class.add="d-none" wire:click="add_to_basket({{$product->id}})" class="category-product checkout-button" style="">سفارش <i class="fa fa-arrow-left"></i></span>
-                            <div wire:loading style="margin-right: auto;color: #72baf6" class="spinner-grow " role="status">
-                                <span class="sr-only">Loading...</span>
+    <div class="basket-invoice">
+        <div id="time" class="header-basket d-flex justify-content-center align-items-center" >
+            <p id="remaining-time" class="mb-0">{{ $remainingTime }}</p>
+        </div>
+        <div class="mt-3">
+            @foreach($products ?? [] as $product)
+                <div  class="col-lg-12 col-sm-12 mb-1">
+                    <div class="card-category mb-2">
+                        <div class="card-category-content">
+                            <div class="d-flex mb-2">
+                                <p class="category-product card-category-title mb-0 ">{{$product->name}}</p>
+                                <span wire:loading.class.add="d-none" wire:click="remove_from_basket({{$product->id}})" class="category-product checkout-button-remove" style=""><i class="fa fa-times"></i></span>
+                                <div wire:loading style="margin-right: auto;color: #72baf6" class="spinner-grow " role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="details-product d-flex">
-                            <div class="text-center">
-                                <p class="category-product card-product-details w-80 mb-0 "> قیمت محصول: {{number_format($product->price)}} </p>
-                                <p class="category-product card-product-details mb-0 w-80 "> موجودی انبار: {{number_format($product->stock)}} </p>
+                            <div class="form-field d-flex align-items-center form-invoice">
+                                <input type="number" wire:model.lazy="invoice.{{ $product->id }}"  class="mb-1" placeholder="برحسب {{$type[$product->type] ?? 'None'}}">
+                                @error('invoice.' . $product->id)
+                                <span style="font-size: 27px;color: red" class="fa fa-times-circle error-message show" aria-hidden="true"></span>
+                                @enderror
+                            </div>
+                            <div class="">
+                                <p style="font-size: 11px !important;" class="category-product card-category-title mb-1 w-100"> قیمت : {{number_format($product->price)}}</p>
+                                @if($this->price[$product->id] ?? 0)
+                                    <p class="category-product card-product-details w-100 mb-1">قیمت نهایی: {{ number_format($this->price[$product->id] ?? 0) }} تومان</p>
+
+                                @endif
                             </div>
 
                         </div>
-
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
 
+        </div>
+    </div>
+    <div class="checkout-card ">
+        <div class="total-factor p-3">
+            <p class="mb-0">جمع کل : {{$total}}</p>
+        </div>
+        <span class="checkout-button-basket p-3">ثبت نهایی</span>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

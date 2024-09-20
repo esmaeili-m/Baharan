@@ -8,12 +8,10 @@ use Livewire\Component;
 
 class Product extends Component
 {
-    public $product,$category;
+    public $product,$category,$type=['1'=>'عدد','2'=>'کیلو گرم'];
 
     public function add_to_basket($id)
-    {
-        $user=User::find(3);
-        auth()->login($user);
+    {;
         $product=\App\Models\Product::where('stock','>',0)->where('status',2)->first();
         if ($product){
             \App\Models\Basket::create([

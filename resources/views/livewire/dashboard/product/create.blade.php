@@ -36,7 +36,8 @@
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text"
+                                        <input type="number"
+                                               step="0.0001"
                                                wire:model.lazy="price"
                                                class="form-control"
                                                placeholder="قیمت محصول را وارد کنید">
@@ -54,7 +55,8 @@
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text"
+                                        <input type="number"
+                                               step="0.0001"
                                                wire:model.lazy="stock"
                                                class="form-control"
                                                placeholder="موجودی محصول را وارد کنید">
@@ -63,6 +65,61 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">حداقل سفارش</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number"
+                                               step="0.0001"
+                                               wire:model.lazy="min"
+                                               class="form-control"
+                                               placeholder="حداقل سفارش محصول را وارد کنید">
+                                        @error('min')
+                                        <p class="text-danger mt-1">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">حداکثر سفارش</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number"
+                                               step="0.0001"
+                                               wire:model.lazy="max"
+                                               class="form-control"
+                                               placeholder="حداکثر سفارش محصول را وارد کنید">
+                                        @error('max')
+                                        <p class="text-danger mt-1">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">برحسب</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="type">
+                                        <option value="" disabled >گزینه خود را انتخاب کنید</option>
+                                            <option value="1" selected>تعداد</option>
+                                            <option value="2">وزن</option>
+                                    </select>
+                                </div>
+                                @error('category_id')
+                                <p class="text-danger mt-1">{{$message}}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="row clearfix">

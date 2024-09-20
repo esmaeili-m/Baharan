@@ -11,10 +11,15 @@ use Livewire\Component;
 
 class Basket extends Component
 {
-    public $openingTime;  // ساعت باز شدن
+    public $openingTime;
+    public $total=0;
+    public $type=['1'=>'عدد','2'=>'کیلو گرم'];
+    // ساعت باز شدن
     public $products;  // ساعت باز شدن
     public $closingTime;  // ساعت بسته شدن
     public $remainingTime;
+    public $invoice=[];
+    public $price=[];
 
     #[On('add_basket')]
     public function add_basket()
@@ -22,9 +27,19 @@ class Basket extends Component
         $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
         $this->products=\App\Models\Product::whereIn('id',$products ?? [])->get();
     }
+
+    public function remove_from_basket($id)
+    {
+        $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)
+            ->where('product_id',$id)->delete();
+        $this->products = $this->products->reject(function ($item) use ($id){
+            return $item['id'] === $id; // آیتم با id برابر 2 حذف می‌شود
+        });
+        unset($this->invoice[$id]);
+    }
     public function mount()
     {
-        \auth()->login(User::find(1));
+
         $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
         $this->products=\App\Models\Product::whereIn('id',$products ?? [])->get();
         $today = Verta::now()->timezone('Asia/Tehran'); // گرفتن تاریخ امروز به وقت ایران
@@ -56,6 +71,12 @@ class Basket extends Component
         }
     }
 
+    public function updatedInvoice($value, $key)
+    {
+        $product=\App\Models\Product::find($key);
+        array_filter($this->invoice);
+        $this->price[$product->id]=$value * $product->price;
+    }
     public function render()
     {
         return view('livewire.home.shop.basket');

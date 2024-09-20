@@ -5,7 +5,7 @@
         </div>
         <div class="row mt-3">
             @foreach($category->products as $product)
-                <div  class="col-lg-6 col-sm-12">
+                <div  class="col-lg-4 col-sm-12">
                     <div class="card-category mb-2">
                         <img class="w-100 category-image" src="{{asset($product->image ?? '/home/images/category.jpg')}}" title="{{$product->title}}" alt="{{$product->title}}">
                         <div class="card-category-content">
@@ -18,8 +18,10 @@
                             </div>
                             <div class="details-product d-flex">
                                 <div class="text-center">
-                                    <p class="category-product card-product-details w-80 mb-0 "> قیمت محصول: {{number_format($product->price)}} </p>
-                                    <p class="category-product card-product-details mb-0 w-80 "> موجودی انبار: {{number_format($product->stock)}} </p>
+                                    <p class="category-product card-product-details w-80 mb-0 "> قیمت : {{number_format($product->price)}} ( تومان )</p>
+                                    <p class="category-product card-product-details mb-0 w-80 "> موجودی : {{number_format($product->stock)}} ( {{$type[1] ?? 'None'}} )</p>
+                                    <p class="category-product card-product-details mb-0 w-80 "> حداقل سفارش : {{number_format($product->min)}} ( {{$type[1] ?? 'None'}} )</p>
+                                    <p class="category-product card-product-details mb-0 w-80 "> حداکثر سفارش : {{number_format($product->max)}} ( {{$type[1] ?? 'None'}} )</p>
                                 </div>
 
                             </div>

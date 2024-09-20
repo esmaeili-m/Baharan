@@ -225,8 +225,8 @@ body {
 /* نقاط توقف برای عرض‌های مختلف */
 .sidebar-category{
     font-family: 'Iransanse', serif !important;
-    min-height: 480px;
-    max-height: 480px;
+    min-height: 580px;
+    max-height: 580px;
     margin: 20px auto 0px auto;
     padding: 15px 15px 15px 15px;
     background-color: #ecf0f3;
@@ -236,19 +236,25 @@ body {
 }
 .sidebar-basket{
     font-family: 'Iransanse', serif !important;
-    min-height: 620px;
-    max-height: 620px;
+    min-height: 720px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* ارتفاع کل صفحه */
+    overflow: hidden;
+    max-height: 720px;
     overflow-y: auto;
-    margin: 80px auto;
-    padding: 40px 30px 30px 30px;
+    margin: 20px auto;
     background-color: #ecf0f3;
     border-radius: 15px;
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
+.basket-invoice{
+    padding: 10px 10px 10px 10px;
+}
 .sidebar-profile{
     font-family: 'Iransanse', serif !important;
     min-height: 100px;
-    margin: 80px auto 0px auto;
+    margin: 20px auto 0px auto;
     padding: 20px 20px 20px 20px;
     background-color: #ecf0f3;
     border-radius: 15px;
@@ -256,11 +262,11 @@ body {
 }
 .shop-category{
     font-family: 'Iransanse', serif !important;
-    min-height: 620px;
-    max-height: 620px;
+    min-height: 720px;
+    max-height: 720px;
     overflow-y: auto;
-    margin: 80px auto;
-    padding: 10px 30px 30px 30px;
+    margin: 20px auto;
+    padding: 10px 10px 10px 10px;
     background-color: #ecf0f3;
     border-radius: 15px;
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
@@ -269,8 +275,8 @@ body {
     width: 100%;
     display: flex;
     min-height: 100vh; /* تنظیم ارتفاع به 100% */
-    padding-left: 100px; /* فاصله از چپ */
-    padding-right: 100px; /* فاصله از راست */
+    padding-left: 20px; /* فاصله از چپ */
+    padding-right: 20px; /* فاصله از راست */
     box-sizing: border-box;
 }
 .header-basket{
@@ -334,10 +340,63 @@ body {
     color: #4a4949;
     text-align: center;
 }
+.basket-invoice {
+    flex-grow: 1; /* اجازه می‌دهد این بخش بیشتر فضای ارتفاع را بگیرد */
+    overflow-y: auto; /* اسکرول عمودی فعال */
+}
+.checkout-card {
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+
+    position: sticky; /* برای ثابت کردن بخش */
+    bottom: 0; /* چسباندن به پایین */
+}
+.checkout-button-basket {
+    display: inline-block;
+    color: #4a4949; /* رنگ متن */
+    padding: 10px 20px; /* فاصله داخلی */
+    text-align: center; /* وسط‌چین کردن متن */
+    cursor: pointer; /* تغییر نشانگر به حالت کلیک */
+    border-radius: 5px; /* گوشه‌های گرد */
+    text-decoration: none;
+}
+.total-factor{
+    font-size: 13px;
+}
+.checkout-button-remove{
+    margin-right: auto;
+    background-color: rgb(251, 229, 229);
+    cursor: pointer;
+}
+.checkout-button-basket:hover {
+    background-color: #9ffbd5; /* تغییر رنگ پس‌زمینه هنگام هاور */
+}
 .checkout-button{
     margin-right: auto;
     background-color: #cefbe7;
     cursor: pointer;
+}
+.form-invoice input{
+    width: 100%;
+    display: block;
+    border: none;
+    direction: rtl;
+    outline: none;
+    background: none;
+    font-size: 1.0rem;
+    color: #666;
+    border-radius: 15px;
+    padding: 6px 6px 6px 6px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+
+}
+.checkout-button-basket{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-right: auto;
+    background-color: #adfdb4;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
 }
 @media only screen and (max-width: 600px) {
     .shop-container{

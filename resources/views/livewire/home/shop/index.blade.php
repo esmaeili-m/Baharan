@@ -15,13 +15,13 @@
 
 
             </div>
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-7 col-sm-12">
                 <livewire:home.shop.product />
 {{--                <div class="content-Product" >--}}
 
 {{--                </div>--}}
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <livewire:home.shop.basket />
             </div>
         </div>
