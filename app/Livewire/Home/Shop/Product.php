@@ -12,7 +12,7 @@ class Product extends Component
 
     public function add_to_basket($id)
     {;
-        $product=\App\Models\Product::where('stock','>',0)->where('status',2)->first();
+        $product=\App\Models\Product::where('id',$id)->where('stock','>',0)->where('status',2)->first();
         if ($product){
             \App\Models\Basket::create([
                'user_id'=>auth()->user()->id,
@@ -29,6 +29,13 @@ class Product extends Component
     public function category($categoryId)
     {
         $this->category=\App\Models\Category::with('products')->find($categoryId);
+    }
+    #[On('update-stock')]
+    public function update_stock()
+    {
+        if ($this->category){
+            $this->category=\App\Models\Category::with('products')->find($this->category->id);
+        }
     }
     public function render()
     {

@@ -144,6 +144,18 @@ body {
 .invalid-form {
     background-color: #fde6e6 !important;
 }
+.error-invoice-main{
+    margin: 20px auto;
+    width: 800px;
+    height: 100px;
+    min-height: 600px;
+    font-family: 'Iransanse', serif !important;
+    overflow-y: auto;
+    padding: 10px 10px 10px 10px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
 .custom-primary{
     width: 60%;
     height: 40px;
@@ -367,9 +379,7 @@ body {
     background-color: rgb(251, 229, 229);
     cursor: pointer;
 }
-.checkout-button-basket:hover {
-    background-color: #9ffbd5; /* تغییر رنگ پس‌زمینه هنگام هاور */
-}
+
 .checkout-button{
     margin-right: auto;
     background-color: #cefbe7;
@@ -397,6 +407,14 @@ body {
     padding: 10px;
     cursor: pointer;
     width: 100%;
+}
+.error-invoice{
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    width: 100%;
+    background-color: #fbe5e5;
+    border-radius: 25px;
+    padding: 5px 20px;
+    font-size: 11px;
 }
 @media only screen and (max-width: 600px) {
     .shop-container{
@@ -427,6 +445,17 @@ body {
         width: 100%;
         text-align: center;
 
+    }
+    .error-invoice-main{
+        margin: 20px auto;
+        width: 250px;
+        min-height: 200px;
+        font-family: 'Iransanse', serif !important;
+        overflow-y: auto;
+        padding: 10px 10px 10px 10px;
+        background-color: #ecf0f3;
+        border-radius: 15px;
+        box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
     }
 }
 

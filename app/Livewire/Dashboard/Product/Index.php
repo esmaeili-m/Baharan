@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Dashboard\Product;
 
+use App\Models\Invoice;
 use App\Models\Product;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -18,6 +20,7 @@ class Index extends Component
         if (session()->has('message')){
             $this->dispatch('alert',icon:'success',message:session()->get('message'));
         }
+
     }
 
     public function delete($id)

@@ -15,17 +15,21 @@
                                     <span class="sr-only">Loading...</span>
                                 </div>
                             </div>
-                            <div class="form-field d-flex align-items-center form-invoice">
-                                <input type="number" wire:model.lazy="invoice.{{ $product->id }}"  class="mb-1" placeholder="برحسب {{$type[$product->type] ?? 'None'}}">
-                                @error('invoice.' . $product->id)
+                            <div class="d-flex align-items-center form-invoice  ">
+                                <input wire:key="product-{{$product->id}}" type="number"  wire:model.live.debounce.1000ms="invoice.{{ $product->id }}"  class="mb-1 @if(session()->has('invoice-'.$product->id)) invalid-form @endif" placeholder="برحسب {{$type[$product->type] ?? 'None'}}">
+                                @if(session()->has('invoice-'.$product->id))
                                 <span style="font-size: 27px;color: red" class="fa fa-times-circle error-message show" aria-hidden="true"></span>
-                                @enderror
+                                @endif
                             </div>
                             <div class="">
+                                @if(session()->has('invoice-'.$product->id))
+                                    <div class="error-invoice mt-1 mb-1 text-center">
+                                        {{session()->get('invoice-'.$product->id)}}
+                                    </div>
+                                @endif
                                 <p style="font-size: 11px !important;" class="category-product card-category-title mb-1 w-100"> قیمت : {{number_format($product->price)}}</p>
                                 @if($this->price[$product->id] ?? 0)
                                     <p class="category-product card-product-details w-100 mb-1">قیمت نهایی: {{ number_format($this->price[$product->id] ?? 0) }} تومان</p>
-
                                 @endif
                             </div>
 
@@ -38,9 +42,17 @@
     </div>
     <div class="checkout-card ">
         <div class="total-factor p-3">
-            <p class="mb-0">جمع کل : {{$total}}</p>
+            <p class="mb-0">جمع کل : {{number_format(array_sum($price ?? []) ?? 0)}}</p>
         </div>
-        <span class="checkout-button-basket p-3">ثبت نهایی</span>
+        @if($this->invoice && $this->price)
+            @if(count($price) == count($invoice)  && count($price) == count($products ?? []))
+                <span wire:click="save()"  class="checkout-button-basket p-3">ثبت نهایی</span>
+            @else
+                <span style="background-color: #fae5e5 !important;" class="checkout-button-basket p-3">ثبت نهایی</span>
+            @endif
+        @else
+            <span style="background-color: #fae5e5 !important;" class="checkout-button-basket p-3">ثبت نهایی</span>
+        @endif
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

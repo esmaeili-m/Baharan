@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Home\Shop;
 
+use App\Models\Invoice;
 use App\Models\User;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -33,49 +35,110 @@ class Basket extends Component
         $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)
             ->where('product_id',$id)->delete();
         $this->products = $this->products->reject(function ($item) use ($id){
-            return $item['id'] === $id; // آیتم با id برابر 2 حذف می‌شود
+            return $item['id'] === $id;
         });
         unset($this->invoice[$id]);
+        unset($this->price[$id]);
     }
     public function mount()
     {
 
         $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
         $this->products=\App\Models\Product::whereIn('id',$products ?? [])->get();
-        $today = Verta::now()->timezone('Asia/Tehran'); // گرفتن تاریخ امروز به وقت ایران
-        $this->openingTime = Verta::create($today->year, $today->month, $today->day, 1, 0, 0, 'Asia/Tehran')->DateTime();
-        $this->closingTime = Verta::create($today->year, $today->month, $today->day, 3, 0, 0, 'Asia/Tehran')->DateTime();
         $this->remainingTime='00:01';
-//        $this->calculateRemainingTime();
     }
-
-    // محاسبه زمان باقی‌مانده تا بسته شدن مغازه
-    public function calculateRemainingTime()
+    public function updatedInvoice($value, $key)
     {
-        // زمان فعلی بر اساس زمان ایران
-        $currentTime = Verta::now()->timezone('Asia/Tehran')->DateTime();
+        if ($value){
+            $product=\App\Models\Product::find($key);
+            if ($product->stock < $value ){
+                unset($this->invoice[$key]);
+                unset($this->price[$key]);
+                return session()->flash('invoice-'.$key,'موجودی انبار: '.$product->stock);
 
-        // اگر زمان فعلی بعد از زمان بسته شدن بود، یعنی مغازه بسته است
-        if ($currentTime >= $this->closingTime) {
-            $this->remainingTime = 'مغازه بسته است';
-        } elseif ($currentTime < $this->openingTime) {
-            $this->remainingTime = 'مغازه هنوز باز نشده است';
-        } else {
-            // محاسبه تفاوت زمانی بین حال و زمان بسته شدن
-            $diffInSeconds = $this->closingTime->getTimestamp() - $currentTime->getTimestamp();
-            $diffInHours = floor($diffInSeconds / 3600);
-            $diffInMinutes = floor(($diffInSeconds % 3600) / 60);
+            }
+            if ($product->max < $value ){
+                unset($this->invoice[$key]);
+                unset($this->price[$key]);
+                return session()->flash('invoice-'.$key,'حداکثر سفارش: '.$product->max);
 
-            // نمایش زمان باقی‌مانده به شکل HH:MM
-            $this->remainingTime = sprintf('%02d:%02d', $diffInHours, $diffInMinutes);
+            }
+            if ($product->min > $value ){
+                unset($this->invoice[$key]);
+                unset($this->price[$key]);
+                return session()->flash('invoice-'.$key,'حداقل سفارش: '.$product->min);
+            }
+            array_filter($this->invoice);
+            $this->price[$product->id]=$value * $product->price;
+        }else{
+            unset($this->price[$key]);
+            unset($this->invoice[$key]);
         }
     }
 
-    public function updatedInvoice($value, $key)
+    public function save()
     {
-        $product=\App\Models\Product::find($key);
-        array_filter($this->invoice);
-        $this->price[$product->id]=$value * $product->price;
+        DB::beginTransaction(); // شروع تراکنش
+        $check=1;
+        try {
+            $bakset = \App\Models\Basket::whereDate('created_at', Carbon::today())
+                ->where('user_id', auth()->user()->id)
+                ->pluck('product_id');
+            $products = \App\Models\Product::whereIn('id', $bakset ?? [])->get();
+            $invoice = Invoice::whereDate('created_at', Carbon::today())
+                ->where('user_id', auth()->user()->id)
+                ->first();
+            $product_invoice = [];
+
+            foreach ($products as $key => $product) {
+                if (!isset($this->invoice[$product->id])) {
+                    session()->flash('invoice-' . $key, 'محصول یافت نشد');
+                    DB::rollBack();
+                    $check=0;// تراکنش را لغو می‌کند
+                    break; // از حلقه خارج می‌شود
+                } else {
+                    if ($product->stock < $this->invoice[$product->id] ?? 0) {
+                        session()->flash('invoice-' . $key, 'تمام شده است');
+                        DB::rollBack();
+                        $check=0;// تراکنش را لغو می‌کند
+                        break; // از حلقه خارج می‌شود
+                    } else {
+                        $product->update([
+                            'stock' => $product->stock - $this->invoice[$product->id],
+                        ]);
+                        $product_invoice[$key]['name'] = $product->name;
+                        $product_invoice[$key]['barcode'] = $product->barcode;
+                        $product_invoice[$key]['price'] = $product->price;
+                        $product_invoice[$key]['stock'] = $product->stock;
+                        $product_invoice[$key]['order'] = $this->invoice[$product->id];
+                    }
+                }
+            }
+
+            // اگر هیچ خطایی وجود نداشت، عملیات ادامه پیدا می‌کند
+            if ($check) {
+                Invoice::create([
+                    'user_id' => auth()->user()->id,
+                    'barcode' => $this->get_barcode(),
+                    'created_by' => auth()->user()->id,
+                    'products' => $product_invoice,
+                    'price' => array_sum($this->price)
+                ]);
+                \App\Models\Basket::whereDate('created_at', Carbon::today())
+                    ->where('user_id', auth()->user()->id)
+                    ->update(['status'=>1]);
+                DB::commit(); // اتمام تراکنش و ذخیره‌سازی تغییرات
+            }
+
+        } catch (\Exception $e) {
+            DB::rollBack(); // در صورت بروز خطا بازگشت به حالت قبلی
+            throw $e; // ارسال خطا به سیستم یا نمایش پیغام
+        }
+    }
+    public function get_barcode()
+    {
+        $max=Invoice::max('barcode');
+        return $max == 0 ? $max=10000 : $max+1;
     }
     public function render()
     {

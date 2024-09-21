@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('baskets', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->longText('product_id');
+            $table->bigInteger('barcode');
+            $table->bigInteger('created_by');
             $table->integer('status')->default(0);
+            $table->longText('products');
+            $table->string('price');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('baskets');
+        Schema::dropIfExists('invoices');
     }
 };
