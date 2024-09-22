@@ -11,7 +11,8 @@ use Livewire\WithFileUploads;
 class Login extends Component
 {
     use WithFileUploads;
-    public $phone,$status,$code,$submit_information,$name,$email,$code_meli,$avatar,$user;
+    public $phone,$status,$code,$submit_information,$name,$email,$code_meli,$avatar,$user,$father,
+        $day,$month,$years,$license_day,$license_month,$license_years,$address,$type,$license_number,$license_image;
     public function get_code()
     {
         $this->validate([
@@ -66,22 +67,44 @@ class Login extends Component
         } while ($exists);
         return $otpCode;
     }
+
+    public function set_type($type)
+    {
+        $this->type=$type;
+    }
     public function register_user()
     {
         $this->validate([
             'name' => ['required'],
             'code_meli' => ['required','size:10','unique:users,code_meli'],
-            'email' => ['required ','unique:users,email'],
+            'father' => ['required'],
+            'day' => ['required' ],
+            'month' => ['required' ],
+            'years' => ['required' ],
+            'license_day' => ['required' ],
+            'license_month' => ['required' ],
+            'license_years' => ['required' ],
+            'address' => ['required'],
+            'type' => ['required'],
+            'license_number' => ['required'],
+            'license_image' => ['required','image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone'],
         ], [
             'name.required' => 'این فیلد الزامی می باشد',
+            'day.required' => 'این فیلد الزامی می باشد',
+            'month.required' => 'این فیلد الزامی می باشد',
+            'type.required' => 'این فیلد الزامی می باشد',
+            'years.required' => 'این فیلد الزامی می باشد',
+            'license_day.required' => 'این فیلد الزامی می باشد',
+            'license_month.required' => 'این فیلد الزامی می باشد',
+            'license_years.required' => 'این فیلد الزامی می باشد',
+            'father.required' => 'این فیلد الزامی می باشد',
+            'address.required' => 'این فیلد الزامی می باشد',
             'code_meli.required' => 'این فیلد الزامی می باشد',
-            'email.required' => 'این فیلد الزامی می باشد',
             'phone.required' => 'این فیلد الزامی می باشد',
             'phone.regex' => 'شماره همراه نامعتبر می باشد.',
             'phone.unique'=>'این شماره همراه استفاده شده است لطفا شماره همراه دیگری را وارد کنید',
             'code_meli.unique'=>'این کد ملی استفاده شده است',
-            'email.unique'=>'این ایمیل استفاده شده است لطفا ایمیل دیگری را وارد کنید',
             'code_meli.size'=>'کد ملی نامعتبر می باشد',
         ]);
             User::create([
@@ -120,6 +143,13 @@ class Login extends Component
     public function UpdatedAvatar()
     {
         $this->avatar=upload_file($this->avatar,'auth');
+        dd($this->avatar);
+
+    }
+    public function UpdatedLicenseImage()
+    {
+
+        $this->license_image=upload_file($this->license_image,'auth');
     }
 
     public function mount()

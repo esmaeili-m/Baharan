@@ -46,7 +46,25 @@ body {
     8px 8px 15px #a7aaa7,
     -8px -8px 15px #fff;
 }
+.form-select {
+    background-color: transparent; /* تغییر رنگ پس‌زمینه */
+    border-radius: 10px; /* گوشه‌های گرد */
+    padding: 10px;
+    font-family: 'Iransanse', serif !important;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
 
+}
+.form-select option {
+    font-family: 'Iransanse', serif !important;
+    font-size: 16px;
+}
+.no-arrow {
+    appearance: none;
+    -webkit-appearance: none; /* برای مرورگرهای وب‌کیت */
+    -moz-appearance: none; /* برای مرورگرهای موزیلا */
+    background-image: none; /* حذف تصویر فلش */
+    padding-right: 10px; /* فضای کافی در سمت راست */
+}
 .wrapper .name {
     font-weight: 600;
     font-size: 1.4rem;
@@ -160,6 +178,26 @@ body {
     width: 60%;
     height: 40px;
     background-color: #96d7f4;
+    color: #3a3939;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    letter-spacing: 1px;
+}
+.custom-label{
+    background-color: #96d7f4;
+    color: #3a3939;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    letter-spacing: 1px;
+}
+.w-lg-50{
+    width: 50%;
+}
+.custom-green{
+    width: 60%;
+    height: 40px;
+    background-color: #aef496;
     color: #3a3939;
     border-radius: 25px;
     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
@@ -421,6 +459,9 @@ body {
         padding-left: 10px; /* فاصله از چپ */
         padding-right: 10px;
     }
+    .padding-mobile-4{
+        padding: 10px;
+    }
     .wrapper-register {
         width: 100%; /* تنظیم برای موبایل‌ها */
         margin: 10px auto;
@@ -445,6 +486,9 @@ body {
         width: 100%;
         text-align: center;
 
+    }
+    .w-sm-100 {
+        width: 100%;
     }
     .error-invoice-main{
         margin: 20px auto;
