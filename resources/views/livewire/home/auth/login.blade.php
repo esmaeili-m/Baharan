@@ -3,17 +3,11 @@
         <div class="form-container">
             <div class=" wrapper-register" style="direction: rtl">
                 <div class="text-center mb-5">
-                    <div style="margin: 5px auto 40px auto;" class="logo"> <!-- افزایش margin-bottom -->
-                        <img
-                            src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png"
-                            alt="">
-                    </div>
-                    <span style="margin: 20px auto;" class="custom-primary-label">شرکت طیور متحد زرین قم (بهاران)</span>
-                    <!-- افزایش margin-top -->
+                    <span class=" btn custom-primary mt-3 mb-3 w-lg-40 w-sm-100 h-sm-50" >شرکت طیور متحد زرین قم (بهاران)</span>
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-4 col-sm-12 mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-4">
                         <div class="form-field d-flex align-items-center @error('name') invalid-form @enderror">
                             <input type="text" wire:model.lazy="name" class="" placeholder="نام و نام خانوادگی*"
                                    @if(($user->status ?? 0) == 2) disabled @endif>
@@ -26,7 +20,7 @@
                         <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="col-lg-4 col-sm-12 mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-4">
                         <div class="form-field d-flex align-items-center @error('father') invalid-form @enderror">
                             <input type="text" wire:model.lazy="father" class="" placeholder="نام پدر*"
                                    @if(($user->status ?? 0) == 2) disabled @endif>
@@ -39,7 +33,7 @@
                         <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="col-lg-4 col-sm-12 mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-4">
                         <div
                             class="form-field d-flex align-items-center @error('phone') invalid-form @enderror mb-sm-10 form-controller-custom">
                             <input type="text" wire:model.lazy="phone" placeholder="شماره همراه*"
@@ -53,7 +47,7 @@
                         <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="col-lg-4 col-sm-12 mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-4">
                         <div class="form-field d-flex align-items-center @error('address') invalid-form @enderror">
                             <input type="text" wire:model.lazy="address" class="" placeholder="آدرس*"
                                    @if(($user->status ?? 0) == 2) disabled @endif>
@@ -66,7 +60,7 @@
                         <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="col-lg-4 col-sm-12 mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-4">
                         <div class="form-field d-flex align-items-center @error('license_number') invalid-form @enderror">
                             <input type="text" wire:model.lazy="license_number" class=""
                                    placeholder="شماره پروانه / مجوز*"
@@ -80,7 +74,7 @@
                         <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="col-lg-4 col-sm-12 mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-4">
                         <div class="form-field d-flex align-items-center @error('code_meli') invalid-form @enderror">
                             <input type="text" wire:model.lazy="code_meli" class="" placeholder="کد ملی*"
                                    @if(($user->status ?? 0) == 2) disabled @endif>
@@ -93,7 +87,7 @@
                         <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="col-lg-6 col-sm-12 mb-2 ">
+                    <div class="col-lg-6 col-sm-12 mb-4 ">
                         <div class="p-3 form-field align-items-center padding-mobile-4 @if($errors->has('day')) invalid-form @elseif($errors->has('month')) invalid-form @elseif($errors->has('years')) invalid-form @endif">
                             <p class="mb-2 " ></p>
                             <button style="font-size: 10px" type="submit" class="btn  custom-label  mx-2  ">
@@ -102,34 +96,39 @@
                             <div class=" d-lg-flex">
                                 <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                     <select class="form-select no-arrow" wire:model.lazy="day" id="customSelect">
-                                        <option selected>روز تولد</option>
+                                        <option value="0" selected>روز تولد</option>
                                         @for($i=1;$i<31;$i++)
-                                            <option>{{$i}}</option>
+                                            @if($i<10)
+                                                <option value="0{{$i}}">{{$i}}</option>
+
+                                            @else
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endif
                                         @endfor
                                     </select>
                                 </div>
                                 <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                     <select class="form-select no-arrow" wire:model.lazy="month" id="customSelect">
-                                        <option selected>ماه تولد</option>
-                                        <option>فروردین</option>
-                                        <option>اردیبهشت</option>
-                                        <option>خرداد</option>
-                                        <option>تیر</option>
-                                        <option>مرداد</option>
-                                        <option>شهریور</option>
-                                        <option>مهر</option>
-                                        <option>آبان</option>
-                                        <option>آذر</option>
-                                        <option>دی</option>
-                                        <option>بهمن</option>
-                                        <option>اسفند</option>
+                                        <option value="0" selected>ماه صدور</option>
+                                        <option value="01">فروردین</option>
+                                        <option value="02">اردیبهشت</option>
+                                        <option value="03">خرداد</option>
+                                        <option value="04">تیر</option>
+                                        <option value="05">مرداد</option>
+                                        <option value="06">شهریور</option>
+                                        <option value="07">مهر</option>
+                                        <option value="08">آبان</option>
+                                        <option value="09">آذر</option>
+                                        <option value="10">دی</option>
+                                        <option value="11">بهمن</option>
+                                        <option value="12">اسفند</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                     <select class="form-select no-arrow" wire:model.lazy="years" id="customSelect">
-                                        <option selected>سال تولد</option>
+                                        <option value="0" selected>سال تولد</option>
                                         @for($i=1300;$i<1390;$i++)
-                                            <option>{{$i}}</option>
+                                            <option value="{{$i}}">{{$i}}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -161,7 +160,7 @@
 
 
                     </div>
-                    <div class="col-lg-6 col-sm-12 mb-2 ">
+                    <div class="col-lg-6 col-sm-12 mb-4 ">
                         <div class="p-3 form-field align-items-center padding-mobile-4 @if($errors->has('license_day')) invalid-form @elseif($errors->has('license_month')) invalid-form @elseif($errors->has('license_years')) invalid-form @endif">
                             <p class="mb-2 " ></p>
                             <button style="font-size: 10px" type="submit" class="btn  custom-label  mx-2  ">تاریخ صدور پروانه کسب
@@ -169,32 +168,37 @@
                             <div class=" d-lg-flex">
                                 <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                     <select class="form-select no-arrow" wire:model.lazy="license_day" id="customSelect">
-                                        <option selected>روز تولد</option>
+                                        <option value="0" selected>روز صدور</option>
                                         @for($i=1;$i<31;$i++)
-                                            <option>{{$i}}</option>
+                                            @if($i<10)
+                                                <option value="0{{$i}}">{{$i}}</option>
+
+                                            @else
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endif
                                         @endfor
                                     </select>
                                 </div>
                                 <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                     <select class="form-select no-arrow" wire:model.lazy="license_month" id="customSelect">
-                                        <option selected>ماه تولد</option>
-                                        <option>فروردین</option>
-                                        <option>اردیبهشت</option>
-                                        <option>خرداد</option>
-                                        <option>تیر</option>
-                                        <option>مرداد</option>
-                                        <option>شهریور</option>
-                                        <option>مهر</option>
-                                        <option>آبان</option>
-                                        <option>آذر</option>
-                                        <option>دی</option>
-                                        <option>بهمن</option>
-                                        <option>اسفند</option>
+                                        <option value="0" selected>ماه صدور</option>
+                                        <option value="01">فروردین</option>
+                                        <option value="02">اردیبهشت</option>
+                                        <option value="03">خرداد</option>
+                                        <option value="04">تیر</option>
+                                        <option value="05">مرداد</option>
+                                        <option value="06">شهریور</option>
+                                        <option value="07">مهر</option>
+                                        <option value="08">آبان</option>
+                                        <option value="09">آذر</option>
+                                        <option value="10">دی</option>
+                                        <option value="11">بهمن</option>
+                                        <option value="12">اسفند</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                     <select class="form-select no-arrow" wire:model.lazy="license_years" id="customSelect">
-                                        <option selected>سال تولد</option>
+                                        <option value="0" selected>سال صدور</option>
                                         @for($i=1300;$i<1390;$i++)
                                             <option>{{$i}}</option>
                                         @endfor
@@ -228,13 +232,17 @@
 
 
                     </div>
-
-                    <div class="col-lg-6 col-sm-12 mb-2">
-                        <div class="form-field d-lg-flex align-items-center ">
+                    <div class="col-lg-6 col-sm-12 mb-4">
+                        <div class="form-field d-lg-flex align-items-center @error('license_image') invalid-form @enderror">
                             <input id="license-file" type="file" wire:model.lazy="license_image" class="d-none" placeholder="">
-                            <label wire:model.lazy="license_image" id="license-label" for="license-file">
-                                <span class="btn custom-primary mt-3 mb-3 w-100">تصویر پروانه کسب را اپلود کنید</span>
+                            <label wire:model.lazy="license_image" id="license-label" for="license-file" >
+                                <span class="w-100 btn custom-primary mt-3 mb-3 h-sm-50">تصویر پروانه کسب را اپلود کنید</span>
                             </label>
+                            @error('license_image')
+                            <span style="font-size: 27px;color: red" class="fa fa-times-circle error-message show"
+                                  aria-hidden="true"></span>
+                            @enderror
+
                             @if($license_image)
                                 <div class="w-sm-100">
                                     <img class="avatar mb-3 mt-3 mx-2" src="{{asset($license_image)}}" width="120px"
@@ -245,7 +253,7 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-6 col-sm-12 mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-4">
                         <div class="form-field d-lg-flex align-items-center ">
                             <input id="image-file" type="file" wire:model.lazy="avatar" class="d-none" placeholder="">
                             <label wire:model.lazy="avatar" id="image-label" for="image-file">
@@ -259,9 +267,8 @@
                                 </div>
                             @endif
                         </div>
-
                     </div>
-                    <div class="col-lg-6 col-sm-12 mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-4">
                         <div class="form-field d-flex align-items-center p-2 @error('type') invalid-form @enderror">
 
                             <div class="w-100 d-flex">
@@ -279,7 +286,6 @@
                         <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
                         @enderror
                     </div>
-
                     <div class="col-lg-6 col-sm-12">
                         <div class="custom-card d-flex justify-content-center align-items-center ">
                             @auth()

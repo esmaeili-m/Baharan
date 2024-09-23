@@ -228,6 +228,17 @@ body {
     color: #acaaaa;
     padding: 10px 15px 10px 10px;
 }
+#license-label {
+    width: 100%;
+    display: block;
+    border: none;
+    direction: rtl;
+    outline: none;
+    background: none;
+    font-size: 1.2rem;
+    color: #acaaaa;
+    padding: 10px 15px 10px 10px;
+}
 .avatar{
 
     border-radius: 5px;
@@ -454,6 +465,9 @@ body {
     padding: 5px 20px;
     font-size: 11px;
 }
+.w-lg-40{
+    width: 40%
+}
 @media only screen and (max-width: 600px) {
     .shop-container{
         padding-left: 10px; /* فاصله از چپ */
@@ -473,6 +487,11 @@ body {
     .fs-sm-20{
         font-size: 15px;
     }
+   .h-sm-50{
+       /*height: 60px;*/
+       font-size: 13px;
+   }
+
     .custom-card {
         text-align: center;
     }
