@@ -321,6 +321,54 @@ body {
     border-radius: 15px;
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
+.content-profile{
+    font-family: 'Iransanse', serif !important;
+    min-height: 100px;
+    margin: 20px auto 0px auto;
+    padding: 20px 20px 20px 20px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.content-profile input{
+
+}
+.content-profile input {
+    width: 100%;
+    display: block;
+    border: none;
+    direction: rtl;
+    outline: none;
+    background: none;
+    font-size: 1rem;
+    color: #666;
+    padding: 5px 10px 5px 5px;
+    /* border: 1px solid red; */
+}
+.content-profile label {
+    font-size: 10px;
+    border-radius: 25px;
+    background-color: #5c99f4;
+    color: #FFFFFF;
+    width: 20vh;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+}
+.content-profile .form-field {
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+.span-custom{
+    font-size: 10px;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+}
+.span-primary{
+    background-color: #5c99f4;
+    color: #FFFFFF;
+}
 .shop-category{
     font-family: 'Iransanse', serif !important;
     min-height: 720px;
@@ -331,6 +379,18 @@ body {
     background-color: #ecf0f3;
     border-radius: 15px;
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.main-card{
+    padding: 10px 10px 10px 10px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.c-shadow{
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.profile-container{
+    margin: 80px 30px 40px 30px;
 }
 .shop-container {
     width: 100%;
@@ -467,6 +527,13 @@ body {
 }
 .w-lg-40{
     width: 40%
+}
+.invoices th{
+    font-size: 14px;
+}
+.invoices td{
+    font-size: 12px;
+    color: #504f4f;
 }
 @media only screen and (max-width: 600px) {
     .shop-container{

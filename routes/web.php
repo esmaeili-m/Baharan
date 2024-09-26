@@ -22,5 +22,6 @@ Route::prefix('home')->group(function (){
 
     ///////////////////////////Shop//////////////////////////////////
     Route::get('/shop',\App\Livewire\Home\Shop\Index::class)->name('shop.index');
-    ///
+    ///////////////////////////Profile//////////////////////////////////
+    Route::get('profile',\App\Livewire\Home\Profile\Index::class)->name('profile.index');
 });
