@@ -107,6 +107,7 @@ class Basket extends Component
                             'stock' => $product->stock - $this->invoice[$product->id],
                         ]);
                         $product_invoice[$key]['name'] = $product->name;
+                        $product_invoice[$key]['image'] = $product->image;
                         $product_invoice[$key]['barcode'] = $product->barcode;
                         $product_invoice[$key]['price'] = $product->price;
                         $product_invoice[$key]['stock'] = $product->stock;

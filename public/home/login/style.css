@@ -535,7 +535,25 @@ body {
     font-size: 12px;
     color: #504f4f;
 }
+.label-input{
+    background-color: #96d7f4;
+    color: #686767;
+    font-size: 12px;
+    width: 30%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    letter-spacing: 1px;
+}
+.btn-light-info{
+    background-color: #b2d8ff;
+    color: #2085f8;
+}
 @media only screen and (max-width: 600px) {
+    .label-input{
+        width: 100%;
+    }
     .shop-container{
         padding-left: 10px; /* فاصله از چپ */
         padding-right: 10px;

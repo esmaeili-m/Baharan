@@ -25,7 +25,7 @@ class Login extends Component
         $check=Code::where('phone',$this->phone)->where('created_at', '>=', now()->subMinutes(2))->exists();
         $this->status=1;
         if ($check){
-             return $this->dispatch('alert',icon:'error',message:'کد احراز هویت برای شما ارسال شده است لطفا چند دقیقه دیگر امتحان کنید');
+            return $this->dispatch('alert',icon:'success',message:'کد احراز هویت برای شما ارسال گردید');
         }else{
             Code::where('phone',$this->phone)->delete();
             $code=$this->generate_code();
@@ -53,9 +53,17 @@ class Login extends Component
                 $this->name=$this->user->name;
                 $this->phone=$this->user->phone;
                 $this->code_meli=$this->user->code_meli;
-                $this->email=$this->user->email;
+                $this->father=$this->user->father;
+                $this->address=$this->user->address;
+                $this->type=$this->user->type;
+                $this->license_number=$this->user->license_number;
+                $this->license_image=$this->user->license_image;
+                $this->avatar=$this->user->avatar;
+                list($this->years,$this->month,$this->day)=explode('-',$this->user->birthday);
+                list($this->license_years,$this->license_month,$this->license_day)=explode('-',$this->user->license_date);
+                \session()->put('register',$this->phone);
+                Auth::login($this->user);
             }
-            \session()->put('register',$this->phone);
         }else{
             Session::flash('code', 'کد نامعتبر می باشد');
         }
@@ -88,12 +96,15 @@ class Login extends Component
             'address' => ['required'],
             'type' => ['required'],
             'license_number' => ['required'],
+            'license_image' => ['required'],
             'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone'],
         ], [
             'name.required' => 'این فیلد الزامی می باشد',
+            'license_number.required' => 'این فیلد الزامی می باشد',
             'day.required' => 'این فیلد الزامی می باشد',
             'month.required' => 'این فیلد الزامی می باشد',
             'type.required' => 'این فیلد الزامی می باشد',
+            'license_image.required' => 'این فیلد الزامی می باشد',
             'years.required' => 'این فیلد الزامی می باشد',
             'license_day.required' => 'این فیلد الزامی می باشد',
             'license_month.required' => 'این فیلد الزامی می باشد',
@@ -202,7 +213,7 @@ class Login extends Component
 
     public function mount()
     {
-        if (\session()->has('register')){
+        if (\session()->has('register') && auth()->check()){
             $this->submit_information=1;
             $this->user=User::where('phone',session()->get('register'))->first();
             if ($this->user){
