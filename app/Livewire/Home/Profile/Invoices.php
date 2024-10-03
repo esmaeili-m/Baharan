@@ -3,11 +3,12 @@
 namespace App\Livewire\Home\Profile;
 
 use App\Models\Invoice;
+use Hekmatinasser\Verta\Facades\Verta;
 use Livewire\Component;
 
 class Invoices extends Component
 {
-    public $invoice_select;
+    public $invoice_select,$barcode,$from,$to,$fillter=0,$search;
     public $type=['1'=>'عدد','2'=>'کیلو گرم'];
 
     public function show_invoice($id)
@@ -18,6 +19,8 @@ class Invoices extends Component
     public function all_invoice()
     {
         $this->invoice_select=null;
+        $this->dispatch('contentChanged')->to(Index::class);
+
     }
     public function getTotalPrice()
     {
@@ -27,9 +30,44 @@ class Invoices extends Component
         }
         return number_format($total);
     }
+
+    public function search_invoice()
+    {
+        $invoices=Invoice::where('user_id',auth()->user()->id);
+        if ($this->from || $this->to) {
+            // اگر فقط تاریخ شروع تعریف شده باشد
+            if ($this->from) {
+                $fromDate = Verta::parse($this->from)->startDay()->toCarbon();
+                $invoices = $invoices->where('created_at', '>=', $fromDate);
+            }
+
+            // اگر فقط تاریخ پایان تعریف شده باشد
+            if ($this->to) {
+                $toDate = Verta::parse($this->to)->endDay()->toCarbon();
+                $invoices = $invoices->where('created_at', '<=', $toDate);
+            }
+
+            // اگر هر دو تاریخ تعریف شده باشند
+            if ($this->from && $this->to) {
+                $invoices = $invoices->whereBetween('created_at', [$fromDate, $toDate]);
+            }
+        }
+        if ($this->barcode){
+            $barcode = preg_replace('/\D/', '', $this->barcode);
+            $invoices=$invoices->where('barcode',$barcode);
+        }
+        $this->search=$invoices->pluck('id');
+        $this->fillter=1;
+
+    }
     public function render()
     {
-        $invoices=Invoice::where('user_id',auth()->user()->id)->latest()->get();
+        $invoices=Invoice::where('user_id',auth()->user()->id);
+        if ($this->fillter){
+            $invoices=$invoices->whereIn('id',$this->search);
+        }
+        $invoices=$invoices->latest()->get();
+        $this->dispatch('contentChanged')->to(Index::class);
         return view('livewire.home.profile.invoices',compact('invoices'))->layout('layouts.home');
     }
 }

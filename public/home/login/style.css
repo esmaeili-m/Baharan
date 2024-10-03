@@ -571,6 +571,11 @@ body {
     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
 
 }
+.chat-page{
+    min-height: 400px;
+    overflow-y: auto;
+    border-radius: 15px;
+}
 @media only screen and (max-width: 600px) {
     .label-input{
         width: 100%;

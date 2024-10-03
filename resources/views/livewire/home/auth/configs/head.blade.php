@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{asset('home/login/style.css')}}">
         <link rel="stylesheet" href="{{asset('home/login/datepicker/persian-datepicker.min.css')}}"/>
 
-        @stack('styles')
+        @stack('styles-end')
         @livewireStyles
     </head>
 </div>

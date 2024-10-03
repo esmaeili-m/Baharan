@@ -64,24 +64,22 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-control-custom" >
-                            <input class="" placeholder="شماره فاکتور">
-
+                            <input id="barcode" wire:model.lazy="barcode" class="" placeholder="شماره فاکتور">
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-control-custom" >
+                            <input wire:model.lazy="from" id="from" type="text" data-jdp placeholder="از تاریخ" />
 
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-control-custom" >
-                            <input type="date" class="" placeholder="تاریخ فاکتور">
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-control-custom" >
-                            <input type="date" class="" placeholder="تاریخ فاکتور">
+                            <input wire:model.lazy="to" id="to" type="text" data-jdp placeholder="تا تاریخ ">
                         </div>
                     </div>
                     <div class="col-lg-1">
-                        <button class="btn w-100 btn-custom-primary-submit p-3 mt-1"><i class="fa fa-search"></i></button>
+                        <button wire:click="search_invoice()" class="btn w-100 btn-custom-primary-submit p-3 mt-1"><i class="fa fa-search"></i></button>
                     </div>.
 
                 </div>
@@ -136,107 +134,4 @@
 
         @endif
     </div>
-    @push('scripts')
-        <script>
-            $(document).ready(function(){
-                var post = 0;
-                $(".example1").persianDatepicker({
-                    showGregorianDate: true,
-                    formatPersian: false,
-                    months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
-                    dowTitle: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
-                    shortDowTitle: ["ش", "ی", "د", "س", "چ", "پ", "ج"],
-                    persianNumbers: true,
-                    responsive:true,
-                    isRTL: true,
-                    persianDigit: false,
-                    selectableMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                    selectedBefore: false,
-                    selectedDate: null,
-                    startDate: null,
-                    endDate: null,
-                    theme: 'default',
-                    alwaysShow: false,
-                    selectableYears: null,
-                    cellWidth: 25,
-                    cellHeight: 20,
-                    fontSize: 13,
-                    format: 'YYYY-MM-DD H:m:ss',
-                    observer: true,
-                    timePicker: {
-                        enabled: true,
-                        meridiem: {
-                            enabled: true
-                        },
-                    },
-                });
-                $("input[name='title']").val('');
-                $("input[name='code']").val('');
-                $("input[name='percent']").val('');
-                $("input[name='count']").val('');
-                $("input[name='day']").val('');
-                $("select[name='product_id']").val('');
-                $("select[name='status']").val('');
-                $('.popUp').hide();
-                $('.filterContent').hide();
-                $('.filterTitle').click(function(){
-                    $('.filterContent').toggle();
-                })
-                $('#cancelDelete').click(function(){
-                    $('.popUp').hide();
-                    post = 0;
-                })
-                $('#deletePost').click(function(){
-                    $('.popUp').hide();
-                });
-                $('.buttons').on('click' , '.deleteButton' ,function(){
-                    post = this.id;
-                    $('.popUp').show();
-                    $('.buttonsPop form').attr('action' , '/admin/discount/' + post+'/delete');
-                })
-                $('.buttons').on('click' , '.editButton' ,function(){
-                    post = this.id;
-                    var form = {
-                        "_token": "{{ csrf_token() }}",
-                        discount:post,
-                    };
-                    $.ajax({
-                        url: "/admin/discount/" + post + "/edit",
-                        type: "get",
-                        data: form,
-                        success: function (data) {
-                            $('.createFilled').attr('action' , '/admin/discount/' + post+'/edit');
-                            $(".createFilled input[name='_method']").remove();
-                            $('.createFilled').append(
-                                $('@method('put')')
-                            )
-                            $('.buttonForm h4').remove();
-                            $('.buttonForm').append(
-                                $('<h4>لغو</h4>').on('click',function(ss){
-                                    post = 0;
-                                    $('.createFilled').attr('action' , '/admin/discount/');
-                                    $(".createFilled input[name='_method']").remove();
-                                    $(this).hide();
-                                    $("input[name='title']").val('');
-                                    $("input[name='code']").val('');
-                                    $("input[name='percent']").val('');
-                                    $("input[name='count']").val('');
-                                    $("input[name='day']").val('');
-                                    $("select[name='product_id']").val('');
-                                    $("select[name='status']").val('');
-                                })
-                            )
-                            $("input[name='title']").val(data[0].title);
-                            $("input[name='code']").val(data[0].code);
-                            $("input[name='percent']").val(data[0].percent);
-                            $("input[name='count']").val(data[0].count);
-                            $("input[name='day']").val(data[1]);
-                            $("select[name='product_id']").val(data[0].product_id);
-                            $("select[name='status']").val(data[0].status);
-                        },
-                    });
-                })
-            })
-        </script>
-    @endpush
 </div>

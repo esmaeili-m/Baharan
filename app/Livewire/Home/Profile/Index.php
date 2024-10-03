@@ -3,10 +3,12 @@
 namespace App\Livewire\Home\Profile;
 
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class Index extends Component
 {
+    #[Url]
     public $status=1;
     #[On('change-content')]
     public function change_status($status)
@@ -15,7 +17,16 @@ class Index extends Component
             return redirect()->route('shop.index');
         }
        $this->status=$status;
+       $this->dispatch('contentChanged');
+    }
 
+    public function mount()
+    {
+        if (request()->has('status')) {
+            $this->status = request()->status;
+            $this->dispatch('contentChanged');
+
+        }
     }
     public function render()
     {

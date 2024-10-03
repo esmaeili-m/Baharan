@@ -3,9 +3,7 @@
     <script src="{{asset('home/login/datepicker/jquery-3.7.1.min.js')}}"></script>
     <script src="{{asset('home/login/datepicker/persian-date.min.js')}}"></script>
     <script src="{{asset('home/login/datepicker/persian-datepicker.min.js')}}"></script>
-    <script>
-
-    </script>
+    @stack('scripts-end')
     <script>
         document.addEventListener('livewire:initialized', () => {
             Livewire.on('alert', (event) => {
