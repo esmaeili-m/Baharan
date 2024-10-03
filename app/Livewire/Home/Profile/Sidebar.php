@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Home\Profile;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Sidebar extends Component
@@ -9,6 +10,12 @@ class Sidebar extends Component
     public function change_status($status)
     {
 
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('user.login');
     }
     public function render()
     {

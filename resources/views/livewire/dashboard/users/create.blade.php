@@ -31,16 +31,16 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="email_address_2">ایمیل</label>
+                                <label>نام پدر</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text"
-                                               wire:model.lazy="email"
+                                               wire:model.defer="father"
                                                class="form-control"
-                                               placeholder="ایمیل کاربر را وارد کنید">
-                                        @error('email')
+                                               placeholder="نام پدر کاربر را وارد کنید">
+                                        @error('father')
                                         <p class="text-danger mt-1">{{$message}}</p>
                                         @enderror
                                     </div>
@@ -49,16 +49,52 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="email_address_2">رمز عبور</label>
+                                <label for="email_address_2">شماره همراه</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text"
-                                               wire:model.lazy="password"
+                                               wire:model.lazy="phone"
                                                class="form-control"
-                                               placeholder="رمز عبور کاربر را وارد کنید">
-                                        @error('password')
+                                               placeholder="شماره همراه کاربر را وارد کنید">
+                                        @error('phone')
+                                        <p class="text-danger mt-1">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">آدرس کاربر</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text"
+                                               wire:model.lazy="address"
+                                               class="form-control"
+                                               placeholder="آدرس کاربر را وارد کنید">
+                                        @error('address')
+                                        <p class="text-danger mt-1">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">شماره پروانه / مجوز</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text"
+                                               wire:model.lazy="license_number"
+                                               class="form-control"
+                                               placeholder="شماره پروانه / مجوز">
+                                        @error('license_number')
                                         <p class="text-danger mt-1">{{$message}}</p>
                                         @enderror
                                     </div>
@@ -85,20 +121,141 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="email_address_2">شماره همراه</label>
+                                <label for="email_address_2">تاریخ تولد کاربر</label>
+                            </div>
+                            <div class="col-lg-3 col-md-10 col-sm-8 col-xs-7 mb-0">
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="day">
+                                        <option value=""  selected>روز تولد کاربر</option>
+                                        @for($i=1;$i<31;$i++)
+                                            @if($i<10)
+                                                <option value="0{{$i}}">{{$i}}</option>
+
+                                            @else
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endif
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-10 col-sm-8 col-xs-7 mb-0">
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="month">
+                                        <option value=""  selected>ماه تولد کاربر</option>
+                                        <option value="01">فروردین</option>
+                                        <option value="02">اردیبهشت</option>
+                                        <option value="03">خرداد</option>
+                                        <option value="04">تیر</option>
+                                        <option value="05">مرداد</option>
+                                        <option value="06">شهریور</option>
+                                        <option value="07">مهر</option>
+                                        <option value="08">آبان</option>
+                                        <option value="09">آذر</option>
+                                        <option value="10">دی</option>
+                                        <option value="11">بهمن</option>
+                                        <option value="12">اسفند</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-10 col-sm-8 col-xs-7 mb-0">
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="years">
+                                        <option value=""  selected>سال تولد کاربر</option>
+                                        @for($i=1300;$i<1390;$i++)
+                                            <option value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-10 col-sm-8 col-xs-7"></div>
+                            @if($errors->has('day'))
+                                <p class="text-danger mb-4 mx-3">{{$errors->first('day')}}</p>
+
+                            @elseif($errors->has('month'))
+                                <p class="text-danger mb-4 mx-3">{{$errors->first('month')}}</p>
+
+                            @elseif($errors->has('years'))
+                                <p class="text-danger mb-4 mx-3">{{$errors->first('years')}}</p>
+
+                            @endif
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">تاریخ صدور مجوز</label>
+                            </div>
+                            <div class="col-lg-3 col-md-10 col-sm-8 col-xs-7 mb-0">
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="license_day">
+                                        <option value=""  selected>روز صدور</option>
+                                        @for($i=1;$i<31;$i++)
+                                            @if($i<10)
+                                                <option value="0{{$i}}">{{$i}}</option>
+
+                                            @else
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endif
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-10 col-sm-8 col-xs-7 mb-0">
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="license_month">
+                                        <option value=""  selected>ماه صدور</option>
+                                        <option value="01">فروردین</option>
+                                        <option value="02">اردیبهشت</option>
+                                        <option value="03">خرداد</option>
+                                        <option value="04">تیر</option>
+                                        <option value="05">مرداد</option>
+                                        <option value="06">شهریور</option>
+                                        <option value="07">مهر</option>
+                                        <option value="08">آبان</option>
+                                        <option value="09">آذر</option>
+                                        <option value="10">دی</option>
+                                        <option value="11">بهمن</option>
+                                        <option value="12">اسفند</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-10 col-sm-8 col-xs-7 mb-0">
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="license_years">
+                                        <option value=""  selected>سال صدور</option>
+                                        @for($i=1300;$i<1390;$i++)
+                                            <option value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-10 col-sm-8 col-xs-7"></div>
+                            @if($errors->has('license_day'))
+                                <p class="text-danger mb-4 mx-3">{{$errors->first('license_day')}}</p>
+
+                            @elseif($errors->has('license_month'))
+                                <p class="text-danger mb-4 mx-3">{{$errors->first('license_month')}}</p>
+
+                            @elseif($errors->has('license_years'))
+                                <p class="text-danger mb-4 mx-3">{{$errors->first('license_years')}}</p>
+
+                            @endif
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">نوع مالکیت</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text"
-                                               wire:model.lazy="phone"
-                                               class="form-control"
-                                               placeholder="شماره همراه کاربر را وارد کنید">
-                                        @error('phone')
-                                        <p class="text-danger mt-1">{{$message}}</p>
-                                        @enderror
-                                    </div>
+                                <div wire:ignore class="select2 input-field col s12">
+                                    <select wire:model.defer="type">
+                                        <option value="" disabled selected>گزینه خود را انتخاب کنید</option>
+                                            <option value="مالک">مالک</option>
+                                            <option value="استیجاری">استیجاری</option>
+                                    </select>
                                 </div>
+                                @error('type')
+                                <p class="text-danger mt-1">{{$message}}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="row clearfix">
@@ -141,7 +298,29 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="email_address_2">تصویر</label>
+                                <label for="email_address_2">تصویر مجوز</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>فایل</span>
+                                        <input wire:model="license_image" type="file">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input wire:model="license_image" class="file-path  form-line" type="text">
+                                    </div>
+                                </div>
+                                @if ($license_image ?? 0)
+                                    <img width="100px" height="100" class="border-radius-per-12" alt="image" src="{{ asset($license_image) }}">
+                                @endif
+                                @error('license_image')
+                                <p class="text-danger mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">تصویر کاربر</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div class="file-field input-field">

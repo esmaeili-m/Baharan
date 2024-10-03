@@ -5,7 +5,7 @@
                 <div class="text-center mb-5">
                     <span class=" btn custom-primary mt-3 mb-3 w-lg-40 w-sm-100 h-sm-50" >شرکت طیور متحد زرین قم (بهاران)</span>
                 </div>
-                @if(($user->status ??0) == 2)
+                @if(($user->status  ?? 0) == 2)
                     <div class=" col-lg-12 col-sm-12">
                         <div class="custom-card d-flex justify-content-center align-items-center" style="background-color: #45c159">
                             <p class="mb-0 fs-sm-20">«کاربر گرامی، اطلاعات شما بررسی و تأیید شد لطفا    وجه ضمانت خود را از طریق لینک زیر پرداخت کنید.»</p>
@@ -16,6 +16,11 @@
                 @else
                     <div class="row">
                         <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
+                                    نام و نام خانوادگی
+                                </p>
+                            </div>
                             <div class="form-field d-flex align-items-center @error('name') invalid-form @enderror">
                                 <input type="text" wire:model.lazy="name" class="" placeholder="نام و نام خانوادگی*"
                                        @if(($user->status ?? 0) == 2) disabled @endif>
@@ -29,6 +34,11 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
+                                    نام پدر
+                                </p>
+                            </div>
                             <div class="form-field d-flex align-items-center @error('father') invalid-form @enderror">
                                 <input type="text" wire:model.lazy="father" class="" placeholder="نام پدر*"
                                        @if(($user->status ?? 0) == 2) disabled @endif>
@@ -42,6 +52,11 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
+                                    شماره همراه
+                                </p>
+                            </div>
                             <div
                                 class="form-field d-flex align-items-center @error('phone') invalid-form @enderror mb-sm-10 form-controller-custom">
                                 <input type="text" wire:model.lazy="phone" placeholder="شماره همراه*"
@@ -56,6 +71,11 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
+                                    آدرس
+                                </p>
+                            </div>
                             <div class="form-field d-flex align-items-center @error('address') invalid-form @enderror">
                                 <input type="text" wire:model.lazy="address" class="" placeholder="آدرس*"
                                        @if(($user->status ?? 0) == 2) disabled @endif>
@@ -69,6 +89,11 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
+                                    شماره پروانه / مجوز
+                                </p>
+                            </div>
                             <div class="form-field d-flex align-items-center @error('license_number') invalid-form @enderror">
                                 <input type="text" wire:model.lazy="license_number" class=""
                                        placeholder="شماره پروانه / مجوز*"
@@ -83,6 +108,11 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
+                                    کد ملی
+                                </p>
+                            </div>
                             <div class="form-field d-flex align-items-center @error('code_meli') invalid-form @enderror">
                                 <input type="text" wire:model.lazy="code_meli" class="" placeholder="کد ملی*"
                                        @if(($user->status ?? 0) == 2) disabled @endif>
@@ -96,11 +126,12 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4 ">
-                            <div class="p-3 form-field align-items-center padding-mobile-4 @if($errors->has('day')) invalid-form @elseif($errors->has('month')) invalid-form @elseif($errors->has('years')) invalid-form @endif">
-                                <p class="mb-2 " ></p>
-                                <button style="font-size: 10px" type="submit" class="btn  custom-label  mx-2  ">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
                                     تاریخ تولد
-                                </button>
+                                </p>
+                            </div>
+                            <div class="p-3 form-field align-items-center padding-mobile-4 @if($errors->has('day')) invalid-form @elseif($errors->has('month')) invalid-form @elseif($errors->has('years')) invalid-form @endif">
                                 <div class=" d-lg-flex">
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="day" id="customSelect">
@@ -169,10 +200,13 @@
 
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4 ">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
+                                    تاریخ صدور مجوز
+                                </p>
+                            </div>
                             <div class="p-3 form-field align-items-center padding-mobile-4 @if($errors->has('license_day')) invalid-form @elseif($errors->has('license_month')) invalid-form @elseif($errors->has('license_years')) invalid-form @endif">
-                                <p class="mb-2 " ></p>
-                                <button style="font-size: 10px" type="submit" class="btn  custom-label  mx-2  ">تاریخ صدور پروانه کسب
-                                </button>
+
                                 <div class=" d-lg-flex">
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="license_day" id="customSelect">
@@ -277,6 +311,11 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="label-input">
+                                <p class="mb-0 mx-2">
+                                    نوع مالکیت
+                                </p>
+                            </div>
                             <div class="form-field d-flex align-items-center p-2 @error('type') invalid-form @enderror">
 
                                 <div class="w-100 d-flex">
@@ -295,17 +334,19 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12">
-                            <div class="custom-card d-flex justify-content-center align-items-center ">
-                                        <p class="mb-0 fs-sm-20">«کاربر گرامی، اطلاعات شما در حال بررسی و تأیید است.»</p>
+                            @if($user && $user->status == 1)
 
-                            </div>
+                                <div class="custom-card d-flex justify-content-center align-items-center mt-4">
+                                    <p class="mb-0 fs-sm-20">«کاربر گرامی، اطلاعات شما در حال بررسی و تأیید می باشد.»</p>
 
+                                </div>
+                            @endif
                         </div>
                         <div class="col-lg-2 col-sm-12">
                             @if($user)
                                 <button style="width: 100%" wire:click="user_update()" type="submit"
                                         class="btn custom-primary mt-3 mb-3"
-                                        @if(($user->status ?? 0) == 2) disabled @endif >ثبت اطلاعات
+                                        @if(($user->status ?? 0) == 2) disabled @endif >ویرایش اطلاعات
                                 </button>
                             @else
                                 <button style="width: 100%" wire:click="register_user()" type="submit"
@@ -325,7 +366,7 @@
     @else
         <div class="wrapper">
             <div class="logo">
-                <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png"
+                <img src="{{asset('home/images/logo.png')}}"
                      alt="">
             </div>
             <div class="text-center mt-3 name mb-4">
