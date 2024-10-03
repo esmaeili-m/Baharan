@@ -5,7 +5,7 @@
                 <div class="text-center mb-5">
                     <span class=" btn custom-primary mt-3 mb-3 w-lg-40 w-sm-100 h-sm-50" >شرکت طیور متحد زرین قم (بهاران)</span>
                 </div>
-                @if($user->status == 2)
+                @if(($user->status ??0) == 2)
                     <div class=" col-lg-12 col-sm-12">
                         <div class="custom-card d-flex justify-content-center align-items-center" style="background-color: #45c159">
                             <p class="mb-0 fs-sm-20">«کاربر گرامی، اطلاعات شما بررسی و تأیید شد لطفا    وجه ضمانت خود را از طریق لینک زیر پرداخت کنید.»</p>

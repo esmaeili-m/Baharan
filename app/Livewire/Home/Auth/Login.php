@@ -203,7 +203,7 @@ class Login extends Component
     public function mount()
     {
         if (\session()->has('register')){
-            $this->submit_information=1;
+            $this->submit_information=0;
             $this->user=User::where('phone',session()->get('register'))->first();
             if ($this->user){
                 $this->name=$this->user->name;
