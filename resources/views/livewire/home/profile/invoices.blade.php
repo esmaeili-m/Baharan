@@ -1,4 +1,5 @@
 <div>
+
     <div class="c-shadow p-5 content-profile">
         @if($invoice_select)
             <button wire:click="all_invoice" class="mb-3  btn btn-outline-primary">نمایش همه<i class="fa fa-arrow-left me-2"></i></button>
@@ -20,88 +21,110 @@
             <table class="table table-striped invoices">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>تصویر محصول</th>
-                    <th>نام محصول</th>
-                    <th>قیمت</th>
-                    <th>تعداد سفارش</th>
-                    <th>جمع</th>
+                    <th class="text-center">#</th>
+                    <th class="text-center">تصویر محصول</th>
+                    <th class="text-center">نام محصول</th>
+                    <th class="text-center">قیمت</th>
+                    <th class="text-center">تعداد سفارش</th>
+                    <th class="text-center">جمع</th>
                 </tr>
                 </thead>
                 <tbody>
                 @php($counter=1)
                 @foreach($invoice_select->products ?? [] as $product)
-                <tr>
-
-                        <td>{{$counter}}</td>
-                        <td>
+                    <tr>
+                        <td style="font-size: 15px" class="text-center align-middle">{{$counter}}</td>
+                        <td class="text-center align-middle">
                             <img style="border-radius: 5px;box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;" width="100px" height="60px" src="{{$product['image'] ?? '/home/images/category.jpg'}}">
                         </td>
-                        <td>
-                            <p class="">{{$product['name']}} </p>
-
+                        <td class="text-center align-middle">
+                            <p style="font-size: 15px" class="mb-0">{{$product['name']}}</p>
                         </td>
-
-                        <td>
-                            <p class="">{{number_format($product['price'])}} </p>
-
+                        <td class="text-center align-middle">
+                            <p class="mb-0" style="font-size: 15px"> {{number_format($product['price'])}} تومان</p>
                         </td>
-                        <td>
-                            <p class="">{{number_format($product['order'])}} </p>
-
+                        <td class="text-center align-middle">
+                            <p class="mb-0" style="font-size: 15px">{{number_format($product['order'])}} {{$type[$product['type']] ?? 'UNKNOW'}}</p>
                         </td>
-                        <td>
-                            <p class="price">{{number_format($product['price'] * $product['order'])}} </p>
-
+                        <td class="text-center align-middle">
+                            <p style="font-size: 15px" class="price mb-0">{{number_format($product['price'] * $product['order'])}} تومان</p>
                         </td>
                         @php($counter+=1)
+                    </tr>
 
-                </tr>
                 @endforeach
 
                 </tbody>
             </table>
             <hr>
-            <p id="total">جمع کل سفارش: {{ $this->getTotalPrice() }}</p>
+            <p id="total">جمع کل سفارش: {{ $this->getTotalPrice() }} تومان</p>
         @else
+            <div class="header">
+                <p>لیست فاکتورها</p>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-control-custom" >
+                            <input class="" placeholder="شماره فاکتور">
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-control-custom" >
+                            <input type="date" class="" placeholder="تاریخ فاکتور">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-control-custom" >
+                            <input type="date" class="" placeholder="تاریخ فاکتور">
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn w-100 btn-custom-primary-submit p-3 mt-1"><i class="fa fa-search"></i></button>
+                    </div>.
+
+                </div>
+            </div>
+        <hr>
             <table class="table table-striped invoices">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>بارکد</th>
-                    <th>محصولات</th>
-                    <th>قیمت</th>
-                    <th>وضعیت سفارش</th>
-                    <th>تاریخ ثبت سفارش</th>
-                    <th>جزئیات</th>
+                    <th class="text-center">#</th>
+                    <th class="text-center">شماره فاکتور</th>
+                    <th class="text-center">محصولات</th>
+                    <th class="text-center">قیمت</th>
+                    <th class="text-center">وضعیت سفارش</th>
+                    <th class="text-center">تاریخ ثبت سفارش</th>
+                    <th class="text-center">جزئیات</th>
                 </tr>
                 </thead>
                 <tbody>
                 @php($counter=1)
                 @foreach($invoices as $invoice)
                     <tr>
-                        <td>{{$counter}}</td>
-                        <td>BIN{{$invoice->barcode}}</td>
-                        <td>
+                        <td class="text-center align-middle">{{$counter}}</td>
+                        <td class="text-center align-middle"><p>BIN{{$invoice->barcode}}</p></td>
+                        <td class="text-center align-middle">
                             @foreach($invoice->products ?? [] as $product)
-                                <p class="">{{$product['name']}} -> {{$product['order']}}</p>
+                                <p class="">{{$product['name']}} -> {{$product['order']}} {{$type[$product['type']] ?? 'UNKNOW'}}</p>
                             @endforeach
 
                         </td>
-                        <td>
-                            {{number_format($invoice->price)}}
+                        <td class="text-center align-middle">
+                            <p>{{number_format($invoice->price)}} تومان</p>
                         </td>
-                        <td>
+                        <td class="text-center align-middle">
                             @if($invoice->status == 0)
                                 <span class="badge bg-warning text-dark">ثبت شده</span>
                             @else
                                 <span class="badge bg-success">تحویل داده شده</span>
                             @endif
                         </td>
-                        <td>
-                            {{verta($invoice->crated_at)->format('H:i:s Y-m-d')}}
+                        <td class="text-center align-middle">
+                            <p>{{verta($invoice->crated_at)->format('H:i:s Y-m-d')}}</p>
                         </td>
-                        <td>
+                        <td class="text-center align-middle">
                             <a wire:click="show_invoice({{$invoice->id}})" class="text-primary" style="cursor: pointer">نمایش فاکتور</a>
                         </td>
                     </tr>
@@ -113,4 +136,107 @@
 
         @endif
     </div>
+    @push('scripts')
+        <script>
+            $(document).ready(function(){
+                var post = 0;
+                $(".example1").persianDatepicker({
+                    showGregorianDate: true,
+                    formatPersian: false,
+                    months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
+                    dowTitle: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
+                    shortDowTitle: ["ش", "ی", "د", "س", "چ", "پ", "ج"],
+                    persianNumbers: true,
+                    responsive:true,
+                    isRTL: true,
+                    persianDigit: false,
+                    selectableMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                    selectedBefore: false,
+                    selectedDate: null,
+                    startDate: null,
+                    endDate: null,
+                    theme: 'default',
+                    alwaysShow: false,
+                    selectableYears: null,
+                    cellWidth: 25,
+                    cellHeight: 20,
+                    fontSize: 13,
+                    format: 'YYYY-MM-DD H:m:ss',
+                    observer: true,
+                    timePicker: {
+                        enabled: true,
+                        meridiem: {
+                            enabled: true
+                        },
+                    },
+                });
+                $("input[name='title']").val('');
+                $("input[name='code']").val('');
+                $("input[name='percent']").val('');
+                $("input[name='count']").val('');
+                $("input[name='day']").val('');
+                $("select[name='product_id']").val('');
+                $("select[name='status']").val('');
+                $('.popUp').hide();
+                $('.filterContent').hide();
+                $('.filterTitle').click(function(){
+                    $('.filterContent').toggle();
+                })
+                $('#cancelDelete').click(function(){
+                    $('.popUp').hide();
+                    post = 0;
+                })
+                $('#deletePost').click(function(){
+                    $('.popUp').hide();
+                });
+                $('.buttons').on('click' , '.deleteButton' ,function(){
+                    post = this.id;
+                    $('.popUp').show();
+                    $('.buttonsPop form').attr('action' , '/admin/discount/' + post+'/delete');
+                })
+                $('.buttons').on('click' , '.editButton' ,function(){
+                    post = this.id;
+                    var form = {
+                        "_token": "{{ csrf_token() }}",
+                        discount:post,
+                    };
+                    $.ajax({
+                        url: "/admin/discount/" + post + "/edit",
+                        type: "get",
+                        data: form,
+                        success: function (data) {
+                            $('.createFilled').attr('action' , '/admin/discount/' + post+'/edit');
+                            $(".createFilled input[name='_method']").remove();
+                            $('.createFilled').append(
+                                $('@method('put')')
+                            )
+                            $('.buttonForm h4').remove();
+                            $('.buttonForm').append(
+                                $('<h4>لغو</h4>').on('click',function(ss){
+                                    post = 0;
+                                    $('.createFilled').attr('action' , '/admin/discount/');
+                                    $(".createFilled input[name='_method']").remove();
+                                    $(this).hide();
+                                    $("input[name='title']").val('');
+                                    $("input[name='code']").val('');
+                                    $("input[name='percent']").val('');
+                                    $("input[name='count']").val('');
+                                    $("input[name='day']").val('');
+                                    $("select[name='product_id']").val('');
+                                    $("select[name='status']").val('');
+                                })
+                            )
+                            $("input[name='title']").val(data[0].title);
+                            $("input[name='code']").val(data[0].code);
+                            $("input[name='percent']").val(data[0].percent);
+                            $("input[name='count']").val(data[0].count);
+                            $("input[name='day']").val(data[1]);
+                            $("select[name='product_id']").val(data[0].product_id);
+                            $("select[name='status']").val(data[0].status);
+                        },
+                    });
+                })
+            })
+        </script>
+    @endpush
 </div>

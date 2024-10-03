@@ -8,6 +8,8 @@ use Livewire\Component;
 class Invoices extends Component
 {
     public $invoice_select;
+    public $type=['1'=>'عدد','2'=>'کیلو گرم'];
+
     public function show_invoice($id)
     {
         $this->invoice_select=Invoice::where('id', $id)->where('user_id',auth()->user()->id)->first();

@@ -248,13 +248,18 @@ body {
 .custom-card{
     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
     width: 100%;
-    height: 90px;
+    padding: 20px;
     background-color: #fbc17f;
     color: #f4f1f1;
     border-radius: 25px;
     letter-spacing: 0.5px;
 }
-
+.btn-custom-primary{
+    background-color: #96d7f4;
+    color: #3a3939;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+}
 @keyframes shake-grow {
     0% {
         transform: scale(1);
@@ -535,6 +540,12 @@ body {
     font-size: 12px;
     color: #504f4f;
 }
+.invoices p{
+    font-size: 15px;
+}
+.invoices span{
+    font-size: 15px;
+}
 .label-input{
     background-color: #96d7f4;
     color: #686767;
@@ -549,6 +560,16 @@ body {
 .btn-light-info{
     background-color: #b2d8ff;
     color: #2085f8;
+}
+.form-control-custom{
+    padding: 15px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+    border-radius: 15px;
+}
+.btn-custom-primary-submit{
+    background-color: #96d7f4;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+
 }
 @media only screen and (max-width: 600px) {
     .label-input{
@@ -604,6 +625,10 @@ body {
         background-color: #ecf0f3;
         border-radius: 15px;
         box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+    }
+    .p-sm-4{
+        padding: 20px;
+        font-size: 15px;
     }
 }
 

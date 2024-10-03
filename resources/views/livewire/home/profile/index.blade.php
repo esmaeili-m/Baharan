@@ -11,6 +11,8 @@
                     <livewire:home.profile.invoices />
                 @endif
             </div>
+            <input type="text" class="example1" />
+
         </div>
     </div>
 

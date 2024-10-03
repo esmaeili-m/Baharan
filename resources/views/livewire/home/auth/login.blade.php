@@ -7,11 +7,15 @@
                 </div>
                 @if(($user->status  ?? 0) == 2)
                     <div class=" col-lg-12 col-sm-12">
-                        <div class="custom-card d-flex justify-content-center align-items-center" style="background-color: #45c159">
+                        <div class="custom-card d-flex justify-content-center align-items-center p-sm-4" style="background-color: #45c159">
                             <p class="mb-0 fs-sm-20">«کاربر گرامی، اطلاعات شما بررسی و تأیید شد لطفا    وجه ضمانت خود را از طریق لینک زیر پرداخت کنید.»</p>
 
                         </div>
+                        <div class="d-flex  justify-content-center align-content-center mt-5">
+                            <a href="{{route('profile.index')}}" class="btn mx-2 btn-custom-primary" style="font-size: 15px">پروفایل کاربری</a>
+                            <a href="{{route('profile.index')}}" class="btn mx-2 btn-custom-primary" style="font-size: 15px">پرداخت وجه ضمانت</a>
 
+                        </div>
                     </div>
                 @else
                     <div class="row">
@@ -358,7 +362,6 @@
 
                         </div>
                     </div>
-
                 @endif
             </div>
 
