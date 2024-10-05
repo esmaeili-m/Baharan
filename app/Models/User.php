@@ -57,4 +57,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Role::class,'id','role_id');
     }
+
+
+
+    public function hasPermission($permission)
+    {
+        return $this->role->permissions->contains('name', $permission); // بررسی وجود مجوز
+    }
 }

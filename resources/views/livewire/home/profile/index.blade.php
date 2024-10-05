@@ -32,15 +32,7 @@
                         date:"-"
                     }
                 });
-                setTimeout(function(){
-                    var elm=document.getElementById("from");
-                    elm.focus();
-                    jalaliDatepicker.hide();
-                    jalaliDatepicker.show(elm);
 
-                    var toInput = document.getElementById("to");
-                    jalaliDatepicker.show(toInput);
-                }, 1000);
 
                     });
 

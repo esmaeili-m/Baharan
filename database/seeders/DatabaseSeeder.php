@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Permissions;
 use App\Models\Tags;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(CategoryTableSeeder::class);
 //        $this->call(PostTableSeeder::class);
 //        $this->call(TagsTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
+//        $this->call(RolesTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
     }
 }

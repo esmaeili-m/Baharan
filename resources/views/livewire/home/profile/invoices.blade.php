@@ -1,10 +1,10 @@
 <div>
 
-    <div class="c-shadow p-5 content-profile">
+    <div class="c-shadow p-lg-5 p-sm-2 content-profile">
         @if($invoice_select)
             <button wire:click="all_invoice" class="mb-3  btn btn-outline-primary">نمایش همه<i class="fa fa-arrow-left me-2"></i></button>
             <div class="header-details-invoice d-flex">
-                <p class="mb-0 mx-2"> سفارش BIN{{$invoice_select->barcode}}</p>
+                <p class="mb-0 mx-2"> فاکتور BIN{{$invoice_select->barcode}}</p>
                 @if($invoice_select->status == 0)
                     <span class="badge bg-warning text-dark">ثبت شده</span>
                 @else
@@ -17,6 +17,7 @@
 
             </span>
             <hr>
+            <div class="table-responsive d-none d-md-block">
 
             <table class="table table-striped invoices">
                 <thead>
@@ -56,36 +57,38 @@
 
                 </tbody>
             </table>
+            </div>
             <hr>
             <p id="total">جمع کل سفارش: {{ $this->getTotalPrice() }} تومان</p>
         @else
             <div class="header">
                 <p>لیست فاکتورها</p>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-sm-12 mb-2">
                         <div class="form-control-custom" >
                             <input id="barcode" wire:model.lazy="barcode" class="" placeholder="شماره فاکتور">
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-sm-12 mb-2">
                         <div class="form-control-custom" >
                             <input wire:model.lazy="from" id="from" type="text" data-jdp placeholder="از تاریخ" />
 
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-sm-12 mb-2">
                         <div class="form-control-custom" >
                             <input wire:model.lazy="to" id="to" type="text" data-jdp placeholder="تا تاریخ ">
                         </div>
                     </div>
-                    <div class="col-lg-1">
+                    <div class="col-lg-1 col-sm-12 mb-2">
                         <button wire:click="search_invoice()" class="btn w-100 btn-custom-primary-submit p-3 mt-1"><i class="fa fa-search"></i></button>
                     </div>.
 
                 </div>
             </div>
         <hr>
-            <table class="table table-striped invoices">
+            <div class="table-responsive ">
+            <table class=" table table-striped invoices">
                 <thead>
                 <tr>
                     <th class="text-center">#</th>
@@ -131,7 +134,7 @@
 
                 </tbody>
             </table>
-
+            </div>
         @endif
     </div>
 </div>

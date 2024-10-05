@@ -394,6 +394,16 @@ body {
 .c-shadow{
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
+.shadow-2{
+    box-shadow: 10px 10px 10px #cbced1, -10px -10px 10px #fff;
+
+}
+.btn-shadow{
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+}
+.bg-light-primary{
+    background-color: #5c99f4;
+}
 .profile-container{
     margin: 80px 30px 40px 30px;
 }
@@ -419,6 +429,7 @@ body {
     font-family: 'Number', serif;
 }
 .card-category{
+    min-width: auto;
     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
     width: 100%;
     border-radius: 10px;
@@ -485,6 +496,10 @@ body {
     border-radius: 5px; /* گوشه‌های گرد */
     text-decoration: none;
 }
+.blink-button{
+    animation: blink 1s infinite;
+
+}
 .total-factor{
     font-size: 13px;
 }
@@ -522,6 +537,11 @@ body {
     cursor: pointer;
     width: 100%;
 }
+@keyframes blink {
+      0% { opacity: 1; }
+      50% { background-color: #02da4e;color: white }
+      100% { opacity: 1; }
+  }
 .error-invoice{
     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
     width: 100%;
@@ -576,7 +596,20 @@ body {
     overflow-y: auto;
     border-radius: 15px;
 }
+.products-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* کارت‌ها به چند سطر تقسیم می‌شوند */
+}
+.message{
+    max-width: 75%; display: inline-block; border-radius: 8px;
+}
 @media only screen and (max-width: 600px) {
+    .products-wrapper {
+        display: flex;
+        flex-wrap: nowrap; /* کارت‌ها در یک سطر قرار می‌گیرند */
+        overflow-x: auto; /* اسکرول افقی فعال می‌شود */
+    }
+
     .label-input{
         width: 100%;
     }
@@ -635,7 +668,48 @@ body {
         padding: 20px;
         font-size: 15px;
     }
+    .sidebar-category{
+        font-family: 'Iransanse', serif !important;
+        /*padding: 15px 15px 15px 15px;*/
+        max-height: 150px;
+        min-height: 400px;
+        background-color: #ecf0f3;
+        border-radius: 15px;
+        box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+        overflow-y: auto;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto; /* فعال کردن اسکرول افقی */
+        padding-bottom: 10px; /* فاصله برای اسکرول بار */
+    }
+    .shop-category{
+        font-family: 'Iransanse', serif !important;
+        min-height: 350px;
+        max-height: 720px;
+        overflow-y: auto;
+        margin: 20px auto;
+    }
+    .category-image{
+        height: 70px;
+    }
+    .card-category{
+        min-width: 200px;
+    }
+    .category-product{
+        font-size: 13px;
+    }
+    .shop-container{
+        width: 100%;
+        display: flex;
+        min-height: 100vh; /* تنظیم ارتفاع به 100% */
+    }
+    .mobile-margin{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .message{
+        max-width: 100%; display: inline-block; border-radius: 8px;
+    }
 }
-
 
 
