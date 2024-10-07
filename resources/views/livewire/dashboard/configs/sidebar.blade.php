@@ -44,10 +44,22 @@
                         <span>کاربران</span>
                     </a>
                 </li>
+                <li  class="{{request()->routeIs('invoice.*') ? 'active active_route' : ''}}">
+                    <a href="{{route('invoice.list')}}">
+                        <i class="menu-icon ti-list"></i>
+                        <span>فاکتور ها</span>
+                    </a>
+                </li>
                 <li  class="{{request()->routeIs('product.*') ? 'active active_route' : ''}}">
                     <a href="{{route('product.list')}}">
                         <i class="menu-icon ti-list"></i>
                         <span>محصولات</span>
+                    </a>
+                </li>
+                <li  class="{{request()->routeIs('role.*') ? 'active active_route' : ''}}">
+                    <a href="{{route('role.list')}}">
+                        <i class="menu-icon ti-list"></i>
+                        <span>نقش ها و دسترسی ها</span>
                     </a>
                 </li>
                 <li  class="{{request()->routeIs('post.*') ? 'active active_route' : ''}}">

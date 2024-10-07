@@ -22,6 +22,16 @@ Route::get('/category/list',\App\Livewire\Dashboard\Category\Index::class)->name
 Route::get('/category/create',\App\Livewire\Dashboard\Category\Create::class)->name('category.create');
 Route::get('/category/update/{id}',\App\Livewire\Dashboard\Category\Update::class)->name('category.update');
 Route::get('/category/trash',\App\Livewire\Dashboard\Category\Trash::class)->name('category.trash');
+//-------------------------------------------------------{ Role } ---------------------------------------
+Route::get('/role/list',\App\Livewire\Dashboard\Role\Index::class)->name('role.list');
+Route::get('/role/create',\App\Livewire\Dashboard\Role\Create::class)->name('role.create');
+Route::get('/role/update/{id}',\App\Livewire\Dashboard\Role\Update::class)->name('role.update');
+Route::get('/permission/{id}',\App\Livewire\Dashboard\Permission\Index::class)->name('role.permission');
+//-------------------------------------------------------{ Invoice } ---------------------------------------
+Route::get('/invoice/list',\App\Livewire\Dashboard\Invoice\Index::class)->name('invoice.list');
+Route::get('/invoice/create',\App\Livewire\Dashboard\Invoice\Create::class)->name('invoice.create');
+Route::get('/invoice/details/{id}',\App\Livewire\Dashboard\Invoice\Details::class)->name('invoice.details');
+
 //-------------------------------------------------------{ Post } ---------------------------------------
 Route::get('/post/list',\App\Livewire\Dashboard\Post\Index::class)->name('post.list');
 Route::get('/post/create',\App\Livewire\Dashboard\Post\Create::class)->name('post.create');
