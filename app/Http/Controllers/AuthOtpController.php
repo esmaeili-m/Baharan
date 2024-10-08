@@ -44,7 +44,7 @@ class AuthOtpController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
 
-        if ($lastRecord && $lastRecord->code === $request->code) {
+        if ($lastRecord && $lastRecord->code == $request->code) {
             $data=User::where('phone',$this->phone)->first();
             Code::where('phone', $request->phone)->delete();
             return response()->json([

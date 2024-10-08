@@ -116,10 +116,13 @@
                             <p>{{number_format($invoice->price)}} تومان</p>
                         </td>
                         <td class="text-center align-middle">
-                            @if($invoice->status == 0)
+                            @if($invoice->status == 1)
                                 <span class="badge bg-warning text-dark">ثبت شده</span>
-                            @else
+                            @elseif($invoice->status == 2)
                                 <span class="badge bg-success">تحویل داده شده</span>
+                            @else
+                                <span class="badge bg-success"> لفو شده </span>
+
                             @endif
                         </td>
                         <td class="text-center align-middle">

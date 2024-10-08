@@ -26,7 +26,7 @@ class Basket extends Component
     #[On('add_basket')]
     public function add_basket()
     {
-        $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
+        $products=\App\Models\Basket::where('status',0)->whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
         $this->products=\App\Models\Product::whereIn('id',$products ?? [])->get();
     }
 
@@ -117,13 +117,13 @@ class Basket extends Component
                 }
             }
 
-            // اگر هیچ خطایی وجود نداشت، عملیات ادامه پیدا می‌کند
             if ($check) {
                 Invoice::create([
                     'user_id' => auth()->user()->id,
                     'barcode' => $this->get_barcode(),
                     'created_by' => auth()->user()->id,
                     'products' => $product_invoice,
+                    'status'=>1,
                     'price' => array_sum($this->price)
                 ]);
                 \App\Models\Basket::whereDate('created_at', Carbon::today())
@@ -131,7 +131,8 @@ class Basket extends Component
                     ->update(['status'=>1]);
                 DB::commit(); // اتمام تراکنش و ذخیره‌سازی تغییرات
             }
-
+            $products=\App\Models\Basket::where('user_id',auth()->user()->id)->update(['status'=>1]);
+            return redirect()->route('profile.index',['status'=>3,'code'=>$invoice->barcode]);
         } catch (\Exception $e) {
             DB::rollBack(); // در صورت بروز خطا بازگشت به حالت قبلی
             throw $e; // ارسال خطا به سیستم یا نمایش پیغام

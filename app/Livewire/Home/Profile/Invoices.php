@@ -60,6 +60,14 @@ class Invoices extends Component
         $this->fillter=1;
 
     }
+
+    public function mount()
+    {
+        if (request()->has('code')) {
+            $this->invoice_select=Invoice::where('barcode', request()->get('code'))->where('user_id',auth()->user()->id)->first();
+
+        }
+    }
     public function render()
     {
         $invoices=Invoice::where('user_id',auth()->user()->id);

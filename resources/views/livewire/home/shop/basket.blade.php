@@ -27,7 +27,7 @@
                                         {{session()->get('invoice-'.$product->id)}}
                                     </div>
                                 @endif
-                                <p style="font-size: 11px !important;" class="category-product card-category-title mb-1 w-100"> قیمت : {{number_format($product->price)}}</p>
+                                <p style="font-size: 11px !important;" class="category-product card-category-title mb-1 w-100"> قیمت : {{number_format($product->price)}} تومان </p>
                                 @if($this->price[$product->id] ?? 0)
                                     <p class="category-product card-product-details w-100 mb-1">قیمت نهایی: {{ number_format($this->price[$product->id] ?? 0) }} تومان</p>
                                 @endif

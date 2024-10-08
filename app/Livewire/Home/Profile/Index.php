@@ -24,9 +24,11 @@ class Index extends Component
     {
         if (request()->has('status')) {
             $this->status = request()->status;
+
             $this->dispatch('contentChanged');
 
         }
+
     }
     public function render()
     {

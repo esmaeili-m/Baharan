@@ -5,9 +5,8 @@
                 <div  class="error-invoice-main  justify-content-center align-content-center">
                     <p class="category-product card-category-title mb-0 p-5">شما در درحال حاظر فاکتور فعال دارید امکان ثبت فاکتور جدید نمی باشد</p><br>
                    <div >
-                       <a style="text-decoration: none" class="mt-3 category-product card-category-title mb-0 p-2">درخواست ویرایش فاکتور</a>
-                       <a style="text-decoration: none" class="mt-3 category-product card-category-title mb-0 p-2">نمایش فاکتور فعلی</a>
-
+                       <a href="{{route('profile.index')}}" style="text-decoration: none" class="mt-3 category-product card-category-title mb-0 p-2">درخواست ویرایش فاکتور</a>
+                       <a href="{{route('profile.index',['status'=>3,'code'=>$has_invoice->barcode])}}" style="text-decoration: none" class="mt-3 category-product card-category-title mb-0 p-2">نمایش فاکتور فعلی</a>
                    </div>
 
                 </div>
