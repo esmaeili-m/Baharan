@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Code;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class AuthOtpController extends Controller
@@ -45,7 +46,7 @@ class AuthOtpController extends Controller
             ->first();
 
         if ($lastRecord && $lastRecord->code == $request->code) {
-            $data=User::where('phone',$this->phone)->first();
+            $data=User::where('phone',$request->phone)->first();
             Code::where('phone', $request->phone)->delete();
             return response()->json([
                 'message' => 'Authenticated successfully',
@@ -89,6 +90,7 @@ class AuthOtpController extends Controller
         if ($request->avatar){
             $request->avatar=upload_file($request->avatar,'users');
         }
+        $token = Str::random(60);
         $data=User::create([
            'name'=>$request->name,
            'code_meli'=>$request->code_meli,
@@ -100,6 +102,7 @@ class AuthOtpController extends Controller
            'license_date'=>$request->license_date,
            'license_image'=>$request->license_image,
            'phone'=>$request->phone,
+           'token'=>$token,
            'avatar'=>$request->avatar,
            'status'=>2,
            'role'=>1,

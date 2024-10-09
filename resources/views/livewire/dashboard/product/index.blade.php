@@ -33,8 +33,9 @@
                     </div>
                     <div class="col-2">
                         <div wire:ignore class="select2 input-field col s12">
-                            <select wire:model.defer="role_id">
+                            <select wire:model.defer="category_id">
                                 <option value="" disabled >دسته محصول</option>
+                                <option value="0" selected> همه</option>
                                 @foreach(\App\Models\Category::where('status',2)->pluck('title','id') as $key => $item)
                                     <option value="{{$key}}">{{$item}}</option>
                                 @endforeach
@@ -88,8 +89,8 @@
                                 </td>
                                 <td>{{$item->name}}</td>
                                 <td>#{{$item->barcode}}</td>
-                                <td>{{number_format($item->price)}}</td>
-                                <td>{{number_format($item->stock)}}</td>
+                                <td>{{number_format($item->price)}} تومان</td>
+                                <td>{{number_format($item->stock)}} {{$type[$item['type']] ?? 'UNKNOW'}}</td>
                                 <td>
                                     @if($item->status == 1)
                                         <button wire:click="change_status({{$item->id}})"  type="button" class="btn btn-outline-danger btn-border-radius">غیر فعال</button>

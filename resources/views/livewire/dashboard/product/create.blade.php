@@ -117,7 +117,7 @@
                                             <option value="2">وزن</option>
                                     </select>
                                 </div>
-                                @error('category_id')
+                                @error('type')
                                 <p class="text-danger mt-1">{{$message}}</p>
                                 @enderror
                             </div>
@@ -129,7 +129,7 @@
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div wire:ignore class="select2 input-field col s12">
                                     <select wire:model.defer="category_id">
-                                        <option value="" disabled selected>گزینه خود را انتخاب کنید</option>
+                                        <option value="0"  selected>گزینه خود را انتخاب کنید</option>
                                         @foreach(\App\Models\Category::where('status',2)->pluck('title','id') as $key => $item)
                                             <option value="{{$key}}">{{$item}}</option>
                                         @endforeach

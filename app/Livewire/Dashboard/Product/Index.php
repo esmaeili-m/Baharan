@@ -15,6 +15,8 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
     public $name,$phone,$role_id,$code_meli,$status,$users,$barcode,$category_id;
     public $sort,$paginate_count=20,$search;
+    public $type=['1'=>'عدد','2'=>'کیلو گرم'];
+
     public function mount()
     {
         if (session()->has('message')){

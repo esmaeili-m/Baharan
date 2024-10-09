@@ -27,6 +27,9 @@
                                                class="form-control"
                                                placeholder="تاریخ">
                                     </div>
+                                    @error('date')
+                                    <p class="text-danger mt-1">{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -37,14 +40,13 @@
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div wire:ignore class="select2 input-field col s12">
                                     <select wire:model.defer="user_id">
-                                        <option value="" disabled selected>گزینه خود را انتخاب کنید</option>
+                                        <option value="0" selected>گزینه خود را انتخاب کنید</option>
                                         @foreach(\App\Models\User::where('status',3)->get() as $user)
                                             <option value="{{$user->id}}">{{$user->name}} - {{$user->code_meli}}</option>
-
                                         @endforeach
                                     </select>
                                 </div>
-                                @error('type')
+                                @error('user_id')
                                 <p class="text-danger mt-1">{{$message}}</p>
                                 @enderror
                             </div>
@@ -56,14 +58,14 @@
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div wire:ignore class="select2 input-field col s12">
                                     <select wire:model.lazy="option">
-                                        <option value="" disabled selected>گزینه خود را انتخاب کنید</option>
+                                        <option value="0" selected>گزینه خود را انتخاب کنید</option>
                                         @foreach(\App\Models\Product::where('status',2)->get() as $item)
                                             <option value="{{$item->id}}">{{$item->name}}</option>
 
                                         @endforeach
                                     </select>
                                 </div>
-                                @error('type')
+                                @error('count_product')
                                 <p class="text-danger mt-1">{{$message}}</p>
                                 @enderror
                             </div>
@@ -101,6 +103,7 @@
                             </div>
 
                         @endforeach
+
                         <hr>
                         <div class="row clearfix">
                             <div class="col-lg-3 col-md-2 col-sm-4 col-xs-5 form-control-label">
