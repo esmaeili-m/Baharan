@@ -5,10 +5,16 @@
             <button wire:click="all_invoice" class="mb-3  btn btn-outline-primary">نمایش همه<i class="fa fa-arrow-left me-2"></i></button>
             <div class="header-details-invoice d-flex">
                 <p class="mb-0 mx-2"> فاکتور BIN{{$invoice_select->barcode}}</p>
-                @if($invoice_select->status == 0)
+                @if($invoice_select->status == 1)
                     <span class="badge bg-warning text-dark">ثبت شده</span>
+                @elseif($invoice_select->status == 2)
+                    <span class="badge bg-success">تایید شده  </span>
+
+                @elseif($invoice_select->status == 3)
+                    <span class="badge bg-primary">تحویل داده شده</span>
+
                 @else
-                    <span class="badge bg-success">تحویل داده شده</span>
+                    <span class="badge bg-success">لفو شده</span>
                 @endif
             </div>
             <i class="fa fa-calendar mx-2"></i>
@@ -119,7 +125,10 @@
                             @if($invoice->status == 1)
                                 <span class="badge bg-warning text-dark">ثبت شده</span>
                             @elseif($invoice->status == 2)
-                                <span class="badge bg-success">تحویل داده شده</span>
+                                <span class="badge bg-success">تایید شده</span>
+
+                            @elseif($invoice->status == 3)
+                                <span class="badge bg-primary">تحویل داده شده</span>
                             @else
                                 <span class="badge bg-success"> لفو شده </span>
 

@@ -3,13 +3,14 @@
 namespace App\Livewire\Home\Shop;
 
 use App\Models\Invoice;
+use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
-use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Hekmatinasser\Verta\Facades\Verta;
 
 class Basket extends Component
 {
@@ -45,7 +46,14 @@ class Basket extends Component
 
         $products=\App\Models\Basket::where('status',0)->whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
         $this->products=\App\Models\Product::whereIn('id',$products ?? [])->get();
-        $this->remainingTime='00:01';
+        $shop=Setting::find(1);
+        $startDate = Verta::parse($shop->sales_date_start);
+        $endDate = Verta::parse($shop->sales_date_end);
+        $diff = $startDate->diff($endDate);
+        $hours = $diff->h;
+        $minutes = $diff->i;
+        $formattedDiff = sprintf('%02d:%02d', $hours, $minutes);
+        $this->remainingTime=$formattedDiff;
     }
     public function updatedInvoice($value, $key)
     {
@@ -78,6 +86,17 @@ class Basket extends Component
 
     public function save()
     {
+        $shop=Setting::find(1);
+        if ($shop && $shop->status == 2) {
+            $startDate = Verta::parse($shop->sales_date_start);
+            $endDate = Verta::parse($shop->sales_date_end);
+            $now = Verta::now();
+            if (!($now->between($startDate, $endDate))) {
+                abort(403, 'زمان سفارش‌گیری به پایان رسیده است.');
+            }
+        }else{
+            abort(403,'فروشگاه بسته می باشد');
+        }
         DB::beginTransaction(); // شروع تراکنش
         $check=1;
         try {
@@ -108,6 +127,7 @@ class Basket extends Component
                             'stock' => $product->stock - $this->invoice[$product->id],
                         ]);
                         $product_invoice[$key]['name'] = $product->name;
+                        $product_invoice[$key]['id'] = $product->id;
                         $product_invoice[$key]['type'] = $product->type;
                         $product_invoice[$key]['image'] = $product->image;
                         $product_invoice[$key]['barcode'] = $product->barcode;

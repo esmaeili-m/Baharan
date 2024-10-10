@@ -13,7 +13,7 @@ class Index extends Component
     use WithPagination, WithoutUrlPagination;
     protected $paginationTheme = 'bootstrap';
     public $barcode,$status,$invoices,$from,$to;
-    public $sort,$paginate_count=20,$search;
+    public $sort,$paginate_count=20,$search,$user_id;
     public $type=['1'=>'عدد','2'=>'کیلو گرم'];
 
     public function mount()
@@ -28,25 +28,19 @@ class Index extends Component
         Invoice::find($id)->update(['status'=>3]);
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت کنسل شد');
     }
-    public function change_status($id)
+    public function change_status($id,$status)
     {
         $item=Invoice::find($id);
-        if ($item->status == 1){
-            $item->update([
-                'status'=>2
-            ]);
-        }else{
-            $item->update([
-                'status'=>1
-            ]);
-        }
+        $item->update([
+                'status'=>$status
+        ]);
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بروزرسانی شد');
 
     }
     public function fillter()
     {
         $invoices=Invoice::query();
-        if ( $this->barcode || $this->status  || $this->from || $this->to  ){
+        if ( $this->barcode || $this->status  || $this->from || $this->to || $this->user_id  ){
             if ($this->from || $this->to) {
                 if ($this->from) {
                     $fromDate = Verta::parse($this->from)->startDay()->toCarbon();
@@ -66,6 +60,14 @@ class Index extends Component
                 $barcode = preg_replace('/\D/', '', $this->barcode);
                 $invoices=$invoices->where('barcode',$barcode);
             }
+            if ($this->status){
+                $invoices=$invoices->where('status',$this->status);
+
+            }
+            if ($this->user_id){
+                $invoices=$invoices->where('user_id',$this->user_id);
+
+            }
             $this->invoices=$invoices->pluck('id');
             $this->search=1;
         }else{
@@ -83,9 +85,13 @@ class Index extends Component
     {
         $data=Invoice::query();
         if ($this->search){
-            $data=$data->whereIn("id",$this->invoices)->paginate($this->paginate_count);
+            $data=$data->whereIn("id",$this->invoices) ->with(['user' => function($query) {
+                $query->select('id', 'name','code_meli');
+            }])->paginate($this->paginate_count);
         }else{
-            $data=$data->paginate($this->paginate_count);
+            $data=$data->with(['user' => function($query) {
+                $query->select('id', 'name','code_meli');
+            }])->paginate($this->paginate_count);
         }
         return view('livewire.dashboard.invoice.index',compact('data'));
     }

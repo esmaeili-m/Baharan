@@ -48,8 +48,22 @@
                             <select wire:model.defer="status">
                                 <option value="" disabled >وضعیت</option>
                                 <option value="0" selected> همه</option>
-                                <option value="1">غیرفعال</option>
-                                <option value="2">فعال</option>
+                                <option value="1">ثبت شده</option>
+                                <option value="2">تایید شده</option>
+                                <option value="3">تحویل داده شده</option>
+                                <option value="4">لغو شده</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div wire:ignore class="select2 input-field col s12">
+                            <select wire:model.defer="user_id">
+                                <option value="" disabled >وضعیت</option>
+                                <option value="0" selected> همه</option>
+                                @foreach(\App\Models\User::where('status',3)->pluck('name','id') ?? []  as $key => $user)
+                                    <option value="{{$key}}" selected> {{$user}}</option>
+                                @endforeach
+
                             </select>
                         </div>
                     </div>
@@ -57,7 +71,6 @@
                         <div wire:loading.remove class="btn-group " role="group">
                             <button wire:click="fillter()"  style="height: 55px;border-radius-: 5px" class="btn btn-outline-info"><i class="fa fa-search"></i></button>
                             <button wire:click="reset_search()" type="button" style="height: 55px;border-radius: 5px" class="btn btn-outline-warning"><i class="fa fa-times"></i></button>
-
                         </div>
                         <div wire:loading class="spinner-grow text-warning" style="width: 3rem; height: 3rem;" role="status"></div>
 
@@ -70,12 +83,12 @@
                         <tr>
                             <th>#</th>
                             <th>شماره فاکتور</th>
+                            <th>نام کاربر</th>
                             <th>محصولات</th>
                             <th>قیمت</th>
                             <th>وضعیت سفارش</th>
                             <th>تاریخ ثبت سفارش</th>
-                            <th>جزئیات</th>
-{{--                            <th>عملیات</th>--}}
+                            <th>عملیات</th>
                         </tr>
                         </thead>
                         <tbody >
@@ -85,7 +98,8 @@
                         @foreach($data ?? [] as $item)
                             <tr >
                                 <th scope="row">{{$counter}}</th>
-                                <td >BIN{{$item->barcode}}</td>
+                                <td ><a target="_blank" href="{{route('invoice.details',$item->id)}}">BIN{{$item->barcode}}</a></td>
+                                <td >{{$item->user->name}}<br>{{$item->user->code_meli}}</td>
                                 <td > @foreach($item->products ?? [] as $product)
                                         <p class="">{{$product['name']}} -> {{$product['order']}} {{$type[$product['type']] ?? 'UNKNOW'}}</p>
                                     @endforeach
@@ -97,11 +111,13 @@
                                 <td>
 
                                     @if($item->status == 1)
-                                        <button  type="button" class="btn btn-outline-warning btn-border-radius">ثبت شده</button>
+                                        <button wire:click="change_status({{$item->id}},2)"  type="button" class="btn btn-outline-warning btn-border-radius">ثبت شده</button>
                                     @elseif($item->status == 2)
-                                        <button  type="button" class="btn btn-outline-success btn-border-radius">تحویل داده شده</button>
+                                        <button wire:click="change_status({{$item->id}},3)" type="button" class="btn btn-outline-success btn-border-radius">تایید شده</button>
+                                    @elseif($item->status == 3)
+                                        <button wire:click="change_status({{$item->id}},4)" type="button" class="btn btn-outline-primary btn-border-radius">تحویل داده شده</button>
                                     @else
-                                        <button  type="button" class="btn btn-outline-danger btn-border-radius">لفو شده</button>
+                                        <button wire:click="change_status({{$item->id}},1)" type="button" class="btn btn-outline-danger btn-border-radius">لفو شده</button>
                                     @endif
                                 </td>
                                 <td>
@@ -110,8 +126,8 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{route('invoice.details',$item->id)}}"><button class="btn tblActnBtn text-primary">
-                                            جزئیات سفارش
+                                    <a href="{{route('invoice.update',$item->id)}}"><button class="btn tblActnBtn">
+                                            <i class="material-icons">mode_edit</i>
                                         </button>
                                     </a>
 

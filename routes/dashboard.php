@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice/list',\App\Livewire\Dashboard\Invoice\Index::class)->name('invoice.list');
     Route::get('/invoice/create',\App\Livewire\Dashboard\Invoice\Create::class)->name('invoice.create');
     Route::get('/invoice/details/{id}',\App\Livewire\Dashboard\Invoice\Details::class)->name('invoice.details');
+    Route::get('/invoice/update/{id}',\App\Livewire\Dashboard\Invoice\Update::class)->name('invoice.update');
 //-------------------------------------------------------{ Setting } ---------------------------------------
     Route::get('/setting',\App\Livewire\Dashboard\Setting::class)->name('setting');
 

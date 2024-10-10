@@ -9,7 +9,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
-                    <h2>ساخت فاکتور</h2>
+                    <h2>ویرایش فاکتور BIN{{$invoice->barcode}}</h2>
                 </div>
                 <div class="body">
                     <form class="form-horizontal" wire:submit="save()">
@@ -22,6 +22,7 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text"
+                                               disabled
                                                data-jdp
                                                wire:model.defer="date"
                                                class="form-control"
@@ -39,10 +40,11 @@
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div wire:ignore class="select2 input-field col s12">
-                                    <select wire:model.defer="user_id">
+                                    <select wire:model.defer="user_id" disabled>
                                         <option value="0" selected>گزینه خود را انتخاب کنید</option>
                                         @foreach(\App\Models\User::where('status',3)->get() as $user)
-                                            <option value="{{$user->id}}">{{$user->name}} - {{$user->code_meli}}</option>
+                                            <option {{$user->id == $user_id ? 'selected' : ''}}
+                                                    value="{{$user->id}}">{{$user->name}} - {{$user->code_meli}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -178,16 +180,16 @@
                 }
             });
         </script>
-            <script type="text/javascript" src="{{asset('home/login/datepicker/jalalidatepicker.min.js')}}"></script>
-            <script>
-                jalaliDatepicker.startWatch({
-                    minDate: "attr",
-                    maxDate: "attr",
-                    separatorChars:{
-                        date:"-"
-                    }
-                });
-            </script>
+        <script type="text/javascript" src="{{asset('home/login/datepicker/jalalidatepicker.min.js')}}"></script>
+        <script>
+            jalaliDatepicker.startWatch({
+                minDate: "attr",
+                maxDate: "attr",
+                separatorChars:{
+                    date:"-"
+                }
+            });
+        </script>
     @endpush
 
 </div>

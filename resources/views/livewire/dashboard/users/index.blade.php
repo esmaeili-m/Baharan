@@ -97,7 +97,6 @@
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->code_meli}}</td>
                                 <td>{{$item->role->title ?? 'Unknow'}}</td>
-
                                 <td>
                                     @if($item->status == 1)
                                         <button  type="button" class="btn btn-outline-danger btn-border-radius">عدم تایید</button>

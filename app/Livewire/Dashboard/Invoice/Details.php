@@ -8,6 +8,8 @@ use Livewire\Component;
 class Details extends Component
 {
     public $invoice;
+    public $type=['1'=>'عدد','2'=>'کیلو گرم'];
+
     public function getTotalPrice()
     {
         $total = 0;

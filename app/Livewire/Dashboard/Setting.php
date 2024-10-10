@@ -48,11 +48,14 @@ class Setting extends Component
     public function mount()
     {
         $setting=\App\Models\Setting::find(1);
-        $this->name = $setting->name;
-        $this->start = $setting->sales_date_start;
-        $this->end = $setting->sales_date_end;
-        $this->status = $setting->status;
-        $this->description = $setting->about;
+        if ($setting){
+            $this->name = $setting->name;
+            $this->start = $setting->sales_date_start;
+            $this->end = $setting->sales_date_end;
+            $this->status = $setting->status;
+            $this->description = $setting->about;
+        }
+
     }
     public function render()
     {
