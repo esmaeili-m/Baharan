@@ -36,6 +36,10 @@ class PermissionsTableSeeder extends Seeder
         Permissions::create(['name' => 'trash invoice']);
         Permissions::create(['name' => 'create invoice']);
         Permissions::create(['name' => 'update invoice']);
+        Permissions::create(['name' => 'list role']);
+        Permissions::create(['name' => 'permissions role']);
+        Permissions::create(['name' => 'create role']);
+        Permissions::create(['name' => 'update role']);
         Permissions::create(['name' => 'chat']);
         Permissions::create(['name' => 'setting']);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

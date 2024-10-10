@@ -266,7 +266,7 @@
                                 <div wire:ignore class="select2 input-field col s12">
                                     <select wire:model.defer="role_id">
                                         <option value="" disabled selected>گزینه خود را انتخاب کنید</option>
-                                        @foreach(\App\Models\Role::where('status',1)->pluck('title','id') as $key => $item)
+                                        @foreach(\App\Models\Role::where('status',2)->pluck('title','id') as $key => $item)
                                             <option value="{{$key}}">{{$item}}</option>
                                         @endforeach
                                     </select>

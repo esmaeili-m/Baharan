@@ -10,7 +10,7 @@
                         @foreach($chats ?? [] as $item)
                             <button wire:click="set_chat({{$item->id}})"
                                     style="border-radius: 8px"
-                                    class="mb-4 w-100 btn-shadow btn btn-light-primary">
+                                    class="{{$item->messages_seen_count > 0 ? 'message-blink' : ''}} mb-4 w-100 btn-shadow btn btn-light-primary">
                                 {{$item->title}}
                             </button>
                         @endforeach

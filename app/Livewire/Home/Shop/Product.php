@@ -22,8 +22,6 @@ class Product extends Component
         }else{
             $this->dispatch('alert',icon:'',message:'موجودی این محصول تمام شده است');
         }
-//        dd($product);
-        sleep(5);
     }
     #[On('set-category')]
     public function category($categoryId)

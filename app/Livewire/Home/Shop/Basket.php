@@ -43,7 +43,7 @@ class Basket extends Component
     public function mount()
     {
 
-        $products=\App\Models\Basket::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
+        $products=\App\Models\Basket::where('status',0)->whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->pluck('product_id');
         $this->products=\App\Models\Product::whereIn('id',$products ?? [])->get();
         $this->remainingTime='00:01';
     }
@@ -81,11 +81,12 @@ class Basket extends Component
         DB::beginTransaction(); // شروع تراکنش
         $check=1;
         try {
-            $bakset = \App\Models\Basket::whereDate('created_at', Carbon::today())
+            $bakset = \App\Models\Basket::whereDate('created_at', Carbon::today())->where('status',0)
                 ->where('user_id', auth()->user()->id)
                 ->pluck('product_id');
             $products = \App\Models\Product::whereIn('id', $bakset ?? [])->get();
             $invoice = Invoice::whereDate('created_at', Carbon::today())
+                ->where('status',1)
                 ->where('user_id', auth()->user()->id)
                 ->first();
             $product_invoice = [];
@@ -118,7 +119,7 @@ class Basket extends Component
             }
 
             if ($check) {
-                Invoice::create([
+                $invoice=Invoice::create([
                     'user_id' => auth()->user()->id,
                     'barcode' => $this->get_barcode(),
                     'created_by' => auth()->user()->id,

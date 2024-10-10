@@ -43,6 +43,8 @@ class Update extends Component
         $this->product=Product::find($id);
         $this->name=$this->product->name;
         $this->price=$this->product->price;
+        $this->min=$this->product->min;
+        $this->max=$this->product->max;
         $this->stock=$this->product->stock;
         $this->category_id=$this->product->category_id;
         $this->description=$this->product->description;

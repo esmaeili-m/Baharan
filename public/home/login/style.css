@@ -500,6 +500,14 @@ body {
     animation: blink 1s infinite;
 
 }
+@keyframes blink-msg {
+    0% { background-color: transparent; }
+    50% { background-color: #f1f198; }
+    100% { background-color: transparent; }
+}
+.message-blink {
+    animation: blink-msg 1s ease-in-out infinite;
+}
 .total-factor{
     font-size: 13px;
 }

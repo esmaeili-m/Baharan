@@ -13,7 +13,12 @@ class Index extends Component
     public $has_invoice;
     public function mount()
     {
-        $this->has_invoice=Invoice::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->first();
+        if (auth()->user()->status != 3) {
+            abort(403,'شما به این صفحه دسترسی ندارید');
+        }
+        $this->has_invoice=Invoice::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)
+            ->where('status',1)
+            ->first();
     }
     public function render()
     {

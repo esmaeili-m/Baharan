@@ -5,7 +5,7 @@
                 <div class="text-center mb-5">
                     <span class=" btn custom-primary mt-3 mb-3 w-lg-40 w-sm-100 h-sm-50" >شرکت طیور متحد زرین قم (بهاران)</span>
                 </div>
-                @if(($user->status  ?? 0) == 2)
+                @if(($user->status  ?? 0) == 2  || ($user->status  ?? 0) == 3)
                     <div class=" col-lg-12 col-sm-12">
                         <div class="custom-card d-flex justify-content-center align-items-center p-sm-4" style="background-color: #45c159">
                             <p class="mb-0 fs-sm-20">«کاربر گرامی، اطلاعات شما بررسی و تأیید شد لطفا    وجه ضمانت خود را از طریق لینک زیر پرداخت کنید.»</p>
@@ -152,7 +152,7 @@
                                     </div>
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="month" id="customSelect">
-                                            <option value="0" selected>ماه صدور</option>
+                                            <option value="0" selected>ماه تولد</option>
                                             <option value="01">فروردین</option>
                                             <option value="02">اردیبهشت</option>
                                             <option value="03">خرداد</option>
@@ -348,18 +348,20 @@
                         </div>
                         <div class="col-lg-2 col-sm-12">
                             @if($user)
-                                <button style="width: 100%" wire:click="user_update()" type="submit"
+                                <button style="width: 100%" wire:loading.remove wire:click="user_update()" type="submit"
                                         class="btn custom-primary mt-3 mb-3"
                                         @if(($user->status ?? 0) == 2) disabled @endif >ویرایش اطلاعات
                                 </button>
                             @else
-                                <button style="width: 100%" wire:click="register_user()" type="submit"
+                                <button style="width: 100%" wire:loading.remove wire:click="register_user()" type="submit"
                                         class="btn custom-primary mt-3 mb-3"
                                         @if(($user->status ?? 0) == 2) disabled @endif >ثبت اطلاعات
                                 </button>
 
                             @endif
-
+                                <div wire:loading class="spinner-grow text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
                         </div>
                     </div>
                 @endif

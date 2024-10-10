@@ -6,10 +6,10 @@
                 <li>
                     <div class="sidebar-profile clearfix">
                         <div class="profile-img">
-                            <img src="assets/images/usrbig.jpg" alt="profile">
+                            <img src="{{asset(auth()->user()->avatar ?? '/home/images/user.png')}}" alt="profile">
                         </div>
                         <div class="profile-info">
-                            <h3>حسین حیاتی</h3>
+                            <h3>{{auth()->user()->name}}</h3>
                             <p>خوش آمدید !</p>
                         </div>
                     </div>
@@ -24,18 +24,18 @@
                         <li class="active">
                             <a href="index.html">داشبورد 1</a>
                         </li>
-                        <li>
-                            <a href="pages/dashboard/dashboard2.html">داشبورد 2</a>
-                        </li>
-                        <li>
-                            <a href="pages/dashboard/dashboard3.html">داشبورد 3</a>
-                        </li>
                     </ul>
                 </li>
                 <li  class="{{request()->routeIs('category.*') ? 'active active_route' : ''}}">
                     <a href="{{route('category.list')}}">
                         <i class="menu-icon ti-list"></i>
                         <span>دسته بندی ها</span>
+                    </a>
+                </li>
+                <li  class="{{request()->routeIs('product.*') ? 'active active_route' : ''}}">
+                    <a href="{{route('product.list')}}">
+                        <i class="menu-icon ti-list"></i>
+                        <span>محصولات</span>
                     </a>
                 </li>
                 <li  class="{{request()->routeIs('user.*') ? 'active active_route' : ''}}">
@@ -50,42 +50,43 @@
                         <span>فاکتور ها</span>
                     </a>
                 </li>
-                <li  class="{{request()->routeIs('product.*') ? 'active active_route' : ''}}">
-                    <a href="{{route('product.list')}}">
-                        <i class="menu-icon ti-list"></i>
-                        <span>محصولات</span>
-                    </a>
-                </li>
+
                 <li  class="{{request()->routeIs('role.*') ? 'active active_route' : ''}}">
                     <a href="{{route('role.list')}}">
                         <i class="menu-icon ti-list"></i>
                         <span>نقش ها و دسترسی ها</span>
                     </a>
                 </li>
-                <li  class="{{request()->routeIs('post.*') ? 'active active_route' : ''}}">
-                    <a href="{{route('post.list')}}">
-                        <i class="menu-icon ti-image"></i>
-                        <span>پست ها</span>
+                <li  class="{{request()->routeIs('setting') ? 'active active_route' : ''}}">
+                    <a href="{{route('setting')}}">
+                        <i class="menu-icon ti-settings"></i>
+                        <span>تنظیمات سایت</span>
                     </a>
                 </li>
-                <li  class="{{request()->routeIs('article.*') ? 'active active_route' : ''}}">
-                    <a href="{{route('article.list')}}">
-                        <i class="menu-icon ti-book"></i>
-                        <span>مقالات</span>
-                    </a>
-                </li>
-                <li  class="{{request()->routeIs('service.*') ? 'active active_route' : ''}}">
-                    <a href="{{route('service.list')}}">
-                        <i class="menu-icon ti-money"></i>
-                        <span>خدمات سایت</span>
-                    </a>
-                </li>
-                <li  class="{{request()->routeIs('tag.*') ? 'active active_route' : ''}}">
-                    <a href="{{route('tag.list')}}">
-                        <i class="menu-icon ti-tag"></i>
-                        <span>تگ ها</span>
-                    </a>
-                </li>
+{{--                <li  class="{{request()->routeIs('post.*') ? 'active active_route' : ''}}">--}}
+{{--                    <a href="{{route('post.list')}}">--}}
+{{--                        <i class="menu-icon ti-image"></i>--}}
+{{--                        <span>پست ها</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li  class="{{request()->routeIs('article.*') ? 'active active_route' : ''}}">--}}
+{{--                    <a href="{{route('article.list')}}">--}}
+{{--                        <i class="menu-icon ti-book"></i>--}}
+{{--                        <span>مقالات</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li  class="{{request()->routeIs('service.*') ? 'active active_route' : ''}}">--}}
+{{--                    <a href="{{route('service.list')}}">--}}
+{{--                        <i class="menu-icon ti-money"></i>--}}
+{{--                        <span>خدمات سایت</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li  class="{{request()->routeIs('tag.*') ? 'active active_route' : ''}}">--}}
+{{--                    <a href="{{route('tag.list')}}">--}}
+{{--                        <i class="menu-icon ti-tag"></i>--}}
+{{--                        <span>تگ ها</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
         </div>
         <!-- #Menu -->

@@ -6,8 +6,8 @@
                    aria-expanded="false"></a>
                 <a href="#" onClick="return false;" class="bars"></a>
                 <a class="navbar-brand" href="index.html">
-                    <img src="assets/images/logo.png" alt="" />
-                    <span class="logo-name">آتریو</span>
+                    <img width="40px" height="40px" src="{{asset('home/images/logo.png')}}" alt="" />
+                    <span class="logo-name">بهاران</span>
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -25,148 +25,17 @@
                             <i class="nav-hdr-btn ti-fullscreen"></i>
                         </a>
                     </li>
-                    <!-- #END# Full Screen Button -->
-                    <!-- #START# Notifications-->
-                    <li class="dropdown">
-                        <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <i class="nav-hdr-btn ti-bell"></i>
-                            <span class="notify"></span>
-                            <span class="heartbeat"></span>
-                        </a>
-                        <ul class="dropdown-menu pullDown">
-                            <li class="header">اطلاعیه ها</li>
-                            <li class="body">
-                                <ul class="menu">
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <span class="table-img msg-user">
-                                                <img src="assets/images/user/user1.jpg" alt="">
-                                            </span>
-                                            <span class="menu-info">
-                                                <span class="menu-title">حسین حیاتی</span>
-                                                <span class="menu-desc">
-                                                    <i class="material-icons">access_time</i> 14 دقیقه پیش
-                                                </span>
-                                                <span class="menu-desc">لطفا ایمیل خود را چک کنید.</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <span class="table-img msg-user">
-                                                <img src="assets/images/user/user2.jpg" alt="">
-                                            </span>
-                                            <span class="menu-info">
-                                                <span class="menu-title">حسین حیاتی</span>
-                                                <span class="menu-desc">
-                                                    <i class="material-icons">access_time</i> 22 دقیقه پیش
-                                                </span>
-                                                <span class="menu-desc">لطفا ایمیل خود را چک کنید.</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <span class="table-img msg-user">
-                                                <img src="assets/images/user/user3.jpg" alt="">
-                                            </span>
-                                            <span class="menu-info">
-                                                <span class="menu-title">حسین حیاتی</span>
-                                                <span class="menu-desc">
-                                                    <i class="material-icons">access_time</i> 3 ساعت پیش
-                                                </span>
-                                                <span class="menu-desc">لطفا ایمیل خود را چک کنید.</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <span class="table-img msg-user">
-                                                <img src="assets/images/user/user4.jpg" alt="">
-                                            </span>
-                                            <span class="menu-info">
-                                                <span class="menu-title">حسین حیاتی</span>
-                                                <span class="menu-desc">
-                                                    <i class="material-icons">access_time</i> 3 ساعت پیش
-                                                </span>
-                                                <span class="menu-desc">لطفا ایمیل خود را چک کنید.</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <span class="table-img msg-user">
-                                                <img src="assets/images/user/user5.jpg" alt="">
-                                            </span>
-                                            <span class="menu-info">
-                                                <span class="menu-title">حسین حیاتی</span>
-                                                <span class="menu-desc">
-                                                    <i class="material-icons">access_time</i> 3 ساعت پیش
-                                                </span>
-                                                <span class="menu-desc">لطفا ایمیل خود را چک کنید.</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <span class="table-img msg-user">
-                                                <img src="assets/images/user/user6.jpg" alt="">
-                                            </span>
-                                            <span class="menu-info">
-                                                <span class="menu-title">حسین حیاتی</span>
-                                                <span class="menu-desc">
-                                                    <i class="material-icons">access_time</i> 3 ساعت پیش
-                                                </span>
-                                                <span class="menu-desc">لطفا ایمیل خود را چک کنید.</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <span class="table-img msg-user">
-                                                <img src="assets/images/user/user7.jpg" alt="">
-                                            </span>
-                                            <span class="menu-info">
-                                                <span class="menu-title">حسین حیاتی</span>
-                                                <span class="menu-desc">
-                                                    <i class="material-icons">access_time</i> دیروز
-                                                </span>
-                                                <span class="menu-desc">لطفا ایمیل خود را چک کنید.</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#" onClick="return false;">مشاهده تمام اطلاعیه ها</a>
-                            </li>
-                        </ul>
-                    </li>
+
                     <!-- #END# Notifications-->
                     <li class="dropdown user_profile">
                         <div class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="assets/images/user.jpg" alt="user">
+                            <i class="mt-4 fa fs-1 text-white fa-user"></i>
                         </div>
                         <ul class="dropdown-menu pullDown">
                             <li class="body">
                                 <ul class="user_dw_menu">
                                     <li>
-                                        <a href="#" onClick="return false;">
-                                            <i class="material-icons">person</i>پروفایل
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <i class="material-icons">feedback</i>بازخورد
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
-                                            <i class="material-icons">help</i>راهنما
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;">
+                                        <a wire:click="logout()" onClick="return false;">
                                             <i class="material-icons">power_settings_new</i>خروج
                                         </a>
                                     </li>

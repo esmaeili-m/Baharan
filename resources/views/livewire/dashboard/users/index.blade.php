@@ -112,9 +112,14 @@
                                             <i class="material-icons">mode_edit</i>
                                         </button>
                                     </a>
-                                    <button wire:click="delete({{$item->id}})" class="btn tblActnBtn">
-                                        <i class="material-icons">delete</i>
-                                    </button>
+                                    @if(auth()->user()->id != $item->id)
+                                        <button wire:click="delete"
+                                                wire:confirm="شما مطمین هستید که میخواهید این کاربر را حذف کنید?"
+                                                wire:click="delete({{$item->id}})" class="btn tblActnBtn">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                    @endif
+
                                 </td>
                             </tr>
                             @php($counter++)
