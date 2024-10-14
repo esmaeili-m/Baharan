@@ -90,7 +90,7 @@ class AuthOtpController extends Controller
         if ($request->avatar){
             $request->avatar=upload_file($request->avatar,'users');
         }
-        $token = Str::random(60);
+        $uniqueToken = User::generateUniqueToken();
         $data=User::create([
            'name'=>$request->name,
            'code_meli'=>$request->code_meli,
@@ -102,7 +102,7 @@ class AuthOtpController extends Controller
            'license_date'=>$request->license_date,
            'license_image'=>$request->license_image,
            'phone'=>$request->phone,
-           'token'=>$token,
+           'token'=>$uniqueToken,
            'avatar'=>$request->avatar,
            'status'=>2,
            'role'=>1,

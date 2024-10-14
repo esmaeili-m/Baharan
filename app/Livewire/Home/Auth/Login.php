@@ -140,6 +140,7 @@ class Login extends Component
                 'phone'=>$this->phone,
             ]);
         Auth::login($this->user, true);
+        $cookie = cookie('user_token', $this->user->id, 60 * 24 * 30);
         $this->dispatch('alert',icon:'success',message:'اطالاعات شما با موفقیت ثبت شد');
     }
 
@@ -213,22 +214,28 @@ class Login extends Component
 
     public function mount()
     {
-        if (\session()->has('register') && auth()->check()){
+        if (\session()->has('register')){
             $this->submit_information=1;
-            $this->user=User::where('phone',session()->get('register'))->first();
-            if ($this->user){
-                $this->name=$this->user->name;
-                $this->phone=$this->user->phone;
-                $this->code_meli=$this->user->code_meli;
-                $this->father=$this->user->father;
-                $this->address=$this->user->address;
-                $this->type=$this->user->type;
-                $this->license_number=$this->user->license_number;
-                $this->license_image=$this->user->license_image;
-                $this->avatar=$this->user->avatar;
-                list($this->years,$this->month,$this->day)=explode('-',$this->user->birthday);
-                list($this->license_years,$this->license_month,$this->license_day)=explode('-',$this->user->license_date);
+            if (auth()->check()){
+                $this->user=User::where('phone',session()->get('register'))->first();
+                if ($this->user){
+                    if ($this->user->status == 3){
+                        return redirect()->route('profile.index');
+                    }
+                    $this->name=$this->user->name;
+                    $this->phone=$this->user->phone;
+                    $this->code_meli=$this->user->code_meli;
+                    $this->father=$this->user->father;
+                    $this->address=$this->user->address;
+                    $this->type=$this->user->type;
+                    $this->license_number=$this->user->license_number;
+                    $this->license_image=$this->user->license_image;
+                    $this->avatar=$this->user->avatar;
+                    list($this->years,$this->month,$this->day)=explode('-',$this->user->birthday);
+                    list($this->license_years,$this->license_month,$this->license_day)=explode('-',$this->user->license_date);
+                }
             }
+
         }
     }
     public function render()

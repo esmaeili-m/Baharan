@@ -29,3 +29,8 @@ Route::get('/categories/products',[\App\Http\Controllers\CategoryController::cla
 Route::get('/products',[\App\Http\Controllers\ProductController::class,'products']);
 Route::get('/product/{id}',[\App\Http\Controllers\ProductController::class,'product']);
 Route::get('/products/category',[\App\Http\Controllers\ProductController::class,'products_category']);
+//------------------------------------->Products
+Route::post('/order/create',[\App\Http\Controllers\OrderController::class,'create'])->middleware('check_token');
+Route::post('/order/update',[\App\Http\Controllers\OrderController::class,'update']);
+Route::post('/order/get_invoice',[\App\Http\Controllers\OrderController::class,'get_invoice'])->middleware('check_token');;
+Route::get('/order/get_invoices',[\App\Http\Controllers\OrderController::class,'get_invoices'])->middleware('check_token');;
