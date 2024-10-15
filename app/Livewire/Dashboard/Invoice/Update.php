@@ -59,6 +59,7 @@ class Update extends Component
             'status'=>1,
             'price' => array_sum($this->price)
         ]);
+        create_log(2,auth()->user()->id,'فاکتور ها','[ '.$this->invoice->id.' => '.$this->invoice->barcode.' ]');
         return redirect()->route('invoice.list');
     }
     public function get_barcode()

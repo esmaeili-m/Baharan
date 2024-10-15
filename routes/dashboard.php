@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice/update/{id}',\App\Livewire\Dashboard\Invoice\Update::class)->name('invoice.update');
 //-------------------------------------------------------{ Setting } ---------------------------------------
     Route::get('/setting',\App\Livewire\Dashboard\Setting::class)->name('setting');
+//-------------------------------------------------------{ Logs } ---------------------------------------
+    Route::get('/logs',\App\Livewire\Dashboard\Logs::class)->name('logs');
 
 //-------------------------------------------------------{ Post } ---------------------------------------
     Route::get('/post/list',\App\Livewire\Dashboard\Post\Index::class)->name('post.list');

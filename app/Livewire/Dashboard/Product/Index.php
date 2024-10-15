@@ -27,7 +27,9 @@ class Index extends Component
 
     public function delete($id)
     {
-        Product::find($id)->delete();
+        $item=Product::find($id);
+        create_log(3,auth()->user()->id,'محصولات','[ '.$id.' => '.$item->name.' ]');
+        $item->delete();
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
     }
 
@@ -66,6 +68,7 @@ class Index extends Component
                 'status'=>1
             ]);
         }
+        create_log(6,auth()->user()->id,'مصحولات','[ '.$id.' => '.$item->name.' ]');
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بروزرسانی شد');
 
     }

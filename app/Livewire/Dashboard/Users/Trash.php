@@ -17,6 +17,7 @@ class Trash extends Component
     {
         $user = User::withTrashed()->find($id);
         if ($user) {
+            create_log(5,auth()->user()->id,'کاربران','[ '.$user->id.' => '.$user->name.' ]');
             $user->restore();
             $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بازگردانی شد');
         }
@@ -34,6 +35,7 @@ class Trash extends Component
             if ($existingUser) {
                 $this->dispatch('alert',icon:'error',message:'کاربری با کدملی ، ایمیل  و یا شماره همراه مشابه قرار دارد');
             } else {
+                create_log(4,auth()->user()->id,'کاربران','[ '.$user->id.' => '.$user->name.' ]');
                 $user->forceDelete();
                 $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
             }

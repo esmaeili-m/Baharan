@@ -26,6 +26,7 @@ class Update extends Component
         $this->role->update([
             'title'=>$this->title,
         ]);
+        create_log(2,auth()->user()->id,'نقش ها','[ '.$this->role->id.' => '.$this->title.' ]');
         session()->flash('message','نقش با موفقیت ویرایش شد');
         return redirect()->route('role.list');
     }

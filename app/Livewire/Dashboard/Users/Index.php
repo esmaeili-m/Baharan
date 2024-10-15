@@ -22,7 +22,9 @@ class Index extends Component
 
     public function delete($id)
     {
-        User::find($id)->delete();
+        $item=User::find($id);
+        create_log(3,auth()->user()->id,'کاربران','[ '.$id.' => '.$item->name.' ]');
+        $item->delete();
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
     }
 

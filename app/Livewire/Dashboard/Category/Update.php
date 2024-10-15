@@ -38,7 +38,8 @@ class Update extends Component
             'image'=>$this->image,
             'description'=>$this->description,
         ]);
-        session()->flash('message','دسته بندی با موفقیت ایجاد شد');
+        session()->flash('message','دسته بندی با موفقیت ویرایش شد');
+        create_log(2,auth()->user()->id,'محصولات','[ '.$this->item->id.' => '.$this->title.' ]');
         return redirect()->route('category.list');
     }
 

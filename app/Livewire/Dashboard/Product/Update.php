@@ -54,6 +54,8 @@ class Update extends Component
     {
         $data = $this->validate();
         $this->product->update($data);
+        create_log(2,auth()->user()->id,'دسته بندی','[ '.$this->product->id.' => '.$this->name.' ]');
+
         session()->flash('message', 'محصول با موفقیت ویرایش شد');
         return redirect()->route('product.list');
     }

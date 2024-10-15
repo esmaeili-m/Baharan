@@ -22,12 +22,16 @@ class Trash extends Component
 
     public function delete($id)
     {
-        Product::withTrashed()->find($id)->forceDelete();
+        $item=Product::withTrashed()->find($id);
+        create_log(4,auth()->user()->id,'محصولات','[ '.$id.' => '.$item->name.' ]');
+        $item->forceDelete();
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
     }
     public function restore($id)
     {
-        Product::onlyTrashed()->find($id)->restore();
+        $item=Product::onlyTrashed()->find($id);
+        create_log(5,auth()->user()->id,'محصولات','[ '.$id.' => '.$item->name.' ]');
+        $item->restore();
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بازگردانی شد');
     }
     public function fillter()

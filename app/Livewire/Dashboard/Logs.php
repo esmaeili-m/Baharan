@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Livewire\Dashboard\Category;
+namespace App\Livewire\Dashboard;
 
-use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Logs extends Component
 {
     use WithPagination, WithoutUrlPagination;
     protected $paginationTheme = 'bootstrap';
@@ -22,9 +21,9 @@ class Index extends Component
 
     public function delete($id)
     {
-        $item=Category::find($id);
-        create_log(3,auth()->user()->id,'دسته بندی','[ '.$id.' => '.$item->title.' ]');
-        $item->delete();
+        $category=Category::find($id);
+        create_log('حذف موقت',auth()->user()->id,'دسته بندی','[ '.$id.' => '.$category->name);
+        $category->delete();
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
     }
     public function change_status($id)
@@ -39,7 +38,8 @@ class Index extends Component
                 'status'=>1
             ]);
         }
-        create_log(6,auth()->user()->id,'دسته بندی','[ '.$id.' => '.$item->title.' ]');
+        create_log('تغییر وضعیت',auth()->user()->id,'دسته بندی',$id);
+
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بروزرسانی شد');
 
     }
@@ -68,12 +68,12 @@ class Index extends Component
     }
     public function render()
     {
-        $data=Category::query();
+        $data=\App\Models\Logs::query();
         if ($this->search){
-            $data=$data->whereIn("id",$this->categories)->paginate($this->paginate_count);
+            $data=$data->whereIn("id",$this->categories)->orderBy('id','desc')->paginate($this->paginate_count);
         }else{
-            $data=$data->paginate($this->paginate_count);
+            $data=$data->orderBy('id','desc')->paginate($this->paginate_count);
         }
-        return view('livewire.dashboard.category.index',compact('data'));
+        return view('livewire.dashboard.logs',compact('data'));
     }
 }

@@ -15,7 +15,9 @@ class Index extends Component
     }
     public function delete($id)
     {
-        Role::find($id)->delete();
+        $item=Role::find($id);
+        create_log(3,auth()->user()->id,'نقش ها','[ '.$id.' => '.$item->title.' ]');
+        $item->delete();
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
     }
     public function change_status($id)
@@ -30,6 +32,8 @@ class Index extends Component
                 'status'=>1
             ]);
         }
+        create_log(6,auth()->user()->id,'نقش ها','[ '.$id.' => '.$item->title.' ]');
+
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بروزرسانی شد');
 
     }

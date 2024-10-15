@@ -101,6 +101,7 @@ class Update extends Component
             'role_id'=>$this->role_id ?? 1,
             'phone'=>$this->phone,
             ]);
+        create_log(2,auth()->user()->id,'کاربران','[ '.$this->user->id.' => '.$this->user->name.' ]');
         session()->flash('message', 'کاربر با موفقیت ویرایش شد');
         return redirect()->route('user.list');
     }

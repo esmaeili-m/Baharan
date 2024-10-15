@@ -80,7 +80,7 @@
                                 <div class="col-lg-4 col-md-10 col-sm-8 col-xs-7">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text"
+                                            <input type="number"
                                                    wire:model.live.debounce.3000ms="count_product.{{$product->id}}"
                                                    class="form-control"
                                                    placeholder="{{$type[$product->type] ?? 'Unknow'}}">

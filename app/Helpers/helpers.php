@@ -8,3 +8,13 @@ if (!function_exists('upload_file')) {
         return 'uploads/'.$directory.'/'.$file_name;
     }
 }
+if (!function_exists('create_log')) {
+    function create_log($operation,$user_id,$model,$message=null) {
+        \App\Models\Logs::create([
+           'operation' => $operation,
+           'user_id' => $user_id,
+           'model' => $model,
+           'message' => $message,
+        ]);
+    }
+}

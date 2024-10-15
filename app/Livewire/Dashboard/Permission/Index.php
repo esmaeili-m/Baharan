@@ -58,6 +58,7 @@ class Index extends Component
                 'role_id'=>$this->role->id
             ]);
         }
+        create_log(2,auth()->user()->id,'دسترسی ها','[ '.$this->role->id.' => '.$this->role->title.' ]');
         $this->dispatch('alert',icon:'success',message:'دسترسی ها با موفقیت ثبت شد');
     }
     public function render()

@@ -112,7 +112,7 @@
                                         </button>
                                     </a>
                                     @if(auth()->user()->id != $item->id)
-                                        <button wire:click="delete"
+                                        <button wire:click="delete({{$item->id}})"
                                                 wire:confirm="شما مطمین هستید که میخواهید این کاربر را حذف کنید?"
                                                 wire:click="delete({{$item->id}})" class="btn tblActnBtn">
                                             <i class="material-icons">delete</i>

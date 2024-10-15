@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Code;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -72,6 +73,8 @@ class AuthOtpController extends Controller
 
     public function create(Request $request)
     {
+//        Log::alert($request);
+
         $this->validate($request,
             [
                 'name' => ['required'],
@@ -82,7 +85,7 @@ class AuthOtpController extends Controller
                 'type' => ['required'],
                 'license_number' => ['required'],
                 'license_date' => ['required','regex:/^13[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/'],
-                'license_image' => ['required','image', 'mimes:jpeg,png,jpg', 'max:2048'],
+                'license_image' => ['required','image', 'mimes:jpeg,png,jpg', 'max:5048'],
                 'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone'],
             ]);
 

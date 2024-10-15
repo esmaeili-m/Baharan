@@ -19,7 +19,7 @@ class Create extends Component
     public function save()
     {
         $this->validate();
-        Category::create([
+        $item=Category::create([
            'title'=>$this->title,
            'slug'=>$this->create_slug($this->title),
            'image'=>$this->image,
@@ -27,6 +27,7 @@ class Create extends Component
            'description'=>$this->description,
         ]);
         session()->flash('message','دسته بندی با موفقیت ایجاد شد');
+        create_log(1,auth()->user()->id,'دسته بندی','[ '.$item->id.' => '.$this->title.' ]');
         return redirect()->route('category.list');
     }
     public function create_slug($text)

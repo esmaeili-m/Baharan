@@ -86,6 +86,7 @@ class Create extends Component
             'phone'=>$this->phone,
         ]);
         session()->flash('message', 'کاربر با موفقیت ایجاد شد');
+        create_log(1,auth()->user()->id,'کاربران','[ '.$this->user->id.' => '.$this->name.' ]');
         return redirect()->route('user.list');
     }
     public function UpdatedAvatar()

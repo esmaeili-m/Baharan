@@ -63,6 +63,12 @@
                         <span>تنظیمات سایت</span>
                     </a>
                 </li>
+                <li  class="{{request()->routeIs('logs') ? 'active active_route' : ''}}">
+                    <a href="{{route('logs')}}">
+                        <i class="menu-icon ti-list"></i>
+                        <span>لاگ</span>
+                    </a>
+                </li>
 {{--                <li  class="{{request()->routeIs('post.*') ? 'active active_route' : ''}}">--}}
 {{--                    <a href="{{route('post.list')}}">--}}
 {{--                        <i class="menu-icon ti-image"></i>--}}

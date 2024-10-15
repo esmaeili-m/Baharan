@@ -23,17 +23,15 @@ class Index extends Component
         }
     }
 
-    public function delete($id)
-    {
-        Invoice::find($id)->update(['status'=>3]);
-        $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت کنسل شد');
-    }
+
     public function change_status($id,$status)
     {
         $item=Invoice::find($id);
         $item->update([
                 'status'=>$status
         ]);
+        create_log(6,auth()->user()->id,'فاکتور ها','[ '.$item->id.' => '.$this->barcode.' ]');
+
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بروزرسانی شد');
 
     }

@@ -40,7 +40,7 @@ class Create extends Component
                     $product_invoice[$key]['stock'] = $product->stock;
                     $product_invoice[$key]['order'] = $this->count_product[$product->id];
         }
-        Invoice::create([
+        $item=Invoice::create([
             'user_id' => $this->user_id,
             'barcode' => $this->get_barcode(),
             'created_by' => auth()->user()->id,
@@ -48,6 +48,8 @@ class Create extends Component
             'status'=>1,
             'price' => array_sum($this->price)
         ]);
+        create_log(1,auth()->user()->id,'فاکتور ها','[ '.$item->id.' => '.$item->barcode.' ]');
+        return redirect()->route('invoice.list');
     }
     public function get_barcode()
     {
@@ -69,8 +71,10 @@ class Create extends Component
     }
     public function UpdatedCountProduct($value , $key)
     {
-        $price=Product::find($key)->price;
-        $this->price[$key]=$value*$price;
+        if (ctype_digit($value)) {
+            $price=Product::find($key)->price;
+            $this->price[$key]=$value*$price;
+        }
     }
 
     public function removeProduct($id)

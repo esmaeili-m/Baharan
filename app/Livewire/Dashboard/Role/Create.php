@@ -17,10 +17,12 @@ class Create extends Component
     public function save()
     {
         $this->validate();
-        Role::create([
+        $item=Role::create([
             'title'=>$this->title,
             'status'=>2
         ]);
+        create_log(1,auth()->user()->id,'نقش ها','[ '.$item->id.' => '.$this->title.' ]');
+
         session()->flash('message','نقش با موفقیت ایجاد شد');
         return redirect()->route('role.list');
     }

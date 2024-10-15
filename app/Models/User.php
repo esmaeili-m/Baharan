@@ -65,7 +65,7 @@ class User extends Authenticatable
     {
         return $this->role->permissions->contains('name', $permission); // بررسی وجود مجوز
     }
-    function generateUniqueToken()
+    public static function generateUniqueToken()
     {
         do {
             $token = Str::random(60);

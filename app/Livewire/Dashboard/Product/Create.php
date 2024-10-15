@@ -49,8 +49,9 @@ class Create extends Component
         $data['order']=$this->get_order();
         $data['barcode']=$this->get_barcode();
         $data['status']=2;
-        Product::create($data);
+        $item=Product::create($data);
         session()->flash('message', 'محصول با موفقیت ایجاد شد');
+        create_log(1,auth()->user()->id,'محصولات ','[ '.$item->id.' => '.$this->name.' ]');
         return redirect()->route('product.list');
     }
     public function get_order()

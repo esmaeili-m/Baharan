@@ -21,12 +21,15 @@ class Trash extends Component
         if ($item->image){
             unlink($item->image);
         }
+        create_log(4,auth()->user()->id,'دسته بندی','[ '.$item->id.' => '.$item->title.' ]');
         $item->forceDelete();
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت حذف شد');
     }
     public function restore($id)
     {
-        Category::onlyTrashed()->find($id)->restore();
+        $item=Category::onlyTrashed()->find($id);
+        create_log(5,auth()->user()->id,'دسته بندی','[ '.$id.' => '.$item->title.' ]');
+        $item->restore();
         $this->dispatch('alert',icon:'success',message:'آیتم با موفقیت بازگردانی شد');
     }
     public function change_status($id)

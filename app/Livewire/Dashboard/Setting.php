@@ -41,6 +41,8 @@ class Setting extends Component
                 'status' => $this->status
             ]
         );
+        create_log(2,auth()->user()->id,'تنظیمات سایت','[  ]');
+
         return $this->dispatch('alert',icon:'success',message:'تنظیمات فروشگاه با موفقیت ثبت شد');
 
     }
