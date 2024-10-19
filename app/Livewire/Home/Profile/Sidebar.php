@@ -15,6 +15,7 @@ class Sidebar extends Component
     public function logout()
     {
         Auth::logout();
+        session()->flush();
         return redirect()->route('user.login');
     }
     public function render()

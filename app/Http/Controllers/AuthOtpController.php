@@ -73,8 +73,6 @@ class AuthOtpController extends Controller
 
     public function create(Request $request)
     {
-//        Log::alert($request);
-
         $this->validate($request,
             [
                 'name' => ['required'],
@@ -84,11 +82,10 @@ class AuthOtpController extends Controller
                 'address' => ['required'],
                 'type' => ['required'],
                 'license_number' => ['required'],
-                'license_date' => ['required','regex:/^13[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/'],
+                'license_date' => ['required','regex:/[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/'],
                 'license_image' => ['required','image', 'mimes:jpeg,png,jpg', 'max:5048'],
                 'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone'],
             ]);
-
         $request->license_image=upload_file($request->license_image,'users');
         if ($request->avatar){
             $request->avatar=upload_file($request->avatar,'users');

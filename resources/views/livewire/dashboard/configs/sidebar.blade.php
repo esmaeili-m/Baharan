@@ -15,16 +15,12 @@
                     </div>
                 </li>
                 <li class="header">-- اصلی</li>
-                <li class="active">
-                    <a href="#" onClick="return false;" class="menu-toggle">
+
+                <li  class="{{request()->routeIs('dashboard') ? 'active active_route' : ''}}">
+                    <a href="{{route('dashboard')}}">
                         <i class="menu-icon ti-home"></i>
-                        <span>خانه</span>
+                        <span>داشبورد</span>
                     </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="index.html">داشبورد 1</a>
-                        </li>
-                    </ul>
                 </li>
                 <li  class="{{request()->routeIs('category.*') ? 'active active_route' : ''}}">
                     <a href="{{route('category.list')}}">
