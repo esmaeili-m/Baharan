@@ -30,6 +30,7 @@ class User extends Authenticatable
         'license_date',
         'license_image',
         'phone',
+        'token',
         'status',
         'description',
         'avatar',

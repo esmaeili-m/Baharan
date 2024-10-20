@@ -58,7 +58,7 @@ class OrderController extends Controller
         }
         DB::beginTransaction();
         $price=0;
-        foreach ($products as $key => $product) {
+        foreach ($products ?? [] as $key => $product) {
             $product_details=Product::find($product->product_id);
             if (!$product_details && $product_details->status == 1) {
                 return response()->json([

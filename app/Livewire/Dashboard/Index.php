@@ -22,9 +22,9 @@ class Index extends Component
     public function fillter()
     {
         if ($this->status == 4){
-            $invoice=Invoice::query();
-            if ($this->users){
-                $invoice=$invoice->whereIn('user_id', $this->users)->get();
+            $invoice=Invoice::where('status',2);
+            if ($this->selectedUser){
+                $invoice=$invoice->whereIn('user_id', array_keys(array_filter($this->selectedUser)))->get();
             }else{
                 $invoice=$invoice->get();
             }
@@ -33,12 +33,9 @@ class Index extends Component
             foreach ($products as $productGroup) {
                 foreach ($productGroup as $product) {
                     $id = $product['id'];
-
-                    // اگر محصول قبلاً در آرایه $sales وجود داشته باشد، مجموع سفارشات آن را اضافه می‌کنیم
                     if (isset($sales[$id])) {
                         $sales[$id]['total_orders'] += (int)$product['order'];
                     } else {
-                        // در غیر این صورت، محصول جدید را اضافه می‌کنیم
                         $sales[$id] = [
                             'name' => $product['name'],
                             'total_orders' => (int)$product['order']
@@ -67,6 +64,7 @@ class Index extends Component
             $this->users=User::where('status',3)->where('role_id',1)->pluck('name','id');
         }else{
             $this->users=0;
+            $this->selectedUser=[];
         }
     }
     public function render()

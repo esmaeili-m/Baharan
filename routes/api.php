@@ -29,8 +29,15 @@ Route::get('/categories/products',[\App\Http\Controllers\CategoryController::cla
 Route::get('/products',[\App\Http\Controllers\ProductController::class,'products']);
 Route::get('/product/{id}',[\App\Http\Controllers\ProductController::class,'product']);
 Route::get('/products/category',[\App\Http\Controllers\ProductController::class,'products_category']);
-//------------------------------------->Products
+//------------------------------------->Invoices
 Route::post('/order/create',[\App\Http\Controllers\OrderController::class,'create'])->middleware('check_token');
 Route::post('/order/update',[\App\Http\Controllers\OrderController::class,'update']);
 Route::post('/order/get_invoice',[\App\Http\Controllers\OrderController::class,'get_invoice'])->middleware('check_token');;
 Route::get('/order/get_invoices',[\App\Http\Controllers\OrderController::class,'get_invoices'])->middleware('check_token');;
+//------------------------------------->Products
+Route::post('/chat/create',[\App\Http\Controllers\ChatController::class,'create'])->middleware('check_token');
+Route::post('/chat/create_message',[\App\Http\Controllers\ChatController::class,'create_message'])->middleware('check_token');
+Route::post('/chat/messages',[\App\Http\Controllers\ChatController::class,'messages'])->middleware('check_token');
+Route::get('/chat/chats',[\App\Http\Controllers\ChatController::class,'chats'])->middleware('check_token');
+
+

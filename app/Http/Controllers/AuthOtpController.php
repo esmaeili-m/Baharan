@@ -40,6 +40,7 @@ class AuthOtpController extends Controller
 
     }
     public function check_code(Request $request)
+
     {
         $this->validate($request, ['phone' => 'required | regex:/^0[0-9]{10}$/','code'=>'size:5']);
         $lastRecord = Code::where('phone', $request->phone)
@@ -48,6 +49,15 @@ class AuthOtpController extends Controller
 
         if ($lastRecord && $lastRecord->code == $request->code) {
             $data=User::where('phone',$request->phone)->first();
+            $uniqueToken = User::generateUniqueToken();
+            if ($data && !$data->token ){
+                $uniqueToken = User::generateUniqueToken();
+                $data->update([
+                   'token'=>$uniqueToken
+                ]);
+                $data=User::where('phone',$request->phone)->first();
+
+            }
             Code::where('phone', $request->phone)->delete();
             return response()->json([
                 'message' => 'Authenticated successfully',
