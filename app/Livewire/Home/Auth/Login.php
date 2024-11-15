@@ -5,6 +5,7 @@ namespace App\Livewire\Home\Auth;
 use App\Models\Code;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -29,10 +30,35 @@ class Login extends Component
         }else{
             Code::where('phone',$this->phone)->delete();
             $code=$this->generate_code();
+            $wsdlUrl = 'http://webservice.0098sms.com/service.asmx?wsdl';
+            ini_set("soap.wsdl_cache_enabled", "0");
+            try {
+                $smsClient = new \SoapClient($wsdlUrl, [
+                    'encoding' => 'UTF-8',
+                    'exceptions' => true, // فعال کردن پرتاب خطاهای SOAP
+                    'trace' => 1, // فعال کردن trace برای دیباگینگ
+                ]);
+
+                $parameters = [
+                    'username' => 'smsn5232',
+                    'password' => '*Nf(Dc8Ptq77',
+                    'mobileno' => $this->phone,
+                    'pnlno'    => '30005367676767',
+                    'text'     => " به بهاران خوش آمدید.\nکد ورود شما: $code",
+                    'isflash'  => false,
+                ];
+                $result = $smsClient->SendSMS($parameters)->SendSMSResult;
+
+            } catch (\Exception $e) {
+                Log::info($e);
+            }
             Code::create([
                 'code'=>$code,
                 'phone'=>$this->phone
             ]);
+
+
+
             return $this->dispatch('alert',icon:'success',message:'کد احراز هویت برای شما ارسال گردید');
         }
     }

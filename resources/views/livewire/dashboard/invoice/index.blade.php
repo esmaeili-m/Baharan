@@ -9,6 +9,8 @@
                 <div class="header">
                     <a href="{{route('invoice.create')}}">
                         <button class="btn-hover btn-border-radius color-7 border-radius-custom">ثبت فاکتور جدید</button></a>
+                        <a wire:click="export_excel"><button class="btn-hover btn-border-radius color-1 border-radius-custom">خروجی اکسل</button></a>
+
                 </div>
                 <div class="row mt-3 mx-2">
                     <div class="col-2">

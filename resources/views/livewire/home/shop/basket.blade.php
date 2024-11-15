@@ -46,7 +46,13 @@
         </div>
         @if($this->invoice && $this->price)
             @if(count($price) == count($invoice)  && count($price) == count($products ?? []))
-                <span wire:click="save()"  class="checkout-button-basket p-3 blink-button">ثبت نهایی</span>
+                @if($has_invoice)
+                    <span wire:click="update()"  class="checkout-button-basket p-3 blink-button">ویرایش</span>
+
+                @else
+                    <span wire:click="save()"  class="checkout-button-basket p-3 blink-button">ثبت نهایی</span>
+
+                @endif
             @else
                 <span style="background-color: #fae5e5 !important;" class="checkout-button-basket p-3 ">ثبت نهایی</span>
             @endif

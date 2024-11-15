@@ -12,7 +12,12 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $has_invoice;
+    public $has_invoice,$edit;
+
+    public function edit_invoice()
+    {
+        $this->edit=1;
+    }
     public function mount()
     {
         $shop=Setting::find(1);
@@ -30,7 +35,6 @@ class Index extends Component
             abort(403,'شما به این صفحه دسترسی ندارید');
         }
         $this->has_invoice=Invoice::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)
-            ->where('status',1)
             ->first();
     }
     public function render()

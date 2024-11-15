@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Dashboard\Invoice;
 
+use App\Exports\InvoicesExport;
+use App\Exports\UsersExport;
 use App\Models\Invoice;
 use Hekmatinasser\Verta\Facades\Verta;
 use Livewire\Component;
@@ -23,7 +25,16 @@ class Index extends Component
         }
     }
 
+    public function export_excel()
+    {
+        if ($this->search){
+            return (new InvoicesExport($this->invoices->toArray() ?? []))->download('invoices.xlsx');
 
+        }else{
+            return (new InvoicesExport([]))->download('invoices.xlsx');
+
+        }
+    }
     public function change_status($id,$status)
     {
         $item=Invoice::find($id);

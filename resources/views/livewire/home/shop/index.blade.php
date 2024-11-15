@@ -1,17 +1,19 @@
 <div>
-    @if($has_invoice ?? 0)
-        <div class="shop-container" style="direction: rtl" >
-            <div class="row w-100 text-center d-flex justify-content-center align-content-center">
-                <div  class="error-invoice-main  justify-content-center align-content-center">
-                    <p class="category-product card-category-title mb-0 p-5">شما در درحال حاظر فاکتور فعال دارید امکان ثبت فاکتور جدید نمی باشد</p><br>
-                   <div >
-                       <a href="{{route('profile.index')}}" style="text-decoration: none" class="mt-3 category-product card-category-title mb-0 p-2">درخواست ویرایش فاکتور</a>
-                       <a href="{{route('profile.index',['status'=>3,'code'=>$has_invoice->barcode])}}" style="text-decoration: none" class="mt-3 category-product card-category-title mb-0 p-2">نمایش فاکتور فعلی</a>
-                   </div>
+    @if(($has_invoice ?? 0 ) && $edit == 0)
+            <div class="" style="direction: rtl" >
+                <div class="row w-100 text-center d-flex justify-content-center align-content-center">
+                    <div  class="error-invoice-main  justify-content-center align-content-center">
+                        <p class="category-product card-category-title mb-0 p-5">شما در درحال حاظر فاکتور فعال دارید امکان ثبت فاکتور جدید نمی باشد</p><br>
+                       <div >
+                           @if($has_invoice->status == 1)
+                             <a wire:click="edit_invoice()" style="text-decoration: none;cursor: pointer" class="mt-3 category-product card-category-title mb-0 p-2">درخواست ویرایش فاکتور</a>
+                           @endif
+                           <a href="{{route('profile.index',['status'=>3,'code'=>$has_invoice->barcode])}}" style="text-decoration: none" class="mt-3 category-product card-category-title mb-0 p-2">نمایش فاکتور فعلی</a>
+                       </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
 
     @else
         <div class="shop-container" style="direction: rtl" >
@@ -38,6 +40,5 @@
                 </div>
             </div>
         </div>
-
     @endif
 </div>

@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Dashboard\Users;
 
+use App\Exports\UsersExport;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Excel;
 
 class Index extends Component
 {
@@ -20,6 +22,16 @@ class Index extends Component
         }
     }
 
+    public function export_excel()
+    {
+        if ($this->search){
+            return (new UsersExport($this->users->toArray() ?? []))->download('users.xlsx');
+
+        }else{
+            return (new UsersExport([]))->download('users.xlsx');
+
+        }
+    }
     public function delete($id)
     {
         $item=User::find($id);

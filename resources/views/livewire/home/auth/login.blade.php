@@ -12,8 +12,8 @@
 
                         </div>
                         <div class="d-flex  justify-content-center align-content-center mt-5">
-                            <a href="{{route('profile.index')}}" class="btn mx-2 btn-custom-primary" style="font-size: 15px">پروفایل کاربری</a>
-                            <a href="{{route('profile.index')}}" class="btn mx-2 btn-custom-primary" style="font-size: 15px">پرداخت وجه ضمانت</a>
+                               <a href="{{route('profile.index')}}" class="btn mx-2 btn-custom-primary" style="font-size: 15px">پروفایل کاربری</a>
+                                <a href="{{route('profile.index')}}" class="btn mx-2 btn-custom-primary" style="font-size: 15px">پرداخت وجه ضمانت</a>
 
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="day" id="customSelect">
                                             <option value="0" selected>روز تولد</option>
-                                            @for($i=1;$i<31;$i++)
+                                            @for($i=1;$i<32;$i++)
                                                 @if($i<10)
                                                     <option value="0{{$i}}">{{$i}}</option>
 
@@ -170,7 +170,7 @@
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="years" id="customSelect">
                                             <option value="0" selected>سال تولد</option>
-                                            @for($i=1300;$i<1390;$i++)
+                                            @for($i=1300;$i<1404;$i++)
                                                 <option value="{{$i}}">{{$i}}</option>
                                             @endfor
                                         </select>
@@ -215,7 +215,7 @@
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="license_day" id="customSelect">
                                             <option value="0" selected>روز صدور</option>
-                                            @for($i=1;$i<31;$i++)
+                                            @for($i=1;$i<32;$i++)
                                                 @if($i<10)
                                                     <option value="0{{$i}}">{{$i}}</option>
 
@@ -245,7 +245,7 @@
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="license_years" id="customSelect">
                                             <option value="0" selected>سال صدور</option>
-                                            @for($i=1300;$i<1390;$i++)
+                                            @for($i=1300;$i<1404;$i++)
                                                 <option>{{$i}}</option>
                                             @endfor
                                         </select>
@@ -344,6 +344,12 @@
                                     <p class="mb-0 fs-sm-20">«کاربر گرامی، اطلاعات شما در حال بررسی و تأیید می باشد.»</p>
 
                                 </div>
+                                @if($user->description ?? 0)
+                                    <div class="custom-card d-flex mt-4">
+                                            {!! $user->description !!}
+                                    </div>
+                                @endif
+
                             @endif
                         </div>
                         <div class="col-lg-2 col-sm-12">
@@ -405,7 +411,8 @@
                     <p style="direction: rtl; font-size: 13px" class=" text-danger mb-0">{{$message}}</p>
                     @enderror
 
-                    <button wire:click="get_code()" type="submit" class="btn mt-3 mb-3">ارسال اطلاعات</button>
+                    <button  wire:loading.remove wire:click="get_code()" type="submit" class="btn mt-3 mb-3">ارسال اطلاعات</button>
+                    <p style="font-size: 15px;opacity: 50%;text-align: center" wire:loading>... لطفا صبر کنید</p>
                 </div>
             @endif
 

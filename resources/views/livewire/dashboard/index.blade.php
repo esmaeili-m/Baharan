@@ -50,21 +50,21 @@
                     </div>
 
                 </div>
-                <div class="col-10">
-                    <p>فیلتر</p>
+                <div class="col-6">
+                         <p>فیلتر</p>
                         <div class="mx-10">
                             @if($status == 1)
-                                <div class="col-sm-6 col-lg-12">
+                                <div class="col-sm-6 col-lg-6">
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="color" value="purple">تمام فاکتور ها
                                             <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
+                                                <span class="check"></span>
+                                            </span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-12">
+                                <div class="col-sm-6 col-lg-6">
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="color" value="purple"> فاکتور ثبت شده
@@ -74,7 +74,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-12">
+                                <div class="col-sm-6 col-lg-6">
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="color" value="purple"> فاکتور تایید شده
@@ -84,7 +84,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-12">
+                                <div class="col-sm-6 col-lg-6">
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="color" value="purple"> فاکتور تحویل داده شده
@@ -94,7 +94,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-12">
+                                <div class="col-sm-6 col-lg-6">
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="color" value="purple"> فاکتور لفو شده
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                             @elseif($status == 2)
-                                <div class="col-sm-6 col-lg-12">
+                                <div class="col-sm-6 col-lg-6">
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="color" value="purple">تمام دسته بندی ها
@@ -115,7 +115,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-12">
+                                <div class="col-sm-6 col-lg-6">
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="color" value="purple"> دسته بندی های فعال
@@ -125,7 +125,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-12">
+                                <div class="col-sm-6 col-lg-6">
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="color" value="purple">   دسته بندی های غیر فعال
@@ -203,37 +203,41 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text"
-                                           data-jdp
-                                           wire:model.defer="from"
-                                           class="form-control"
-                                           placeholder="از تاریخ">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text"
-                                           data-jdp
-                                           wire:model.defer="to"
-                                           class="form-control"
-                                           placeholder="تا تاریخ">
-                                </div>
+
+
+
+                        </div>
+            </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-12">
+                        <p>تاریخ</p>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text"
+                                       data-jdp
+                                       wire:model.defer="from"
+                                       class="form-control"
+                                       placeholder="از تاریخ">
                             </div>
                         </div>
-
-
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text"
+                                       data-jdp
+                                       wire:model.defer="to"
+                                       class="form-control"
+                                       placeholder="تا تاریخ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-2">
-                    <button wire:click="fillter()" class="btn-hover color-7">دکمه</button>
+                    <button wire:click="fillter()" class="btn-hover color-7">جستجو</button>
 
                 </div>
-            </div>
             <hr>
-            <div class="">
 
-            </div>
-
+        </div>
 
             @if($status == 1)
                 <div class="row">
@@ -451,7 +455,6 @@
                 </div>
 
             @endif
-        </div>
     </div>
     <div class="row " wire:ignore>
         <div class="col-6 ">

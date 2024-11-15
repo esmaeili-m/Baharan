@@ -4,7 +4,7 @@
         @if($invoice_select)
             <button wire:click="all_invoice" class="mb-3  btn btn-outline-primary">نمایش همه<i class="fa fa-arrow-left me-2"></i></button>
             <div class="header-details-invoice d-flex">
-                <p class="mb-0 mx-2"> فاکتور BIN{{$invoice_select->barcode}}</p>
+                <p class="mb-0 mx-2"> سفارش BIN{{$invoice_select->barcode}}</p>
                 @if($invoice_select->status == 1)
                     <span class="badge bg-warning text-dark">ثبت شده</span>
                 @elseif($invoice_select->status == 2)
@@ -68,11 +68,11 @@
             <p id="total">جمع کل سفارش: {{ $this->getTotalPrice() }} تومان</p>
         @else
             <div class="header">
-                <p>لیست فاکتورها</p>
+                <p>لیست سفارشها</p>
                 <div class="row">
                     <div class="col-lg-3 col-sm-12 mb-2">
                         <div class="form-control-custom" >
-                            <input id="barcode" wire:model.lazy="barcode" class="" placeholder="شماره فاکتور">
+                            <input id="barcode" wire:model.lazy="barcode" class="" placeholder="شماره سفارش">
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-12 mb-2">
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-lg-1 col-sm-12 mb-2">
                         <button wire:click="search_invoice()" class="btn w-100 btn-custom-primary-submit p-3 mt-1"><i class="fa fa-search"></i></button>
-                    </div>.
+                    </div>
 
                 </div>
             </div>
@@ -98,7 +98,7 @@
                 <thead>
                 <tr>
                     <th class="text-center">#</th>
-                    <th class="text-center">شماره فاکتور</th>
+                    <th class="text-center">شماره سفارش</th>
                     <th class="text-center">محصولات</th>
                     <th class="text-center">قیمت</th>
                     <th class="text-center">وضعیت سفارش</th>
@@ -138,7 +138,10 @@
                             <p>{{verta($invoice->crated_at)->format('H:i:s Y-m-d')}}</p>
                         </td>
                         <td class="text-center align-middle">
-                            <a wire:click="show_invoice({{$invoice->id}})" class="text-primary" style="cursor: pointer">نمایش فاکتور</a>
+                            @if($invoice->created_at->format('Y-m-d') == Carbon\Carbon::today()->format('Y-m-d'))
+                            <a class="fs-4 mx-2" style="cursor: pointer"><i class="fa fa-edit"></i></a>
+                            @endif
+                            <a wire:click="show_invoice({{$invoice->id}})" class="text-primary" style="cursor: pointer">نمایش سفارش</a>
                         </td>
                     </tr>
                     @php($counter++)

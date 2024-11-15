@@ -9,6 +9,7 @@
                 <div class="header">
                     <a href="{{route('user.create')}}"><button class="btn-hover btn-border-radius color-7 border-radius-custom">افزودن کاربر</button></a>
                     <a href="{{route('user.trash')}}"><button class="btn-hover btn-border-radius color-8 border-radius-custom">سطل آشغال ( {{\App\Models\User::onlyTrashed()->count()}} )</button></a>
+                    <a wire:click="export_excel"><button class="btn-hover btn-border-radius color-1 border-radius-custom">خروجی اکسل</button></a>
                 </div>
                 <div class="row mt-3 mx-2">
                     <div class="col-2">

@@ -19,7 +19,7 @@
                                 <div class="details-product d-flex">
                                     <div class="text-center">
                                         <p class="category-product card-product-details w-80 mb-0"> قیمت : {{number_format($product->price)}} (تومان)</p>
-                                        <p class="category-product card-product-details mb-0 w-80"> موجودی : {{number_format($product->stock)}} ({{$type[$product->type] ?? 'None'}})</p>
+                                        <p class="category-product card-product-details mb-0 w-80"> موجودی : {{number_format($product->stock+($products[$product->id] ?? 0))}} ({{$type[$product->type] ?? 'None'}})</p>
                                         <p class="category-product card-product-details mb-0 w-80"> حداقل سفارش : {{number_format($product->min)}} ({{$type[$product->type] ?? 'None'}})</p>
                                         <p class="category-product card-product-details mb-0 w-80"> حداکثر سفارش : {{number_format($product->max)}} ({{$type[$product->type] ?? 'None'}})</p>
                                     </div>

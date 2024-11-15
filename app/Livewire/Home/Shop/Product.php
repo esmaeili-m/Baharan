@@ -3,13 +3,23 @@
 namespace App\Livewire\Home\Shop;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Product extends Component
 {
-    public $product,$category,$type=['1'=>'عدد','2'=>'کیلو گرم'];
+    public $product,$category,$type=['1'=>'عدد','2'=>'کیلو گرم'],$products;
 
+    public function mount()
+    {
+        $products=\App\Models\Invoice::where('status',1)->whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)->value('products');
+        if ($products){
+            foreach ($products as $product){
+                $this->products[$product['id']]=$product['order'];
+            }
+        }
+    }
     public function add_to_basket($id)
     {;
         $product=\App\Models\Product::where('id',$id)->where('stock','>',0)->where('status',2)->first();

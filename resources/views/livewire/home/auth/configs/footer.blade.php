@@ -7,7 +7,7 @@
                     {!! \App\Models\Setting::find(1)->about ?? '1' !!}
                 </div>
             </div>
-            <div class="col-lg-2 col-sm-12 text-white p-3 "  >
+            <div class="col-lg-3 col-sm-12 text-white p-3 "  >
                 <div class="links" style="line-height: 26px">
                     <p>صفحات</p>
                     <ul>
@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-2 col-sm-12 text-white p-3 "  >
                 <div >
-
+{{--                    <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=545042&Code=X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=545042&Code=X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH' alt='' style='cursor:pointer' code='X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH'></a>--}}
                 </div>
 
             </div>
