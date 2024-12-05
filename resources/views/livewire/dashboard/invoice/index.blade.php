@@ -13,7 +13,17 @@
 
                 </div>
                 <div class="row mt-3 mx-2">
-                    <div class="col-2">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text"
+                                       wire:model.defer="product"
+                                       class="form-control"
+                                       placeholder="نام محصول را وارد کنید">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
                         <div class="form-group">
                             <div class="form-line">
                                 <input type="text"
@@ -23,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <div class="form-line">
                                 <input type="text"
@@ -34,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
                             <div class="form-line">
                                 <input type="text"
@@ -45,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div wire:ignore class="select2 input-field col s12">
                             <select wire:model.defer="status">
                                 <option value="" disabled >وضعیت</option>
@@ -57,7 +67,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div wire:ignore class="select2 input-field col s12">
                             <select wire:model.defer="user_id">
                                 <option value="" disabled >وضعیت</option>
@@ -69,7 +79,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div wire:loading.remove class="btn-group " role="group">
                             <button wire:click="fillter()"  style="height: 55px;border-radius-: 5px" class="btn btn-outline-info"><i class="fa fa-search"></i></button>
                             <button wire:click="reset_search()" type="button" style="height: 55px;border-radius: 5px" class="btn btn-outline-warning"><i class="fa fa-times"></i></button>
@@ -123,7 +133,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <p>{{verta($item->crated_at)->format('H:i:s Y-m-d')}}</p>
+
+                                    <p>{{verta($item->created_at)->format('H:i:s Y-m-d')}}</p>
 
                                 </td>
 

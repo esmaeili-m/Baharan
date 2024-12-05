@@ -36,6 +36,9 @@ class Index extends Component
         }
         $this->has_invoice=Invoice::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)
             ->first();
+        if ($this->has_invoice){
+            $this->edit=1;
+        }
     }
     public function render()
     {

@@ -109,7 +109,7 @@
                 <tbody>
                 @php($counter=1)
                 @foreach($invoices as $invoice)
-                    <tr>
+                    <tr wire:key="invoice-{{$invoice->id}}">
                         <td class="text-center align-middle">{{$counter}}</td>
                         <td class="text-center align-middle"><p>BIN{{$invoice->barcode}}</p></td>
                         <td class="text-center align-middle">
@@ -135,11 +135,11 @@
                             @endif
                         </td>
                         <td class="text-center align-middle">
-                            <p>{{verta($invoice->crated_at)->format('H:i:s Y-m-d')}}</p>
+                            <p>{{verta($invoice->created_at)->format('H:i:s Y-m-d')}}</p>
                         </td>
                         <td class="text-center align-middle">
-                            @if($invoice->created_at->format('Y-m-d') == Carbon\Carbon::today()->format('Y-m-d'))
-                            <a class="fs-4 mx-2" style="cursor: pointer"><i class="fa fa-edit"></i></a>
+                            @if($invoice->created_at->format('Y-m-d') == Carbon\Carbon::today()->format('Y-m-d') && $invoice->status == 1)
+                            <a href="{{route('shop.index')}}" class="fs-4 mx-2" style="cursor: pointer"><i class="fa fa-edit"></i></a>
                             @endif
                             <a wire:click="show_invoice({{$invoice->id}})" class="text-primary" style="cursor: pointer">نمایش سفارش</a>
                         </td>

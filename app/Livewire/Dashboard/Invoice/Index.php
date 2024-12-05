@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard\Invoice;
 use App\Exports\InvoicesExport;
 use App\Exports\UsersExport;
 use App\Models\Invoice;
+use App\Models\Product;
 use Hekmatinasser\Verta\Facades\Verta;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -14,7 +15,7 @@ class Index extends Component
 {
     use WithPagination, WithoutUrlPagination;
     protected $paginationTheme = 'bootstrap';
-    public $barcode,$status,$invoices,$from,$to;
+    public $barcode,$status,$invoices,$from,$to,$product,$products_id=[];
     public $sort,$paginate_count=20,$search,$user_id;
     public $type=['1'=>'عدد','2'=>'کیلو گرم'];
 
@@ -49,7 +50,7 @@ class Index extends Component
     public function fillter()
     {
         $invoices=Invoice::query();
-        if ( $this->barcode || $this->status  || $this->from || $this->to || $this->user_id  ){
+        if ( $this->barcode || $this->status  || $this->from || $this->to || $this->user_id || $this->product ){
             if ($this->from || $this->to) {
                 if ($this->from) {
                     $fromDate = Verta::parse($this->from)->startDay()->toCarbon();
@@ -77,8 +78,13 @@ class Index extends Component
                 $invoices=$invoices->where('user_id',$this->user_id);
 
             }
+
             $this->invoices=$invoices->pluck('id');
+
             $this->search=1;
+            if ($this->product){
+                $this->products_id=Product::where('name','Like','%'.$this->product.'%')->pluck('id')->toArray();
+            }
         }else{
             $this->search=0;
 
@@ -87,7 +93,7 @@ class Index extends Component
 
     public function reset_search()
     {
-        $this->reset(['title','status']);
+        $this->reset(['status','barcode','status','from','to','user_id','product']);
         $this->search=null;
     }
     public function render()
@@ -96,7 +102,19 @@ class Index extends Component
         if ($this->search){
             $data=$data->whereIn("id",$this->invoices) ->with(['user' => function($query) {
                 $query->select('id', 'name','code_meli');
-            }])->paginate($this->paginate_count);
+            }]);
+            if ($this->products_id) {
+                if (is_array($this->products_id)) {
+                    $data = $data->where(function ($query) {
+                        foreach ($this->products_id as $id) {
+                            $query->orWhereRaw("JSON_CONTAINS(products, JSON_OBJECT('id', ?))", [$id]);
+                        }
+                    });
+                } else {
+                    $data = $data->whereRaw("JSON_CONTAINS(products, JSON_OBJECT('id', ?))", [$this->products_id]);
+                }
+            }
+            $data=$data->paginate($this->paginate_count);
         }else{
             $data=$data->with(['user' => function($query) {
                 $query->select('id', 'name','code_meli');

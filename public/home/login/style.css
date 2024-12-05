@@ -764,4 +764,11 @@ body {
     }
 
 }
+.confirm-information{
+    margin-top: 20px;
+    line-height: 35px;
+    padding: 10px;
+    overflow-y: scroll;
+    max-height: 300px;
 
+}
