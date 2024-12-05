@@ -30,13 +30,13 @@
                 </li>
                 <li  class="{{request()->routeIs('product.*') ? 'active active_route' : ''}}">
                     <a href="{{route('product.list')}}">
-                        <i class="menu-icon ti-list"></i>
+                        <i class="menu-icon ti-gallery"></i>
                         <span>محصولات</span>
                     </a>
                 </li>
                 <li  class="{{request()->routeIs('user.*') ? 'active active_route' : ''}}">
                     <a href="{{route('user.list')}}">
-                        <i class="menu-icon ti-list"></i>
+                        <i class="menu-icon ti-user"></i>
                         <span>کاربران</span>
                     </a>
                 </li>
@@ -44,6 +44,12 @@
                     <a href="{{route('invoice.list')}}">
                         <i class="menu-icon ti-list"></i>
                         <span>فاکتور ها</span>
+                    </a>
+                </li>
+                <li  class="{{request()->routeIs('message.*') ? 'active active_route' : ''}}">
+                    <a href="{{route('message.list')}}">
+                        <i class="menu-icon ti-comment-alt"></i>
+                        <span>پیام ها</span>
                     </a>
                 </li>
 

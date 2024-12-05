@@ -18,9 +18,10 @@ class InvoicesExport implements  FromCollection, WithHeadings, WithStyles,WithEv
 {
     use Exportable;
 
-    public function __construct(array $invoices)
+    public function __construct(array $invoices,$products=null)
     {
         $this->invoices = $invoices;
+        $this->products_id = $products;
     }
 
     public function collection()
@@ -33,21 +34,44 @@ class InvoicesExport implements  FromCollection, WithHeadings, WithStyles,WithEv
             $invoices=Invoice::with('user')->get();
 
         }
-        return $invoices->map(function ($invoice) use ($type) {
+        $result=collect();
+        foreach ($invoices as $invoice){
             $user = $invoice->user;
-            $products_invoice=null;
             foreach ($invoice->products ?? [] as $products){
-                $products_invoice=$products_invoice.' | '.$products['name'].' -> '.$products['order'] .' '. $type[$products['type']];
+                if (count($this->products_id ?? [])){
+                    if (in_array($products['id'] ?? 0,$this->products_id ?? [])){
+                        $result[]=[
+                            'invoice_id' => $invoice->barcode,
+                            'user_name' => $user->name,
+                            'code_meli' => $user->code_meli,
+                            'phone' => $user->phone,
+                            'product' => $products['name'],
+                            'order' => $products['order'],
+                            'type' => $type[$products['type'] ?? 1],
+                            'price' => $invoice->price,
+                            'status' => $this->getStatusText($invoice->status),
+                            'order_date' => verta($invoice->created_at)->format('Y-m-d H:i:s'),
+                        ];
+
+                    }
+                }else{
+                        $result[]=[
+                            'invoice_id' => $invoice->barcode,
+                            'user_name' => $user->name,
+                            'code_meli' => $user->code_meli,
+                            'phone' => $user->phone,
+                            'product' => $products['name'],
+                            'order' => $products['order'],
+                            'type' => $type[$products['type'] ?? 1],
+                            'price' => $invoice->price,
+                            'status' => $this->getStatusText($invoice->status),
+                            'order_date' => verta($invoice->created_at)->format('Y-m-d H:i:s'),
+                        ];
+                }
+
             }
-            return [
-                'invoice_id' => $invoice->id,
-                'user_name' => $user->name.'( '.$user->code_meli.' )',
-                'products' => $products_invoice,
-                'price' => $invoice->price,
-                'status' => $this->getStatusText($invoice->status),
-                'order_date' => $invoice->created_at,
-            ];
-        });
+        }
+        return $result;
     }
 
     private function getStatusText($status)
@@ -72,7 +96,11 @@ class InvoicesExport implements  FromCollection, WithHeadings, WithStyles,WithEv
         return [
             'شماره فاکتور',
             'نام کاربر',
-            'محصولات',
+            'کد ملی',
+            'شماره تلفن',
+            'محصول',
+            'مقدار',
+            'برحسب',
             'قیمت',
             'وضعیت سفارش',
             'تاریخ سفارش',

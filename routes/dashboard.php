@@ -28,7 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/role/create',\App\Livewire\Dashboard\Role\Create::class)->name('role.create');
     Route::get('/role/update/{id}',\App\Livewire\Dashboard\Role\Update::class)->name('role.update');
     Route::get('/permission/{id}',\App\Livewire\Dashboard\Permission\Index::class)->name('role.permission');
-//-------------------------------------------------------{ Invoice } ---------------------------------------
+//-------------------------------------------------------{ Messages } ---------------------------------------
+    Route::get('/message/list',\App\Livewire\Dashboard\Messages\Index::class)->name('message.list');
+    Route::get('/message/chats/{user}',\App\Livewire\Dashboard\Messages\User::class)->name('message.chats');
+    //-------------------------------------------------------{ Invoice } ---------------------------------------
     Route::get('/invoice/list',\App\Livewire\Dashboard\Invoice\Index::class)->name('invoice.list');
     Route::get('/invoice/create',\App\Livewire\Dashboard\Invoice\Create::class)->name('invoice.create');
     Route::get('/invoice/details/{id}',\App\Livewire\Dashboard\Invoice\Details::class)->name('invoice.details');

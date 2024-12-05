@@ -29,7 +29,7 @@ class Index extends Component
     public function export_excel()
     {
         if ($this->search){
-            return (new InvoicesExport($this->invoices->toArray() ?? []))->download('invoices.xlsx');
+            return (new InvoicesExport($this->invoices->toArray() ?? [],$this->products_id))->download('invoices.xlsx');
 
         }else{
             return (new InvoicesExport([]))->download('invoices.xlsx');
@@ -83,7 +83,7 @@ class Index extends Component
 
             $this->search=1;
             if ($this->product){
-                $this->products_id=Product::where('name','Like','%'.$this->product.'%')->pluck('id')->toArray();
+                $this->products_id=Product::where('status',2)->where('name','Like','%'.$this->product.'%')->pluck('id')->toArray();
             }
         }else{
             $this->search=0;
@@ -114,11 +114,12 @@ class Index extends Component
                     $data = $data->whereRaw("JSON_CONTAINS(products, JSON_OBJECT('id', ?))", [$this->products_id]);
                 }
             }
-            $data=$data->paginate($this->paginate_count);
+            $this->invoices=$data->pluck('id');
+            $data=$data->latest()->paginate($this->paginate_count);
         }else{
             $data=$data->with(['user' => function($query) {
                 $query->select('id', 'name','code_meli');
-            }])->paginate($this->paginate_count);
+            }])->latest()->paginate($this->paginate_count);
         }
         return view('livewire.dashboard.invoice.index',compact('data'));
     }

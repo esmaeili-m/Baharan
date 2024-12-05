@@ -66,6 +66,11 @@ class User extends Authenticatable
     {
         return $this->role->permissions->contains('name', $permission); // بررسی وجود مجوز
     }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class,'user_id','id')->with('messages');
+    }
     public static function generateUniqueToken()
     {
         do {

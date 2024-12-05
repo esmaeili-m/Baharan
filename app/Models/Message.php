@@ -10,4 +10,9 @@ class Message extends Model
     use HasFactory;
     protected $guarded=[];
 
+    public function sender()
+    {
+        return $this->hasOne(User::class,'id','sender_id');
+    }
+
 }
