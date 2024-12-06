@@ -19,13 +19,13 @@ class Index extends Component
         $data = DB::table('chats')
             ->join('messages', 'chats.id', '=', 'messages.chat_id')
             ->join('users', 'chats.user_id', '=', 'users.id')
-            ->where('users.role_id', 2) // فقط چت‌هایی که از سمت مشتری هستند
+            ->where('users.role_id', 1) // فقط چت‌هایی که از سمت مشتری هستند
             ->where('messages.seen', 0) // پیام‌های دیده نشده
             ->where(function ($query) {
                 $query->where('messages.sender_id', function ($subQuery) {
                     $subQuery->select('id')
                         ->from('users')
-                        ->where('role_id', 2) // فقط پیام‌های مشتری
+                        ->where('role_id', 1)
                         ->orderByDesc('messages.created_at')
                         ->limit(1);
                 });
