@@ -64,7 +64,7 @@ class User extends Authenticatable
 
     public function hasPermission($permission)
     {
-        return $this->role->permissions->contains('name', $permission); // بررسی وجود مجوز
+        return $this->role->permissions->contains('name', $permission);
     }
 
     public function chats()

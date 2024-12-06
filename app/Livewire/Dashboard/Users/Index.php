@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Users;
 
 use App\Exports\UsersExport;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -17,9 +18,11 @@ class Index extends Component
     public $sort,$paginate_count=20,$search;
     public function mount()
     {
+        $this->authorize('list-users');
         if (session()->has('message')){
             $this->dispatch('alert',icon:'success',message:session()->get('message'));
         }
+
     }
 
     public function export_excel()
@@ -34,6 +37,7 @@ class Index extends Component
     }
     public function delete($id)
     {
+        $this->authorize('delete-users');
         $item=User::find($id);
         create_log(3,auth()->user()->id,'کاربران','[ '.$id.' => '.$item->name.' ]');
         $item->delete();

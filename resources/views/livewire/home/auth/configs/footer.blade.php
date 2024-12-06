@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-2 col-sm-12 text-white p-3 "  >
                 <div >
-{{--                    <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=545042&Code=X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=545042&Code=X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH' alt='' style='cursor:pointer' code='X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH'></a>--}}
+                    <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=545042&Code=X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=545042&Code=X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH' alt='' style='cursor:pointer' code='X6eBHaa5sUPm3CHBMqs4BSAOiQP5NhgH'></a>
                 </div>
 
             </div>

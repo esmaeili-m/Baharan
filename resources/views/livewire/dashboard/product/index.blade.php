@@ -11,7 +11,7 @@
                     <a href="{{route('product.trash')}}"><button class="btn-hover btn-border-radius color-8 border-radius-custom">سطل آشغال ( {{\App\Models\Product::onlyTrashed()->count()}} )</button></a>
                 </div>
                 <div class="row mt-3 mx-2">
-                    <div class="col-2">
+                    <div class="col-lg-2 col-sm-6 col-md-6">
                         <div class="form-group">
                             <div class="form-line">
                                 <input type="text"
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-sm-6 col-md-6">
                         <div class="form-group">
                             <div class="form-line">
                                 <input type="text"
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-sm-6 col-md-6">
                         <div wire:ignore class="select2 input-field col s12">
                             <select wire:model.defer="category_id">
                                 <option value="" disabled >دسته محصول</option>
@@ -42,7 +42,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-sm-6 col-md-6">
                         <div wire:ignore class="select2 input-field col s12">
                             <select wire:model.defer="status">
                                 <option value="" disabled >وضعیت محصول</option>

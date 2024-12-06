@@ -22,36 +22,53 @@
                         <span>داشبورد</span>
                     </a>
                 </li>
+
+                @can('list-categories')
                 <li  class="{{request()->routeIs('category.*') ? 'active active_route' : ''}}">
                     <a href="{{route('category.list')}}">
                         <i class="menu-icon ti-list"></i>
                         <span>دسته بندی ها</span>
                     </a>
                 </li>
+                @endcan
+                @can('list-products')
+
                 <li  class="{{request()->routeIs('product.*') ? 'active active_route' : ''}}">
                     <a href="{{route('product.list')}}">
                         <i class="menu-icon ti-gallery"></i>
                         <span>محصولات</span>
                     </a>
                 </li>
+                @endcan
+                @can('list-users')
+
                 <li  class="{{request()->routeIs('user.*') ? 'active active_route' : ''}}">
                     <a href="{{route('user.list')}}">
                         <i class="menu-icon ti-user"></i>
                         <span>کاربران</span>
                     </a>
                 </li>
+                    @endcan
+                @can('list-invoices')
+
                 <li  class="{{request()->routeIs('invoice.*') ? 'active active_route' : ''}}">
                     <a href="{{route('invoice.list')}}">
                         <i class="menu-icon ti-list"></i>
                         <span>فاکتور ها</span>
                     </a>
                 </li>
+                        @endcan
+                @can('chat')
+
                 <li  class="{{request()->routeIs('message.*') ? 'active active_route' : ''}}">
                     <a href="{{route('message.list')}}">
                         <i class="menu-icon ti-comment-alt"></i>
                         <span>پیام ها</span>
                     </a>
                 </li>
+                            @endcan
+
+                @can('list-roles')
 
                 <li  class="{{request()->routeIs('role.*') ? 'active active_route' : ''}}">
                     <a href="{{route('role.list')}}">
@@ -59,18 +76,25 @@
                         <span>نقش ها و دسترسی ها</span>
                     </a>
                 </li>
+                                @endcan
+                @can('setting')
+
                 <li  class="{{request()->routeIs('setting') ? 'active active_route' : ''}}">
                     <a href="{{route('setting')}}">
                         <i class="menu-icon ti-settings"></i>
                         <span>تنظیمات سایت</span>
                     </a>
                 </li>
+                                    @endcan
+                @can('logs')
+
                 <li  class="{{request()->routeIs('logs') ? 'active active_route' : ''}}">
                     <a href="{{route('logs')}}">
                         <i class="menu-icon ti-list"></i>
                         <span>لاگ</span>
                     </a>
                 </li>
+                                        @endcan
 {{--                <li  class="{{request()->routeIs('post.*') ? 'active active_route' : ''}}">--}}
 {{--                    <a href="{{route('post.list')}}">--}}
 {{--                        <i class="menu-icon ti-image"></i>--}}

@@ -8,8 +8,11 @@
             <div class="card">
                 <div class="header">
                     <a href="{{route('invoice.create')}}">
+                        @can('create-invoices')
+
                         <button class="btn-hover btn-border-radius color-7 border-radius-custom">ثبت فاکتور جدید</button></a>
-                        <a wire:click="export_excel"><button class="btn-hover btn-border-radius color-1 border-radius-custom">خروجی اکسل</button></a>
+                        @endcan
+                    <a wire:click="export_excel"><button class="btn-hover btn-border-radius color-1 border-radius-custom">خروجی اکسل</button></a>
 
                 </div>
                 <div class="row mt-3 mx-2">
@@ -123,13 +126,33 @@
                                 <td>
 
                                     @if($item->status == 1)
-                                        <button wire:click="change_status({{$item->id}},2)"  type="button" class="btn btn-outline-warning btn-border-radius">ثبت شده</button>
+                                        <button
+                                    @can('update-invoices')
+
+                                            wire:click="change_status({{$item->id}},2)"
+                                            @endcan
+                                            type="button" class="btn btn-outline-warning btn-border-radius">ثبت شده</button>
                                     @elseif($item->status == 2)
-                                        <button wire:click="change_status({{$item->id}},3)" type="button" class="btn btn-outline-success btn-border-radius">تایید شده</button>
+                                        <button
+                                    @can('update-invoices')
+
+                                            wire:click="change_status({{$item->id}},3)"
+                                            @endcan
+                                            type="button" class="btn btn-outline-success btn-border-radius">تایید شده</button>
                                     @elseif($item->status == 3)
-                                        <button wire:click="change_status({{$item->id}},4)" type="button" class="btn btn-outline-primary btn-border-radius">تحویل داده شده</button>
+                                        <button
+                                    @can('update-invoices')
+
+                                            wire:click="change_status({{$item->id}},4)"
+                                            @endcan
+                                            type="button" class="btn btn-outline-primary btn-border-radius">تحویل داده شده</button>
                                     @else
-                                        <button wire:click="change_status({{$item->id}},1)" type="button" class="btn btn-outline-danger btn-border-radius">لفو شده</button>
+                                        <button
+                                    @can('update-invoices')
+
+                                            wire:click="change_status({{$item->id}},1)"
+                                            @endcan
+                                            type="button" class="btn btn-outline-danger btn-border-radius">لفو شده</button>
                                     @endif
                                 </td>
                                 <td>
@@ -139,11 +162,13 @@
                                 </td>
 
                                 <td>
+                                    @can('update-invoices')
+
                                     <a href="{{route('invoice.update',$item->id)}}"><button class="btn tblActnBtn">
                                             <i class="material-icons">mode_edit</i>
                                         </button>
                                     </a>
-
+                                    @endcan
                                 </td>
                             </tr>
                             @php($counter++)

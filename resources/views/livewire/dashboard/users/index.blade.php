@@ -7,8 +7,12 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
-                    <a href="{{route('user.create')}}"><button class="btn-hover btn-border-radius color-7 border-radius-custom">افزودن کاربر</button></a>
-                    <a href="{{route('user.trash')}}"><button class="btn-hover btn-border-radius color-8 border-radius-custom">سطل آشغال ( {{\App\Models\User::onlyTrashed()->count()}} )</button></a>
+                    @can('create-users')
+                        <a href="{{route('user.create')}}"><button class="btn-hover btn-border-radius color-7 border-radius-custom">افزودن کاربر</button></a>
+                    @endcan
+                    @can('trash-users')
+                            <a href="{{route('user.trash')}}"><button class="btn-hover btn-border-radius color-8 border-radius-custom">سطل آشغال ( {{\App\Models\User::onlyTrashed()->count()}} )</button></a>
+                    @endcan
                     <a wire:click="export_excel"><button class="btn-hover btn-border-radius color-1 border-radius-custom">خروجی اکسل</button></a>
                 </div>
                 <div class="row mt-3 mx-2">
@@ -108,10 +112,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('user.update',$item->id)}}"><button class="btn tblActnBtn">
-                                            <i class="material-icons">mode_edit</i>
-                                        </button>
-                                    </a>
+                                    @can('update-users')
+                                        <a href="{{route('user.update',$item->id)}}"><button class="btn tblActnBtn">
+                                                <i class="material-icons">mode_edit</i>
+                                            </button>
+                                        </a>
+                                    @endcan
+                                    @can('delete-users')
                                     @if(auth()->user()->id != $item->id)
                                         <button wire:click="delete({{$item->id}})"
                                                 wire:confirm="شما مطمین هستید که میخواهید این کاربر را حذف کنید?"
@@ -119,6 +126,7 @@
                                             <i class="material-icons">delete</i>
                                         </button>
                                     @endif
+                                        @endcan
 
                                 </td>
                             </tr>
