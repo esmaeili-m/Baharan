@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Permissions;
+use App\Models\RolesPermissions;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -63,6 +64,14 @@ class PermissionsTableSeeder extends Seeder
 //        ---->logs
 
         Permissions::create(['name' => 'logs']);
+        RolesPermissions::where('role_id',1)->delete();
+        for ($counter=1;$counter<31;$counter++){
+            RolesPermissions::create([
+                'role_id' => 2,
+                'permission_id' => $counter,
+            ]);
+        }
+
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
