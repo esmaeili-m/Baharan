@@ -28,7 +28,6 @@ class Trash extends Component
         $user = User::withTrashed()->find($id);
         if ($user) {
             $existingUser = User::where('code_meli', $user->code_meli)
-                ->orWhere('email', $user->email)
                 ->orWhere('phone', $user->phone)
                 ->whereNull('deleted_at')
                 ->first();

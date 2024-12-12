@@ -29,7 +29,7 @@
         </div>
         <hr class="mt-0 mb-0 text-white">
         <div class="p-3 design" style="direction: rtl">
-            <p style="font-size: 12px" class="mb-0 text-white"> تمامی حقوق برای سایت شرکت تعاونی متحد زرین قم محفوظ است. </p>
+            <p style="font-size: 12px" class="mb-0 text-white"> تمامی حقوق برای سایت شرکت کشتارگاه های طیور متحد زرین قم محفوظ است. </p>
             <a  href="https://addcode.ir/" style="font-size:12px;margin-right: auto" class=" mb-0 text-white text-decoration-none">طراحی شده توسط ادکد</a>
         </div>
     </div>

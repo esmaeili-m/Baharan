@@ -3,7 +3,7 @@
         <div class="form-container">
             <div class=" wrapper-register" style="direction: rtl">
                 <div class="text-center mb-5">
-                    <span class=" btn custom-primary mt-3 mb-3 w-lg-40 w-sm-100 h-sm-50" >av;j شرکت  (بهاران)</span>
+                    <span class=" btn custom-primary mt-3 mb-3 w-lg-40 w-sm-100 h-sm-50" >شرکت کشتارگاه های طیور متحد زرین قم</span>
                 </div>
                 @if(($user->status  ?? 0) == 2  || ($user->status  ?? 0) == 3)
                     <div class=" col-lg-12 col-sm-12">
@@ -440,7 +440,7 @@
             @endif
 
             <div class="text-center fs-6">
-                <span style="color: #7f7f7f;font-size: 13px">شرکت طیور متحد زرین قم (بهاران)</span>
+                <span style="color: #7f7f7f;font-size: 13px">شرکت کشتارگاه های طیور متحد زرین قم</span>
             </div>
         </div>
     @endif
