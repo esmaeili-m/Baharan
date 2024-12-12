@@ -22,6 +22,7 @@ class Update extends Component
         $this->address=$this->user->address;
         $this->status=$this->user->status;
         $this->type=$this->user->type;
+        $this->role_id=$this->user->role_id;
         $this->description=$this->user->description;
         $this->license_number=$this->user->license_number;
         $this->license_image=$this->user->license_image;
