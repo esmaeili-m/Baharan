@@ -95,7 +95,6 @@ class Create extends Component
     }
     public function UpdatedLicenseImage()
     {
-
         $this->license_image=upload_file($this->license_image,'auth');
     }
     public function mount()

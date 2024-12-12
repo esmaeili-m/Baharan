@@ -109,7 +109,10 @@ class Update extends Component
     {
         $this->avatar=upload_file($this->avatar,'users');
     }
-
+    public function UpdatedLicenseImage()
+    {
+        $this->license_image=upload_file($this->license_image,'users');
+    }
     public function render()
     {
         return view('livewire.dashboard.users.update');
