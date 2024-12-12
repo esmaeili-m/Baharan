@@ -66,6 +66,8 @@ class InvoicesExport implements  FromCollection, WithHeadings, WithStyles,WithEv
                             'price' => $invoice->price,
                             'status' => $this->getStatusText($invoice->status),
                             'order_date' => verta($invoice->created_at)->format('Y-m-d H:i:s'),
+                            'address' => $user->address,
+                            'license_number' => $user->license_number,
                         ];
                 }
 
@@ -104,6 +106,8 @@ class InvoicesExport implements  FromCollection, WithHeadings, WithStyles,WithEv
             'قیمت',
             'وضعیت سفارش',
             'تاریخ سفارش',
+            'آدرس',
+            'شماره پروانه',
         ];
     }
     public function registerEvents(): array
