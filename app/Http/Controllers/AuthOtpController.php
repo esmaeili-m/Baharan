@@ -115,6 +115,8 @@ class AuthOtpController extends Controller
     }
     public function create(Request $request)
     {
+        Log::info('1',[$request->all()]);
+
         $this->validate($request,
             [
                 'name' => ['required'],
@@ -128,10 +130,13 @@ class AuthOtpController extends Controller
                 'license_image' => ['required','image', 'mimes:jpeg,png,jpg', 'max:5048'],
                 'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone'],
             ]);
+        Log::info('2',[$request->all()]);
         $request->license_image=$this->upload_file($request->license_image,'users');
+        Log::info('3',[$request->all()]);
         if ($request->avatar){
             $request->avatar=$this->upload_file($request->avatar,'users');
         }
+        Log::info('4',[$request->all()]);
         $uniqueToken = User::generateUniqueToken();
         $data=User::create([
            'name'=>$request->name,
