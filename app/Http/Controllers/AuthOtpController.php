@@ -155,4 +155,7 @@ class AuthOtpController extends Controller
         ], 200);
 
     }
+    public function receipt(Request $request){
+        Log::info($request);
+    }
 }
