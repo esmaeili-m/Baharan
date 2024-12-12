@@ -6,6 +6,7 @@ use App\Exports\InvoicesExport;
 use App\Exports\UsersExport;
 use App\Models\Invoice;
 use App\Models\Product;
+use Carbon\Carbon;
 use Hekmatinasser\Verta\Facades\Verta;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -30,9 +31,8 @@ class Index extends Component
     {
         if ($this->search){
             return (new InvoicesExport($this->invoices->toArray() ?? [],$this->products_id))->download('invoices.xlsx');
-
         }else{
-            return (new InvoicesExport([]))->download('invoices.xlsx');
+            return (new InvoicesExport([]))->download(Carbon::now()->format('Y-m-d H:i:s').'.xlsx');
 
         }
     }
