@@ -8,7 +8,7 @@
 
             <div style="direction: ltr" class="countdown">
                 <div style="color: #FFFFFF"  class="time clock-time-card" id="countdown">
-                    <div class="">
+                    <div class="d-none">
                         <span style="color: #FFFFFF" id="days">00</span>
                         <span  style="color: #FFFFFF" >روز</span>
                     </div>
@@ -47,8 +47,6 @@
         <script>
             const openingTime = new Date(@json($openingTime).date).getTime(); // تبدیل به زمان در میلی‌ثانیه
             const closingTime = new Date(@json($closingTime).date).getTime();
-            console.log(@json($openingTime))// تبدیل به زمان در میلی‌ثانیه
-            console.log(@json($closingTime))// تبدیل به زمان در میلی‌ثانیه
             function updateTimer() {
                 const now = new Date(@json($now).date).getTime();
                 let targetTime, status;
