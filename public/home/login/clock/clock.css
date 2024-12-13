@@ -1,0 +1,35 @@
+.countdown {
+    text-align: center;
+}
+
+.countdown .time {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.countdown .time div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown .time div span {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #aaa;
+}
+
+.clock-time-card{
+    background-color: #51b549;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.clock-time-card span{
+    color: #fff;
+
+}

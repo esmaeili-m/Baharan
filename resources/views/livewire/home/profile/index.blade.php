@@ -1,5 +1,9 @@
 <div>
+    <div class="col-lg-12 col-sm-12">
+        <livewire:home.profile.header />
+    </div>
     <div class="profile-container">
+
         <div class="row" style="direction: rtl">
             <div class="col-lg-3 col-sm-12">
                 <livewire:home.profile.sidebar />

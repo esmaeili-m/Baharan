@@ -405,7 +405,7 @@ body {
     background-color: #5c99f4;
 }
 .profile-container{
-    margin: 80px 30px 40px 30px;
+    margin: 10px 30px 40px 30px;
 }
 .shop-container {
     width: 100%;
@@ -631,6 +631,15 @@ body {
     margin: 20px 40px;
     border-radius: 10px;
     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+
+}
+.header-main{
+    margin: 20px 40px 5px 40px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    background: linear-gradient(to right,
+    rgb(100, 48, 230),
+    rgba(7, 108, 119, 0.7),
+    rgba(22, 75, 213, 0.5));    border-radius: 10px;
 
 }
 .addcode{
