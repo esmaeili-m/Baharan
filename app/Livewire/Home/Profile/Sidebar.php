@@ -17,14 +17,12 @@ class Sidebar extends Component
     }
     public function mount()
     {
-        $shop=Setting::find(1);
-        $startDate = Verta::parse($shop->sales_date_start)->datetime();
-        $now = Verta::parse(\verta())->datetime();
-        $endDate = Verta::parse($shop->sales_date_end)->datetime();
-        $this->openingTime =$startDate;
-        $this->closingTime = $endDate;
-        $this->now = $now;
+        $shop = Setting::find(1);
+        $this->openingTime = Verta::parse($shop->sales_date_start)->format('Y-m-d\TH:i:s'); // ISO 8601 format
+        $this->closingTime = Verta::parse($shop->sales_date_end)->format('Y-m-d\TH:i:s'); // ISO 8601 format
+        $this->now = Verta::now()->format('Y-m-d\TH:i:s'); // ISO 8601 format
     }
+
     public function logout()
     {
         Auth::logout();

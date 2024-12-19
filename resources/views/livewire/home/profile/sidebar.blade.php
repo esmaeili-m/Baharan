@@ -44,45 +44,48 @@
         </div>
     </div>
     @push('scripts-end')
-        <script>
-            const openingTime = new Date(@json($openingTime).date).getTime(); // تبدیل به زمان در میلی‌ثانیه
-            const closingTime = new Date(@json($closingTime).date).getTime();
-            function updateTimer() {
-                const now = new Date(@json($now).date).getTime();
-                let targetTime, status;
+            <script>
+                const openingTime = new Date(@json($openingTime)).getTime();
+                const closingTime = new Date(@json($closingTime)).getTime();
+                function updateTimer() {
+                    const now = new Date(@json($now)).getTime();
+                    let targetTime, status;
 
-                if (now < openingTime) {
-                    targetTime = openingTime;
-                    status = "زمان باقی مانده تا شروع سفارش گیری";
+                    if (now < openingTime) {
+                        targetTime = openingTime;
+                        status = "زمان باقی مانده تا شروع سفارش گیری";
+                    } else if (now >= openingTime && now < closingTime) {
+                        targetTime = closingTime;
+                        status = "زمان باقی مانده تا پایان سفارش گیری";
+                    } else {
+                        targetTime = null;
+                        status = "زمان سفارش گیری به پایان رسیده است";
+                    }
 
-                } else if (now >= openingTime && now < closingTime) {
-                    targetTime = closingTime;
-                    status = "زمان باقی مانده تا پایان سفارش گیری";
+                    if (targetTime) {
+                        const timeLeft = targetTime - now;
+                        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                } else {
-                    targetTime = null;
-                    status = "زمان سفارش گیری به پایان رسیده است";
-                }
-                if (targetTime) {
-                    const timeLeft = targetTime - now;
+                        document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+                        document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+                        document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+                        document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+                    } else {
+                        document.getElementById("days").innerHTML = "00";
+                        document.getElementById("hours").innerHTML = "00";
+                        document.getElementById("minutes").innerHTML = "00";
+                        document.getElementById("seconds").innerHTML = "00";
+                    }
 
-                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    document.getElementById("days").innerHTML = String(days).padStart(2, '0');
-                    document.getElementById("hours").innerHTML = String(hours).padStart(2, '0')
-                    document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0')
-                    document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0')
                     document.getElementById("countdown2").textContent = status;
-
-                } else {
-                    document.getElementById("countdown2").textContent = status;
                 }
-            }
 
-            setInterval(updateTimer, 1000);
-            updateTimer();
-        </script>
+                setInterval(updateTimer, 1000);
+                updateTimer();
+            </script>
+
     @endpush
 </div>

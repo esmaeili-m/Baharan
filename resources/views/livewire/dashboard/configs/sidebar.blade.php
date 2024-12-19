@@ -54,7 +54,7 @@
                 <li  class="{{request()->routeIs('invoice.*') ? 'active active_route' : ''}}">
                     <a href="{{route('invoice.list')}}">
                         <i class="menu-icon ti-list"></i>
-                        <span>فاکتور ها</span>
+                        <span>سفارشات</span>
                     </a>
                 </li>
                         @endcan

@@ -10,8 +10,8 @@
                     <p>متغییر</p>
                     <div class="col-sm-6 col-lg-12">
                         <div class="form-check m-l-10">
-                            <label wire:click="set_status(1)" class="form-check-label">
-                                <input class="form-check-input" type="radio" name="status" value="1"> فاکتورها
+                            <label  wire:click="set_status(1)" class="form-check-label">
+                                <input {{$status == 1 ? 'checked' : ''}} class="form-check-input" type="radio" name="status" value="1"> سفارشات
                                 <span class="form-check-sign">
                                      <span class="check"></span>
                                 </span>
@@ -20,8 +20,8 @@
                     </div>
                     <div class="col-sm-6 col-lg-12">
                         <div class="form-check m-l-10">
-                            <label wire:click="set_status(2)" class="form-check-label">
-                                <input class="form-check-input" type="radio" name="status" value="2"> محصولات
+                            <label  wire:click="set_status(2)" class="form-check-label">
+                                <input {{$status == 2 ? 'checked' : ''}} class="form-check-input" type="radio" name="status" value="2"> محصولات
                                 <span class="form-check-sign">
                                     <span class="check"></span>
                                 </span>
@@ -30,18 +30,8 @@
                     </div>
                     <div class="col-sm-6 col-lg-12">
                         <div class="form-check m-l-10">
-                            <label wire:click="set_status(3)" class="form-check-label">
-                                <input class="form-check-input" type="radio" name="status" value="3"> دسته بندی
-                                <span class="form-check-sign">
-                                    <span class="check"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-12">
-                        <div class="form-check m-l-10">
-                            <label wire:click="set_status(4)" class="form-check-label">
-                                <input  class="form-check-input" type="radio" name="status" value="4"> کاربران
+                            <label  wire:click="set_status(4)" class="form-check-label">
+                                <input {{$status == 4 ? 'checked' : ''}} class="form-check-input" type="radio" name="status" value="4"> کاربران
                                 <span class="form-check-sign">
                                     <span class="check"></span>
                                 </span>
@@ -53,154 +43,98 @@
                 <div class="col-6">
                          <p>فیلتر</p>
                         <div class="mx-10">
-                            @if($status == 1)
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="form-check m-l-10">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="color" value="purple">تمام فاکتور ها
-                                            <span class="form-check-sign">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="form-check m-l-10">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="color" value="purple"> فاکتور ثبت شده
-                                            <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="form-check m-l-10">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="color" value="purple"> فاکتور تایید شده
-                                            <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="form-check m-l-10">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="color" value="purple"> فاکتور تحویل داده شده
-                                            <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="form-check m-l-10">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="color" value="purple"> فاکتور لفو شده
-                                            <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                        </label>
-                                    </div>
-                                </div>
-                            @elseif($status == 2)
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="form-check m-l-10">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="color" value="purple">تمام دسته بندی ها
-                                            <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="form-check m-l-10">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="color" value="purple"> دسته بندی های فعال
-                                            <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="form-check m-l-10">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="color" value="purple">   دسته بندی های غیر فعال
-                                            <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                        </label>
-                                    </div>
-                                </div>
-                            @elseif($status == 4)
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="col-sm-12 col-lg-12">
-                                            <div class="form-check m-l-10">
-                                                <label wire:click="get_users('all')" class="form-check-label">
-                                                    <input {{$fillter_user== 'all' ? 'selected' : ''}} class="form-check-input" type="radio" name="user" value="all"> همه کاربران
-                                                    <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-lg-12">
-                                            <div class="form-check m-l-10">
-                                                <label wire:click="get_users('select')" class="form-check-label">
-                                                    <input  {{$fillter_user== 'a' ? 'select' : ''}} class="form-check-input" type="radio" name="user" value="select">کاربر خاص
-                                                    <span class="form-check-sign">
-                                     <span class="check"></span>
-                                </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-7">
-                                        @if($users ?? 0)
-                                            <div style="max-height: 200px;overflow-y: auto">
-                                                <table class="table table-striped" >
-                                                    <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>نام کابر</th>
-                                                        <th>انتخاب</th>
 
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody >
-                                                    @php($counter=1)
-                                                    @foreach($users ?? [] as $key => $item)
-                                                        <tr >
-                                                            <th scope="row">{{$counter}}</th>
-                                                            <td >{{$item}}</td>
-                                                            <td > <div class="col-sm-6 col-lg-3">
-                                                                    <div class="form-check m-l-10">
-                                                                        <label class="form-check-label">
-                                                                            <input wire:model="selectedUser.{{$key}}" class="form-check-input" type="checkbox" value="{{$key}}">
-                                                                            <span class="form-check-sign">
+                            @if($status == 2)
+                                <div style="max-height: 200px;overflow-y: auto">
+                                    <table class="table table-striped" >
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>نام محصول</th>
+                                            <th>انتخاب</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody >
+                                        @php($counter=1)
+
+                                        @foreach(\App\Models\Product::pluck('name','id') ?? [] as $key => $item)
+                                            <tr >
+                                                <th scope="row">{{$counter}}</th>
+                                                <td >{{$item}}</td>
+                                                <td >
+                                                    <div class="col-sm-6 col-lg-3">
+                                                        <div class="form-check m-l-10">
+                                                            <label class="form-check-label">
+                                                                <input wire:model="selectedUser.{{$key}}" class="form-check-input" type="checkbox" value="{{$key}}">
+                                                                <span class="form-check-sign">
                                                                     <span class="check"></span>
                                                                 </span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div></td>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @php($counter++)
+                                        @endforeach
 
-                                                        </tr>
-                                                        @php($counter++)
-                                                    @endforeach
+                                        </tbody>
 
-                                                    </tbody>
+                                    </table>
 
-                                                </table>
+                                </div>
 
-                                            </div>
+                            @elseif($status == 4)
+                                <div style="max-height: 200px;overflow-y: auto">
+                                    <table class="table table-striped" >
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>نام کابر</th>
+                                            <th>انتخاب</th>
 
-                                        @endif
+                                        </tr>
+                                        </thead>
+                                        <tbody >
+                                        @php($counter=1)
+                                            <th scope="row">{{$counter}}</th>
+                                            <td>همه</td>
+                                            <td>
+                                                <div class="col-sm-6 col-lg-3">
+                                                    <div class="form-check m-l-10">
+                                                        <label class="form-check-label">
+                                                            <input wire:model="selectedUser.all" class="form-check-input" type="checkbox" value="all">
+                                                            <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                             </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @foreach(\App\Models\User::pluck('name','id') ?? [] as $key => $item)
+                                            <tr >
+                                                <th scope="row">{{$counter}}</th>
+                                                <td >{{$item}}</td>
+                                                <td >
+                                                    <div class="col-sm-6 col-lg-3">
+                                                        <div class="form-check m-l-10">
+                                                            <label class="form-check-label">
+                                                                <input wire:model="selectedUser.{{$key}}" class="form-check-input" type="checkbox" value="{{$key}}">
+                                                                <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @php($counter++)
+                                        @endforeach
 
-                                    </div>
+                                        </tbody>
+
+                                    </table>
+
                                 </div>
                             @endif
 
@@ -231,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-2 align-center ">
                     <button wire:click="fillter()" class="btn-hover color-7">جستجو</button>
 
                 </div>
@@ -241,8 +175,6 @@
 
             @if($status == 1)
                 <div class="row">
-
-
                     <div class="col-lg-3 col-sm-6">
                         <div class="info-box7 l-bg-green order-info-box7">
                             <div class="info-box7-block">
@@ -253,7 +185,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-3 col-sm-6">
                         <div class="info-box7 l-bg-purple order-info-box7">
                             <div class="info-box7-block">
@@ -264,7 +195,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-3 col-sm-6">
                         <div class="info-box7 l-bg-orange order-info-box7">
                             <div class="info-box7-block">
@@ -275,7 +205,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-3 col-sm-6">
                         <div class="info-box7 l-bg-cyan order-info-box7">
                             <div class="info-box7-block">
@@ -287,7 +216,6 @@
                         </div>
                     </div>
                 </div>
-
             @elseif($status == 2)
                 <div class="row">
 
@@ -368,8 +296,6 @@
 
             @elseif($status == 4)
                 <div class="row">
-
-
                     <div class="col-lg-4 col-sm-6">
                         <div class="info-box7 l-bg-green order-info-box7">
                             <div class="info-box7-block">

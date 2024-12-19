@@ -10,7 +10,7 @@
                     <a href="{{route('invoice.create')}}">
                         @can('create-invoices')
 
-                        <button class="btn-hover btn-border-radius color-7 border-radius-custom">ثبت فاکتور جدید</button></a>
+                        <button class="btn-hover btn-border-radius color-7 border-radius-custom">ثبت سفارش جدید</button></a>
                         @endcan
                     <a wire:click="export_excel"><button class="btn-hover btn-border-radius color-1 border-radius-custom">خروجی اکسل</button></a>
 
@@ -32,7 +32,7 @@
                                 <input type="text"
                                        wire:model.defer="barcode"
                                        class="form-control"
-                                       placeholder="شماره فاکتور را وارد کنید">
+                                       placeholder="شماره سفارش را وارد کنید">
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>شماره فاکتور</th>
+                            <th>شماره سفارش</th>
                             <th>نام کاربر</th>
                             <th>محصولات</th>
                             <th>قیمت</th>

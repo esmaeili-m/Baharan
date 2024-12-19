@@ -3,7 +3,7 @@
             <div class="" style="direction: rtl" >
                 <div class="row w-100 text-center d-flex justify-content-center align-content-center">
                     <div  class="error-invoice-main  justify-content-center align-content-center">
-                        <p class="category-product card-category-title mb-0 p-5">شما در درحال حاظر فاکتور فعال دارید امکان ثبت فاکتور جدید نمی باشد</p><br>
+                        <p class="category-product card-category-title mb-0 p-5">شما در درحال حاظر سفارش فعال دارید امکان ثبت فاکتور جدید نمی باشد</p><br>
                        <div >
                            @if($has_invoice->status == 1)
                              <a wire:click="edit_invoice()" style="text-decoration: none;cursor: pointer" class="mt-3 category-product card-category-title mb-0 p-2">درخواست ویرایش فاکتور</a>
@@ -16,7 +16,10 @@
             </div>
 
     @else
+        <livewire:home.profile.header />
+
         <div class="shop-container" style="direction: rtl" >
+
             <div class="row w-100 mobile-margin">
                 <div class="col-lg-3  col-sm-12">
                     <div class="sidebar-profile d-flex" >

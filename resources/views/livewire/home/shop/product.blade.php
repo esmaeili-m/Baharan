@@ -1,4 +1,6 @@
 <div class="shop-category" >
+
+
     @if($category)
         <div class="text-center">
             <span class="category-product card-product-title">{{$category->title}}</span>
