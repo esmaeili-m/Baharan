@@ -56,8 +56,22 @@
                                         </tr>
                                         </thead>
                                         <tbody >
-                                        @php($counter=1)
 
+                                        @php($counter=1)
+                                        <th scope="row">{{$counter}}</th>
+                                        <td>همه</td>
+                                        <td>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <div class="form-check m-l-10">
+                                                    <label class="form-check-label">
+                                                        <input wire:model="selectedProduct.all" class="form-check-input" type="checkbox" value="all">
+                                                        <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                             </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
                                         @foreach(\App\Models\Product::pluck('name','id') ?? [] as $key => $item)
                                             <tr >
                                                 <th scope="row">{{$counter}}</th>
@@ -66,7 +80,7 @@
                                                     <div class="col-sm-6 col-lg-3">
                                                         <div class="form-check m-l-10">
                                                             <label class="form-check-label">
-                                                                <input wire:model="selectedUser.{{$key}}" class="form-check-input" type="checkbox" value="{{$key}}">
+                                                                <input wire:model="selectedProduct.{{$key}}" class="form-check-input" type="checkbox" value="{{$key}}">
                                                                 <span class="form-check-sign">
                                                                     <span class="check"></span>
                                                                 </span>
@@ -165,22 +179,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-2 align-center ">
+                <div class="col-2 d-flex justify-content-center align-items-center" >
                     <button wire:click="fillter()" class="btn-hover color-7">جستجو</button>
-
                 </div>
             <hr>
 
         </div>
 
-            @if($status == 1)
+            @if($status == 1 && $invoice)
                 <div class="row">
                     <div class="col-lg-3 col-sm-6">
                         <div class="info-box7 l-bg-green order-info-box7">
                             <div class="info-box7-block">
                                 <h4 class="m-b-20">سفارشات دریافت شده</h4>
                                 <h2 class="text-right"><i
-                                        class="fas fa-cart-plus pull-left"></i><span>{{\App\Models\Invoice::count()}}</span>
+                                        class="fas fa-cart-plus pull-left"></i><span>{{$invoice->count()}}</span>
                                 </h2>
                             </div>
                         </div>
@@ -190,7 +203,7 @@
                             <div class="info-box7-block">
                                 <h4 class="m-b-20">سفارشات تکمیل شده</h4>
                                 <h2 class="text-right"><i
-                                        class="fas fa-business-time pull-left"></i><span>{{\App\Models\Invoice::where('status',2)->count()}}</span>
+                                        class="fas fa-business-time pull-left"></i><span>{{$invoice->where('status',2)->count()}}</span>
                                 </h2>
                             </div>
                         </div>
@@ -200,7 +213,7 @@
                             <div class="info-box7-block">
                                 <h4 class="m-b-20">سفارشات جدید</h4>
                                 <h2 class="text-right"><i
-                                        class="fas fa-chart-line pull-left"></i><span>{{\App\Models\Invoice::where('status',1)->count()}}</span>
+                                        class="fas fa-chart-line pull-left"></i><span>{{$invoice->where('status',1)->count()}}</span>
                                 </h2>
                             </div>
                         </div>
@@ -210,13 +223,13 @@
                             <div class="info-box7-block">
                                 <h4 class="m-b-20">مجموع درآمد</h4>
                                 <h2 class="text-right"><i
-                                        class="fas fa-dollar-sign pull-left"></i><span>{{number_format( \App\Models\Invoice::where('status',3)->sum('price'))}}</span>
+                                        class="fas fa-dollar-sign pull-left"></i><span>{{number_format( $invoice->sum('price'))}}</span>
                                 </h2>
                             </div>
                         </div>
                     </div>
                 </div>
-            @elseif($status == 2)
+            @elseif($status == 2 )
                 <div class="row">
 
 
@@ -409,13 +422,12 @@
     </script>
     <script>
         document.addEventListener('livewire:init', () => {
-            let barChart = null; // برای نگه‌داشتن چارت میله‌ای قبلی
-            let pieChart = null; // برای نگه‌داشتن چارت دایره‌ای قبلی
+            let barChart = null;
+            let pieChart = null;
 
             Livewire.on('created-chart', (event) => {
                 var productSales = event.products;
 
-                // اگر چارت‌های قبلی وجود داشتند، آنها را تخریب کن
                 if (barChart !== null) {
                     barChart.destroy();
                 }
@@ -423,10 +435,9 @@
                     pieChart.destroy();
                 }
 
-                // چارت اول (میله‌ای افقی)
                 var barOptions = {
                     series: [{
-                        data: productSales.totals // استفاده از داده‌های پویا
+                        data: productSales.totals
                     }],
                     chart: {
                         type: 'bar',

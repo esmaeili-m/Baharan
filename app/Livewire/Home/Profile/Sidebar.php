@@ -18,9 +18,9 @@ class Sidebar extends Component
     public function mount()
     {
         $shop = Setting::find(1);
-        $this->openingTime = Verta::parse($shop->sales_date_start)->format('Y-m-d\TH:i:s'); // ISO 8601 format
-        $this->closingTime = Verta::parse($shop->sales_date_end)->format('Y-m-d\TH:i:s'); // ISO 8601 format
-        $this->now = Verta::now()->format('Y-m-d\TH:i:s'); // ISO 8601 format
+        $this->openingTime = Verta::parse($shop->sales_date_start)->datetime()->format('Y-m-d\TH:i:s'); // ISO 8601 format
+        $this->closingTime = Verta::parse($shop->sales_date_end)->datetime()->format('Y-m-d\TH:i:s'); // ISO 8601 format
+        $this->now = Verta::now()->datetime()->format('Y-m-d\TH:i:s'); // ISO 8601 format
     }
 
     public function logout()

@@ -48,8 +48,7 @@
                 const openingTime = new Date(@json($openingTime)).getTime();
                 const closingTime = new Date(@json($closingTime)).getTime();
                 function updateTimer() {
-                    const now = new Date(@json($now)).getTime();
-                    let targetTime, status;
+                    const now = new Date().getTime(); // زمان فعلی از مرورگر                    let targetTime, status;
 
                     if (now < openingTime) {
                         targetTime = openingTime;

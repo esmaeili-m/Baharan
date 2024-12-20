@@ -35,19 +35,17 @@ class Invoices extends Component
     {
         $invoices=Invoice::where('user_id',auth()->user()->id);
         if ($this->from || $this->to) {
-            // اگر فقط تاریخ شروع تعریف شده باشد
             if ($this->from) {
                 $fromDate = Verta::parse($this->from)->startDay()->toCarbon();
                 $invoices = $invoices->where('created_at', '>=', $fromDate);
             }
 
-            // اگر فقط تاریخ پایان تعریف شده باشد
             if ($this->to) {
                 $toDate = Verta::parse($this->to)->endDay()->toCarbon();
                 $invoices = $invoices->where('created_at', '<=', $toDate);
             }
 
-            // اگر هر دو تاریخ تعریف شده باشند
+
             if ($this->from && $this->to) {
                 $invoices = $invoices->whereBetween('created_at', [$fromDate, $toDate]);
             }

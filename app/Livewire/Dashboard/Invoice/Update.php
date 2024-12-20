@@ -19,7 +19,7 @@ class Update extends Component
         $this->date=$this->invoice->created_at->format('H:s:i Y-m-d');
         foreach ($this->invoice->products as $product) {
                 $this->count_product[$product['id']]=$product['order'];
-                $this->price[$product['id']]=$product['price'];
+                $this->price[$product['id']]=$product['price']*$product['order'];
                 $this->options[]=Product::find($product['id']);
         }
 

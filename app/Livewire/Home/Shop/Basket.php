@@ -57,14 +57,26 @@ class Basket extends Component
             }
             $this->products=\App\Models\Product::whereIn('id',$products_id ?? [])->get();
         }
-        $shop=Setting::find(1);
-        $startDate = Verta::parse($shop->sales_date_start);
-        $endDate = Verta::parse($shop->sales_date_end);
-        $diff = $startDate->diff($endDate);
-        $hours = $diff->h;
-        $minutes = $diff->i;
-        $formattedDiff = sprintf('%02d:%02d', $hours, $minutes);
-        $this->remainingTime=$formattedDiff;
+        $shop = Setting::find(1);
+        $currentTime = Verta::now()->timestamp; // زمان فعلی
+        $endDate = Verta::parse($shop->sales_date_end)->timestamp; // زمان پایان به صورت timestamp
+
+        $diffInSeconds = $endDate - $currentTime; // اختلاف زمان بر حسب ثانیه
+
+        if ($diffInSeconds > 0) {
+            $hours = floor($diffInSeconds / 3600); // ساعت‌های باقی‌مانده
+            $minutes = floor(($diffInSeconds % 3600) / 60); // دقیقه‌های باقی‌مانده
+
+            $formattedDiff = sprintf('%02d:%02d', $hours, $minutes); // فرمت ساعت:دقیقه
+        } else {
+            $formattedDiff = '00:00'; // اگر زمان به پایان رسیده باشد
+        }
+
+        $this->remainingTime = $formattedDiff;
+
+
+
+
     }
     public function updatedInvoice($value, $key)
     {
