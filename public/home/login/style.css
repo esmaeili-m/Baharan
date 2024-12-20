@@ -379,6 +379,7 @@ body {
     min-height: 720px;
     max-height: 720px;
     overflow-y: auto;
+    overflow-x: hidden;
     margin: 20px auto;
     padding: 10px 10px 10px 10px;
     background-color: #ecf0f3;
