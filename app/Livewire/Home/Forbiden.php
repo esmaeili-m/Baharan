@@ -6,9 +6,15 @@ use Livewire\Component;
 
 class Forbiden extends Component
 {
+    public $message;
+    public function mount($message=null)
+    {
+        if (request()->has('message')) {
+            $this->message = request()->message;
+        }
+    }
     public function render()
     {
-        dd('forbiden');
-        return view('livewire.home.forbiden');
+        return view('livewire.home.forbiden')->layout('layouts.home');
     }
 }

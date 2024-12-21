@@ -30,7 +30,15 @@ body {
     border-radius: 15px;
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
-
+.section-403{
+    max-width: 650px;
+    font-family: 'Iransanse', serif !important;
+    margin: 80px auto;
+    padding: 40px 30px 30px 30px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
 .logo {
     width: 150px;
     margin: 40px auto;
@@ -98,6 +106,16 @@ body {
 }
 
 .wrapper .btn {
+    box-shadow: none;
+    width: 100%;
+    height: 40px;
+    background-color: #03A9F4;
+    color: #fff;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    letter-spacing: 1.3px;
+}
+.section-403 .btn {
     box-shadow: none;
     width: 100%;
     height: 40px;

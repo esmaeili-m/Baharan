@@ -32,13 +32,13 @@ class Index extends Component
             $endDate = Verta::parse($shop->sales_date_end);
             $now = Verta::now();
             if (!($now->between($startDate, $endDate))) {
-                abort(403, 'زمان سفارش‌گیری به پایان رسیده است.');
+                return redirect()->route('forbiden.403',['message'=>'زمان سفارش‌گیری به پایان رسیده است']);
             }
         }else{
-            abort(403,'فروشگاه بسته می باشد');
+            return redirect()->route('forbiden.403',['message'=>'زمان سفارش‌گیری به پایان رسیده است']);
         }
         if (auth()->user()->status != 3) {
-            abort(403,'شما به این صفحه دسترسی ندارید');
+            return redirect()->route('forbiden.403',['message'=>'شما به این صفحه دسترسی ندارید']);
         }
         $this->has_invoice=Invoice::whereDate('created_at', Carbon::today())->where('user_id',auth()->user()->id)
             ->first();
