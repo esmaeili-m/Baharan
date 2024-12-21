@@ -125,7 +125,7 @@ class Login extends Component
             'address' => ['required'],
             'type' => ['required'],
             'license_number' => ['required'],
-            'avatar' => [ 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
+            'avatar' => [ 'nullable','image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
             'license_image' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
             'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone'],
         ], [
@@ -163,7 +163,9 @@ class Login extends Component
             'license_image.mimes' => 'فایل باید یکی از فرمت‌های jpg, jpeg, png باشد.',
             'license_image.max' => 'حداکثر حجم تصویر 2MB است.',
         ]);
-        $this->avatar=upload_file($this->avatar,'auth');
+        if ($this->avatar){
+            $this->avatar=upload_file($this->avatar,'auth');
+        }
         $this->license_image=upload_file($this->license_image,'auth');
         $this->user=User::create([
                 'name'=>$this->name,
@@ -200,8 +202,6 @@ class Login extends Component
             'address' => ['required'],
             'type' => ['required'],
             'license_number' => ['required'],
-            'avatar' => [ 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
-            'license_image' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
             'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone,'.$this->user->id],
         ], [
             'name.required' => 'این فیلد الزامی می باشد',
@@ -237,8 +237,25 @@ class Login extends Component
             'license_image.mimes' => 'فایل باید یکی از فرمت‌های jpg, jpeg, png باشد.',
             'license_image.max' => 'حداکثر حجم تصویر 2MB است.',
         ]);
-        $this->avatar=upload_file($this->avatar,'auth');
-        $this->license_image=upload_file($this->license_image,'auth');
+        $messages = [
+            'avatar.mimes' => 'فرمت تصویر پروفایل باید jpg، jpeg یا png باشد.',
+            'avatar.max' => 'حجم تصویر پروفایل نباید بیشتر از 2MB باشد.',
+            'license_image.mimes' => 'فرمت تصویر مجوز باید jpg، jpeg یا png باشد.',
+            'license_image.max' => 'حجم تصویر مجوز نباید بیشتر از 2MB باشد.',
+        ];
+        if ($this->avatar && $this->avatar instanceof \Illuminate\Http\UploadedFile) {
+            $this->validate([
+                'avatar' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048'],
+            ], $messages);
+            $avatar = upload_file($this->avatar, 'auth');
+        }
+
+        if ($this->license_image && $this->license_image instanceof \Illuminate\Http\UploadedFile) {
+            $this->validate([
+                'license_image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048'],
+            ], $messages);
+            $license_image = upload_file($this->license_image, 'auth');
+        }
         $this->user->update([
             'name'=>$this->name,
             'code_meli'=>$this->code_meli,
@@ -248,18 +265,29 @@ class Login extends Component
             'type'=>$this->type,
             'license_number'=>$this->license_number,
             'license_date'=>$this->license_years.'-'.$this->license_month.'-'.$this->license_day,
-            'license_image'=>$this->license_image,
+            'license_image'=>$license_image ?? $this->license_image,
             'status'=>1,
-            'avatar'=>$this->avatar,
+            'avatar'=>$avatar ?? $this->avatar,
             'phone'=>$this->phone,
         ]);
         $this->dispatch('alert',icon:'success',message:'اطالاعات شما با موفقیت برروزرسانی شد');
 
     }
 
+    public function checkFile()
+    {
+        function isImageFile($filePath) {
+            // بررسی کنید که فایل وجود داشته باشد
+            if (!file_exists($filePath)) {
+                return false;
+            }else{
+                return true;
+            }
+
+        }
+    }
     public function mount()
     {
-
         if (\session()->has('register')){
             $this->submit_information=1;
             if (auth()->check()){

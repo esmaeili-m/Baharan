@@ -316,8 +316,18 @@
 
                                 @if($license_image)
                                     <div class="w-sm-100">
-                                        <img alt="تصویر" class="avatar mb-3 mt-3 mx-2" src="{{asset($license_image)}}" width="120px"
-                                             height="120px">
+                                        @if(is_string($license_image))
+                                                <img alt="تصویر" class="avatar mb-3 mt-3 mx-2" src="{{asset($license_image)}}" width="120px"
+                                                     height="120px">
+
+                                        @else
+                                                @if ($license_image && Str::startsWith($license_image->getMimeType(), 'image/'))
+                                                    <img alt="تصویر" class="avatar mb-3 mt-3 mx-2" src="{{ $license_image->temporaryUrl() }}" width="120px" height="120px">
+
+                                                @endif
+                                            @endif
+
+
 
                                     </div>
                                 @endif
@@ -335,18 +345,26 @@
                                     <span class="w-100 btn custom-primary mt-3 mb-3">تصویر پروفایل کاربری خود را اپلود کنید</span>
                                 </label>
                                 @if($avatar)
-                                    <div class="w-sm-100">
+                                    @if(is_string($avatar))
                                         <img alt="تصویر" class="avatar mb-3 mt-3 mx-2" src="{{asset($avatar)}}" width="120px"
                                              height="120px">
+                                    @else
+                                        @if ($avatar && Str::startsWith($avatar->getMimeType(), 'image/'))
+                                            <img alt="تصویر" class="avatar mb-3 mt-3 mx-2" src="{{ $avatar->temporaryUrl() }}" width="120px" height="120px">
 
-                                    </div>
+                                        @endif
+
+                                    @endif
                                 @endif
 
 
+
                             </div>
+
                             @error('avatar')
                             <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
                             @enderror
+
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
                             <div class="label-input">

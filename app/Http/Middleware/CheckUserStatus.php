@@ -15,6 +15,9 @@ class CheckUserStatus
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!auth()->user() || auth()->user()->role_id == 1 || auth()->user()->status == 1) {
+            abort(403, 'شما اجازه دسترسی به این بخش را ندارید');
+        }
         return $next($request);
     }
 }
