@@ -14,6 +14,7 @@ class Update extends Component
 
     public function mount($id)
     {
+        $this->authorize('update-users');
         $this->user=User::find($id);
         $this->name=$this->user->name;
         $this->phone=$this->user->phone;
