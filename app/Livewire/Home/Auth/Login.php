@@ -89,6 +89,9 @@ class Login extends Component
                 list($this->license_years,$this->license_month,$this->license_day)=explode('-',$this->user->license_date);
                 \session()->put('register',$this->phone);
                 Auth::login($this->user);
+                if ($this->user->status == 3){
+                    return redirect()->route('profile.index');
+                }
             }
         }else{
             Session::flash('code', 'کد نامعتبر می باشد');
