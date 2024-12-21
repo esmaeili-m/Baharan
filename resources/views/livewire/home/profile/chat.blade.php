@@ -6,6 +6,7 @@
                 <div class="mt-2 p-2" style="border: 2px dashed #002aff;border-radius: 10px">
                     <div class="w-100 p-2 justify-content-center align-content-center" style="border-radius: 8px">
                         <button wire:click="new_chat()" style="border-radius: 8px;background-color: #8bb7f6;color: #FFFFFF" class="mb-3 w-100 btn-shadow btn btn-light-primary">
+                            <img width="30" height="30" src="{{asset('home/images/add_16765651.png')}}">
                             ایجاد پیام</button>
                         @foreach($chats ?? [] as $item)
                             <button wire:click="set_chat({{$item->id}})"
@@ -37,7 +38,11 @@
                             <button wire:click="save_chat()"
                                     style="border-radius: 8px;background-color: #8bb7f6;color: #FFFFFF"
                                     class="mb-3  c-shadow btn btn-light-primary">
-                                ثبت پیام</button>
+
+                                ثبت پیام
+                                <img width="30px" height="30px" src="{{asset('home/images/send_17486339.png')}}">
+
+                            </button>
                         </div>
                     </div>
                 </div>

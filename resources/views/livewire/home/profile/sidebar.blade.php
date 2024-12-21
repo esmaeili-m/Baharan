@@ -8,6 +8,7 @@
 
             <div style="direction: ltr" class="countdown">
                 <div style="color: #FFFFFF"  class="time clock-time-card" id="countdown">
+
                     <div class="d-none">
                         <span style="color: #FFFFFF" id="days">00</span>
                         <span  style="color: #FFFFFF" >روز</span>
@@ -24,6 +25,10 @@
                         <span style="color: #FFFFFF" id="seconds">00</span>
                         <span  style="color: #FFFFFF" >ثانیه</span>
                     </div>
+                    <div class="">
+                        <img width="80" height="80" src="{{asset('home/images/alarm-clock.png')}}">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,13 +38,38 @@
                     class="mb-3 w-100 c-shadow btn btn-light-primary"> {{auth()->user()->name}}</button>
         <div class="mt-2 ">
             <div class="w-100 p-2 justify-content-center align-content-center" style="border-radius: 8px">
-                <button @click="$dispatch('change-content', { status: '1' })" style="border-radius: 8px"  class="mb-3 w-100 c-shadow btn btn-light-primary">پروفایل کاربری</button>
+                <button @click="$dispatch('change-content', { status: '1' })"
+                        class="align-center-btn mb-3 w-100 c-shadow btn btn-light-primary">
+                    <img width="40px" height="40px" src="{{asset('home/images/attach_4774602.png')}}">
+                    پروفایل کاربری
+                </button>
+
                 @if(auth()->user()->status == 3)
-                    <button @click="$dispatch('change-content', { status: '2' })" style="border-radius: 8px"  class="mb-3 w-100 c-shadow btn btn-light-primary">فروشگاه</button>
-                    <button @click="$dispatch('change-content', { status: '3' })" style="border-radius: 8px"  class="mb-3 w-100 c-shadow btn btn-light-primary">سفارشات</button>
+                    <button @click="$dispatch('change-content', { status: '2' })"
+                            class="align-center-btn mb-3 w-100 c-shadow btn btn-light-primary">
+                        <img width="40px" height="40px" src="{{asset('home/images/delete-cart_5451616.png')}}">
+                        فروشگاه
+                    </button>
+                    <button @click="$dispatch('change-content', { status: '3' })"
+                            class="align-center-btn mb-3 w-100 c-shadow btn btn-light-primary">
+                        <img width="40px" height="40px" src="{{asset('home/images/bill_5451602.png')}}">
+                        سفارشات
+                    </button>
                 @endif
-                <button @click="$dispatch('change-content', { status: '4' })" style="border-radius: 8px"  class="mb-3 w-100 c-shadow btn btn-light-primary">ارتباط با پشتیبانی</button>
-                <button wire:click="logout()" style="border-radius: 8px;background-color: #f68b8b;color: #FFFFFF" class="mb-3 w-100 c-shadow btn btn-light-primary">خروج</button>
+
+                <button @click="$dispatch('change-content', { status: '4' })"
+                        class="align-center-btn mb-3 w-100 c-shadow btn btn-light-primary">
+                    <img width="40px" height="40px" src="{{asset('home/images/customer-support_5340006.png')}}">
+                    ارتباط با پشتیبانی
+                </button>
+
+                <button wire:click="logout()"
+                        class="align-center-btn mb-3 w-100 c-shadow btn btn-light-primary"
+                        style="background-color: #f68b8b; color: #FFFFFF;">
+                    <img width="40px" height="40px" src="{{asset('home/images/login_4790908.png')}}">
+                    خروج
+                </button>
+
             </div>
         </div>
     </div>

@@ -45,7 +45,7 @@ class Index extends Component
         }
         if ($this->status == 4){
             $invoice = $invoice->where('status', 2);
-            if ($this->selectedUser && !($this->selectedUser['all'] ?? 'false') == 'all'){
+            if ($this->selectedUser && !array_key_exists('all',array_filter($this->selectedUser))){
                 $this->invoice=$invoice->whereIn('user_id', array_keys(array_filter($this->selectedUser)))->get();
             }else{
                 $this->invoice=$invoice->get();
@@ -73,7 +73,7 @@ class Index extends Component
         }elseif ($this->status == 1){
             $this->invoice=$invoice->get();
         }elseif($this->status == 2){
-            if ($this->selectedProduct && !($this->selectedProduct['all'] ?? 'false') == 'all'){
+            if ($this->selectedProduct && !array_key_exists('all',array_filter($this->selectedProduct))){
                 $products=Product::whereIn('id', array_keys(array_filter($this->selectedProduct)))->pluck('id')->toArray();
             }else{
                 $products=Product::withTrashed()->pluck('id')->toArray();

@@ -1,7 +1,9 @@
 <div>
     @if($submit_information)
+        <livewire:home.profile.header />
+
         <div class="form-container">
-            <div class=" wrapper-register" style="direction: rtl">
+            <div class=" wrapper-register" style="direction: rtl;margin: 60px auto">
                 <div class="text-center mb-5">
                     <span class=" btn custom-primary mt-3 mb-3 w-lg-40 w-sm-100 h-sm-50" >شرکت کشتارگاه های طیور متحد زرین قم</span>
                 </div>
