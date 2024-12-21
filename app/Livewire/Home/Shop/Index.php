@@ -18,9 +18,15 @@ class Index extends Component
     {
         $this->edit=1;
     }
+    public $openingTime,$closingTime,$now;
+
+
     public function mount()
     {
-        $shop=Setting::find(1);
+        $shop = Setting::find(1);
+        $this->openingTime = Verta::parse($shop->sales_date_start)->datetime()->format('Y-m-d\TH:i:s'); // ISO 8601 format
+        $this->closingTime = Verta::parse($shop->sales_date_end)->datetime()->format('Y-m-d\TH:i:s'); // ISO 8601 format
+        $this->now = Verta::now()->datetime()->format('Y-m-d\TH:i:s');
         if ($shop && $shop->status == 2) {
             $startDate = Verta::parse($shop->sales_date_start);
             $endDate = Verta::parse($shop->sales_date_end);
