@@ -69,6 +69,11 @@ class Trash extends Component
         }
     }
 
+    public function mount()
+    {
+        $this->authorize('trash-users');
+
+    }
     public function reset_search()
     {
         $this->reset(['name','phone','role_id','status','code_meli']);
