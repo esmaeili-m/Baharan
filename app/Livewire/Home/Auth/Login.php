@@ -110,9 +110,9 @@ class Login extends Component
     public function register_user()
     {
         $this->validate([
-            'name' => ['required'],
-            'code_meli' => ['required','size:10','unique:users,code_meli'],
-            'father' => ['required'],
+            'name' => ['required','regex:/^[\pL\s]+$/u'],
+            'code_meli' => ['required', 'size:10', 'unique:users,code_meli', 'regex:/^\d{10}$/'],
+            'father' => ['required','regex:/^[\pL\s]+$/u'],
             'day' => ['required','not_in:0' ],
             'month' => ['required','not_in:0' ],
             'years' => ['required','not_in:0' ],
@@ -122,15 +122,17 @@ class Login extends Component
             'address' => ['required'],
             'type' => ['required'],
             'license_number' => ['required'],
-            'license_image' => ['required'],
+            'avatar' => [ 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
+            'license_image' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
             'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone'],
         ], [
             'name.required' => 'این فیلد الزامی می باشد',
+            'name.regex' => 'فقط از حروف می توانید استفاده کنید',
+            'father.regex' => 'فقط از حروف می توانید استفاده کنید',
             'license_number.required' => 'این فیلد الزامی می باشد',
             'day.required' => 'این فیلد الزامی می باشد',
             'month.required' => 'این فیلد الزامی می باشد',
             'type.required' => 'این فیلد الزامی می باشد',
-            'license_image.required' => 'این فیلد الزامی می باشد',
             'years.required' => 'این فیلد الزامی می باشد',
             'license_day.required' => 'این فیلد الزامی می باشد',
             'license_month.required' => 'این فیلد الزامی می باشد',
@@ -149,7 +151,17 @@ class Login extends Component
             'phone.unique'=>'این شماره همراه استفاده شده است لطفا شماره همراه دیگری را وارد کنید',
             'code_meli.unique'=>'این کد ملی استفاده شده است',
             'code_meli.size'=>'کد ملی نامعتبر می باشد',
+            'code_meli.regex'=>'کد ملی نامعتبر می باشد',
+            'avatar.image' => 'فایل بارگذاری شده باید یک تصویر باشد.',
+            'avatar.mimes' => 'فایل باید یکی از فرمت‌های jpg, jpeg, png باشد.',
+            'avatar.max' => 'حداکثر حجم تصویر 2MB است.',
+            'license_image.required' => 'لطفاً تصویر پروفایل را بارگذاری کنید.',
+            'license_image.image' => 'فایل بارگذاری شده باید یک تصویر باشد.',
+            'license_image.mimes' => 'فایل باید یکی از فرمت‌های jpg, jpeg, png باشد.',
+            'license_image.max' => 'حداکثر حجم تصویر 2MB است.',
         ]);
+        $this->avatar=upload_file($this->avatar,'auth');
+        $this->license_image=upload_file($this->license_image,'auth');
         $this->user=User::create([
                 'name'=>$this->name,
                 'code_meli'=>$this->code_meli,
@@ -173,9 +185,9 @@ class Login extends Component
     public function user_update()
     {
         $this->validate([
-            'name' => ['required'],
-            'code_meli' => ['required','size:10','unique:users,code_meli,'.$this->user->id],
-            'father' => ['required'],
+            'name' => ['required','regex:/^[\pL\s]+$/u'],
+            'code_meli' => ['required','size:10', 'regex:/^\d{10}$/','unique:users,code_meli,'.$this->user->id],
+            'father' => ['required','regex:/^[\pL\s]+$/u'],
             'day' => ['required','not_in:0' ],
             'month' => ['required','not_in:0' ],
             'years' => ['required','not_in:0' ],
@@ -185,9 +197,13 @@ class Login extends Component
             'address' => ['required'],
             'type' => ['required'],
             'license_number' => ['required'],
+            'avatar' => [ 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
+            'license_image' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // حداکثر حجم 2MB
             'phone' => ['required', 'regex:/^0[0-9]{10}$/','unique:users,phone,'.$this->user->id],
         ], [
             'name.required' => 'این فیلد الزامی می باشد',
+            'name.regex' => 'فقط از حروف می توانید استفاده کنید',
+            'father.regex' => 'فقط از حروف می توانید استفاده کنید',
             'day.required' => 'این فیلد الزامی می باشد',
             'month.required' => 'این فیلد الزامی می باشد',
             'type.required' => 'این فیلد الزامی می باشد',
@@ -209,7 +225,17 @@ class Login extends Component
             'phone.unique'=>'این شماره همراه استفاده شده است لطفا شماره همراه دیگری را وارد کنید',
             'code_meli.unique'=>'این کد ملی استفاده شده است',
             'code_meli.size'=>'کد ملی نامعتبر می باشد',
+            'code_meli.regex'=>'کد ملی نامعتبر می باشد',
+            'avatar.image' => 'فایل بارگذاری شده باید یک تصویر باشد.',
+            'avatar.mimes' => 'فایل باید یکی از فرمت‌های jpg, jpeg, png باشد.',
+            'avatar.max' => 'حداکثر حجم تصویر 2MB است.',
+            'license_image.required' => 'لطفاً تصویر پروفایل را بارگذاری کنید.',
+            'license_image.image' => 'فایل بارگذاری شده باید یک تصویر باشد.',
+            'license_image.mimes' => 'فایل باید یکی از فرمت‌های jpg, jpeg, png باشد.',
+            'license_image.max' => 'حداکثر حجم تصویر 2MB است.',
         ]);
+        $this->avatar=upload_file($this->avatar,'auth');
+        $this->license_image=upload_file($this->license_image,'auth');
         $this->user->update([
             'name'=>$this->name,
             'code_meli'=>$this->code_meli,
@@ -226,16 +252,6 @@ class Login extends Component
         ]);
         $this->dispatch('alert',icon:'success',message:'اطالاعات شما با موفقیت برروزرسانی شد');
 
-    }
-    public function UpdatedAvatar()
-    {
-        $this->avatar=upload_file($this->avatar,'auth');
-
-    }
-    public function UpdatedLicenseImage()
-    {
-
-        $this->license_image=upload_file($this->license_image,'auth');
     }
 
     public function mount()

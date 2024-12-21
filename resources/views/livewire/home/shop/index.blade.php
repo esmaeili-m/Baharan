@@ -96,7 +96,7 @@
                         targetTime = null;
                         status = "زمان سفارش گیری به پایان رسیده است";
                         window.location.href = '/home/shop';
-                        
+
                     }
 
                     if (targetTime) {

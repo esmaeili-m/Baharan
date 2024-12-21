@@ -195,7 +195,7 @@
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="years" id="customSelect">
                                             <option value="0" selected>سال تولد</option>
-                                            @for($i=1300;$i<1404;$i++)
+                                            @for($i=1300;$i<verta()->year-17;$i++)
                                                 <option value="{{$i}}">{{$i}}</option>
                                             @endfor
                                         </select>
@@ -270,7 +270,7 @@
                                     <div class="col-lg-3 col-sm-12 mb-3 mt-3 me-3">
                                         <select class="form-select no-arrow" wire:model.lazy="license_years" id="customSelect">
                                             <option value="0" selected>سال صدور</option>
-                                            @for($i=1300;$i<1404;$i++)
+                                            @for($i=1300;$i<=verta()->year;$i++)
                                                 <option>{{$i}}</option>
                                             @endfor
                                         </select>
@@ -316,28 +316,37 @@
 
                                 @if($license_image)
                                     <div class="w-sm-100">
-                                        <img class="avatar mb-3 mt-3 mx-2" src="{{asset($license_image)}}" width="120px"
+                                        <img alt="تصویر" class="avatar mb-3 mt-3 mx-2" src="{{asset($license_image)}}" width="120px"
                                              height="120px">
 
                                     </div>
                                 @endif
-                            </div>
 
+
+                            </div>
+                            @error('license_image')
+                            <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
                             <div class="form-field d-lg-flex align-items-center ">
                                 <input id="image-file" type="file" wire:model.lazy="avatar" class="d-none" placeholder="">
                                 <label wire:model.lazy="avatar" id="image-label" for="image-file">
-                                    <span class="w-100 btn custom-primary mt-3 mb-3">تصویر خود را اپلود کنید</span>
+                                    <span class="w-100 btn custom-primary mt-3 mb-3">تصویر پروفایل کاربری خود را اپلود کنید</span>
                                 </label>
                                 @if($avatar)
                                     <div class="w-sm-100">
-                                        <img class="avatar mb-3 mt-3 mx-2" src="{{asset($avatar)}}" width="120px"
+                                        <img alt="تصویر" class="avatar mb-3 mt-3 mx-2" src="{{asset($avatar)}}" width="120px"
                                              height="120px">
 
                                     </div>
                                 @endif
+
+
                             </div>
+                            @error('avatar')
+                            <p style="font-size: 12px" class="me-2 text-danger">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="col-lg-6 col-sm-12 mb-4">
                             <div class="label-input">

@@ -39,5 +39,8 @@ Route::post('/chat/create',[\App\Http\Controllers\ChatController::class,'create'
 Route::post('/chat/create_message',[\App\Http\Controllers\ChatController::class,'create_message'])->middleware('check_token');
 Route::post('/chat/messages',[\App\Http\Controllers\ChatController::class,'messages'])->middleware('check_token');
 Route::get('/chat/chats',[\App\Http\Controllers\ChatController::class,'chats'])->middleware('check_token');
+//------------------------------------->Setting
+
+Route::get('/setting',[\App\Http\Controllers\ChatController::class,'setting'])->middleware('check_token');
 
 

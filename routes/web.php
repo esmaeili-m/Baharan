@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',\App\Livewire\Home\Auth\Login::class)->name('user.login');
+Route::get('/forbiden/403',\App\Livewire\Home\Forbiden::class)->name('forbiden.403');
 
 Route::prefix('home')->group(function (){
     Route::post('home/get_code',[\App\Http\Controllers\LoginController::class,'get_code'])->name('get_code');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use App\Models\Message;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,6 +39,14 @@ class ChatController extends Controller
     public function chats(Request $request)
     {
         $data=Chat::where('user_id',$request->user->id)->get();
+        return response()->json([
+            'message' => 'successfully',
+            'data' => $data,
+        ], 200);
+    }
+    public function setting()
+    {
+        $data=Setting::first();
         return response()->json([
             'message' => 'successfully',
             'data' => $data,
