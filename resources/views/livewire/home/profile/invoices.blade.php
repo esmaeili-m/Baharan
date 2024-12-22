@@ -42,7 +42,7 @@
                     <tr>
                         <td style="font-size: 15px" class="text-center align-middle">{{$counter}}</td>
                         <td class="text-center align-middle">
-                            <img style="border-radius: 5px;box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;" width="100px" height="60px" src="{{$product['image'] ?? '/home/images/category.jpg'}}">
+                            <img style="border-radius: 5px;box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;" width="100px" height="60px" src="{{asset($product['image'] ?? '/home/images/category.jpg')}}">
                         </td>
                         <td class="text-center align-middle">
                             <p style="font-size: 15px" class="mb-0">{{$product['name']}}</p>
