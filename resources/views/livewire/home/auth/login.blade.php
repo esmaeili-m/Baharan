@@ -433,7 +433,7 @@
                      alt="">
             </div>
             <div class="text-center mt-3 name mb-4">
-                <p>فرم ثبت نام</p>
+                <p>فرم ورود</p>
             </div>
             @if($status)
                 <div>
