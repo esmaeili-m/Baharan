@@ -25,12 +25,11 @@
 
             <div class="row w-100 mobile-margin">
                 <div class="col-lg-3  col-sm-12">
-                    <div class="sidebar-profile main-card p-3">
-                        <button style="border-radius: 8px;background-color: #93ba59;color: #FFFFFF"
-                                class="mb-3 w-100 c-shadow btn btn-light-primary" id="countdown2"> زمانی باقی مانده تا شروع سفارش گیری</button>
 
-                        <div style="direction: ltr" class="countdown">
-                            <div style="color: #FFFFFF"  class="time clock-time-card" id="countdown">
+
+                        <div style="direction: ltr" class="countdown clock-time-card">
+                            <p style="color: #FFFFFF" id="countdown2" > زمانی باقی مانده تا شروع سفارش گیری</p>
+                            <div style="color: #FFFFFF"  class="time " id="countdown">
 
                                 <div class="d-none">
                                     <span style="color: #FFFFFF" id="days">00</span>
@@ -48,13 +47,12 @@
                                     <span style="color: #FFFFFF" id="seconds">00</span>
                                     <span  style="color: #FFFFFF" >ثانیه</span>
                                 </div>
-                                <div class="">
-                                    <img width="80" height="80" src="{{asset('home/images/alarm-clock.png')}}">
+{{--                                <div class="">--}}
+{{--                                    <img width="80" height="80" src="{{asset('home/images/alarm-clock.png')}}">--}}
 
-                                </div>
+{{--                                </div>--}}
                             </div>
                         </div>
-                    </div>
 
 {{--                    <div class="sidebar-profile d-flex" >--}}
 

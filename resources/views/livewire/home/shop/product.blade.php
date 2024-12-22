@@ -1,8 +1,11 @@
 <div class="shop-category" >
 
+    <button style="border-radius: 8px;background: linear-gradient(to right, #0099cc, #0057b7);color: #FFFFFF" class="mb-3 w-100 c-shadow btn btn-light-primary" > انتخاب محصول </button>
 
     @if($category)
+
         <div class="text-center">
+
             <span class="category-product card-product-title">{{$category->title}}</span>
         </div>
         <div class="row mt-3 products-wrapper">

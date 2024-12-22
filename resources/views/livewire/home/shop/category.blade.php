@@ -1,7 +1,9 @@
 <div>
+
     <div class="sidebar-category " >
-        @foreach($categories ?? [] as $category)
-            <div class="card-category mb-2 me-2">
+
+    @foreach($categories ?? [] as $category)
+            <div class="card-category mb-2 " wire:key="category-{{$category->id}}">
                 <img class="w-100 category-image" src="{{asset($category->image ?? '/home/images/category.jpg')}}" title="{{$category->title}}" alt="{{$category->title}}">
                 <div class="card-category-content">
                     <div class="d-md-flex mb-2">

@@ -727,7 +727,9 @@ body {
        /*height: 60px;*/
        font-size: 13px;
    }
-
+.w-sm-50{
+    width: 50%;
+}
     .custom-card {
         text-align: center;
     }
