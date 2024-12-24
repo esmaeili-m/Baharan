@@ -48,7 +48,7 @@ class InvoicesExport implements  FromCollection, WithHeadings, WithStyles,WithEv
                             'product' => $products['name'],
                             'order' => $products['order'],
                             'type' => $type[$products['type'] ?? 1],
-                            'price' => $invoice->price,
+                            'price' => $products['price'] * $products['order'],
                             'status' => $this->getStatusText($invoice->status),
                             'order_date' => verta($invoice->created_at)->format('Y-m-d H:i:s'),
                         ];
@@ -63,7 +63,7 @@ class InvoicesExport implements  FromCollection, WithHeadings, WithStyles,WithEv
                             'product' => $products['name'],
                             'order' => $products['order'],
                             'type' => $type[$products['type'] ?? 1],
-                            'price' => $invoice->price,
+                            'price' => $products['price'] * $products['order'],
                             'status' => $this->getStatusText($invoice->status),
                             'order_date' => verta($invoice->created_at)->format('Y-m-d H:i:s'),
                             'address' => $user->address,
