@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -32,17 +33,16 @@ class Login extends Component
             'Content-Type' => 'application/json',
             'Cookie' => 'ASP.NET_SessionId=2qmo5itwkocpuw2i2utadqd0; SEP01edab9f=017cb00b00b7a5f03d97258d4208398b390c9d35ec9afc833b40fcdc2e4cba452a7b91e00d1ad5fae10351182ef0a3b612954ece596d96ac0313fb333a80af0416520c4320'
         ];
-        $body = '{
-          "action": "token",
-          "TerminalId": "14615539",
-          "Amount": 12000,
-          "ResNum": '."$tr_code".',
-          "RedirectUrl": "https://mottahedzarrin.ir/home/receipt",
-          "CellNumber": "09193544391"
-        }';
+        $body = json_encode([
+            "action" => "token",
+            "TerminalId" => "14615539",
+            "Amount" => 12000,
+            "ResNum" => $tr_code,
+            "RedirectUrl" => "https://mottahedzarrin.ir/home/receipt",
+            "CellNumber" => \auth()->user()->phone
+        ]);
         $request = new Request('POST', 'https://sep.shaparak.ir/onlinepg/onlinepg', $headers, $body);
         $res = $client->sendAsync($request)->wait();
-
         $response = json_decode($res->getBody()->getContents(), true);
         $token = $response->token;
         $getMethod = '';
