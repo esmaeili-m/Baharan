@@ -3,12 +3,14 @@
 namespace App\Livewire\Home\Auth;
 
 use App\Models\Code;
+use App\Models\Transaction;
 use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -20,6 +22,11 @@ class Login extends Component
 //href="{{route('profile.index')}}"
     public function cost()
     {
+        $tr_code=$this->generate_tr_code();
+        Transaction::create([
+            'user_id'=>\auth()->user()->id,
+            'tr_code'=>$tr_code,
+        ]);
         $client = new Client();
         $headers = [
             'Content-Type' => 'application/json',
@@ -29,15 +36,25 @@ class Login extends Component
           "action": "token",
           "TerminalId": "14615539",
           "Amount": 12000,
-          "ResNum": "1qaz@WSX",
+          "ResNum": '."$tr_code".',
           "RedirectUrl": "https://mottahedzarrin.ir/home/receipt",
           "CellNumber": "09193544391"
         }';
         $request = new Request('POST', 'https://sep.shaparak.ir/onlinepg/onlinepg', $headers, $body);
         $res = $client->sendAsync($request)->wait();
 
-        dd($res->getBody());
-        echo $res->getBody();
+        $response = json_decode($res->getBody()->getContents(), true);
+        $token = $response->token;
+        $getMethod = '';
+        return view('payment.redirect', compact('token', 'getMethod'));
+    }
+    public function generate_tr_code()
+    {
+        do {
+            $trCode = rand(10000, 99999).Str::random(6);
+            $exists = Transaction::where('tr_code', $trCode)->exists();
+        } while ($exists);
+        return $trCode;
     }
     public function get_code()
     {
