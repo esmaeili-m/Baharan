@@ -4,6 +4,8 @@ namespace App\Livewire\Home\Auth;
 
 use App\Models\Code;
 use App\Models\User;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -15,6 +17,26 @@ class Login extends Component
     use WithFileUploads;
     public $phone,$status,$code,$submit_information,$name,$email,$code_meli,$avatar,$user,$father,
         $day,$month,$years,$license_day,$license_month,$license_years,$address,$type,$license_number,$license_image;
+//href="{{route('profile.index')}}"
+    public function cost()
+    {
+        $client = new Client();
+        $headers = [
+            'Content-Type' => 'application/json'
+        ];
+        $body = '{
+          "action": "token",
+          "TerminalId": "14615539",
+          "Amount": 12000,
+          "ResNum": "1qaz@WSX",
+          "RedirectUrl": "mottahedzarrin.ir/home/receipt",
+          "CellNumber": "09193544391"
+        }';
+        $request = new Request('POST', 'https://sep.shaparak.ir/onlinepg/onlinepg', $headers, $body);
+        $res = $client->sendAsync($request)->wait();
+        dd($res);
+//        echo $res->getBody();
+    }
     public function get_code()
     {
         $this->validate([

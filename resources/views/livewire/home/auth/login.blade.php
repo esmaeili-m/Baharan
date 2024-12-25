@@ -38,7 +38,7 @@
                         <div class="d-flex  justify-content-center align-content-center mt-5">
                                <a href="{{route('profile.index')}}" class="btn mx-2 btn-custom-primary" style="font-size: 15px">پروفایل کاربری</a>
                             @if($user->status == 2)
-                                <a href="{{route('profile.index')}}" class="btn mx-2 btn-custom-primary" style="font-size: 15px"> تایید و پرداخت وجه ضمانت</a>
+                                <a wire:click="cost()" class="btn mx-2 btn-custom-primary" style="font-size: 15px"> تایید و پرداخت وجه ضمانت</a>
                             @endif
                         </div>
                     </div>

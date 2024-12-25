@@ -282,7 +282,7 @@
                                     <select wire:model.defer="status">
                                         <option value="" disabled selected>گزینه خود را انتخاب کنید</option>
                                         <option value="1">عدم تایید</option>
-                                        <option value="2">درانتضار تایید نهایی</option>
+                                        <option value="2">دردرانتظار تایید نهایی</option>
                                         <option value="3">تایید شده</option>
                                     </select>
                                 </div>
