@@ -20,7 +20,7 @@ class Login extends Component
     use WithFileUploads;
     public $phone,$status,$code,$submit_information,$name,$email,$code_meli,$avatar,$user,$father,
         $day,$month,$years,$license_day,$license_month,$license_years,$address,$type,$license_number,$license_image;
-//href="{{route('profile.index')}}"
+    //href="{{route('profile.index')}}"
     public function cost()
     {
         $tr_code=$this->generate_tr_code();
@@ -48,7 +48,8 @@ class Login extends Component
         $response = json_decode($res->getBody()->getContents(), true);
         $token = $response['token'];
         $getMethod = '';
-        return view('redirect', compact('token', 'getMethod'));    }
+        return redirect()->route('redirect',['token'=>$token,'method'=>$getMethod]);
+    }
     public function generate_tr_code()
     {
         do {
