@@ -9,7 +9,7 @@ class Redirect extends Component
     public $token;
     public $getMethod;
 
-    public function mount($token, $getMethod)
+    public function mount($token=null, $getMethod=null)
     {
         $this->token = $token;
         $this->getMethod = $getMethod;
