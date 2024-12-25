@@ -48,8 +48,7 @@ class Login extends Component
         $response = json_decode($res->getBody()->getContents(), true);
         $token = $response['token'];
         $getMethod = '';
-        return view('livewire.home.redirect', compact('token', 'getMethod'));
-    }
+        return view('livewire.home.redirect', compact('token', 'getMethod'));    }
     public function generate_tr_code()
     {
         do {
