@@ -46,7 +46,7 @@ class Login extends Component
         $request = new Request('POST', 'https://sep.shaparak.ir/onlinepg/onlinepg', $headers, $body);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody()->getContents(), true);
-        $token = $response->token;
+        $token = $response['token'];
         $getMethod = '';
         return view('payment.redirect', compact('token', 'getMethod'));
     }
