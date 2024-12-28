@@ -173,6 +173,7 @@ class AuthOtpController extends Controller
                 $user->update([
                     'status'=>3,
                 ]);
+                auth()->login($user);
                 return redirect()->route('profile.index',['token',$token]);
             }
         }else{

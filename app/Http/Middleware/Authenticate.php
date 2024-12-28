@@ -12,9 +12,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        if (\request()->has('token')){
-            session()->put('token', \request()->token);
-        }
+
         return $request->expectsJson() ? null : route('user.login');
     }
 }
