@@ -347,8 +347,8 @@ class Login extends Component
     public function mount()
     {
         $user=null;
-        if (\request()->has('token')){
-            $user=Transaction::where('token',\request()->token)->latest()->first();
+        if (\session()->has('token')){
+            $user=Transaction::where('token',\session()->get('token'))->latest()->first();
             if ($user){
                 $this->user=User::find($user->user_id);
                 auth()->login($this->user);
