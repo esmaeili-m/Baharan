@@ -346,6 +346,7 @@ class Login extends Component
     }
     public function mount()
     {
+        $user=null;
         if (\request()->has('token')){
             $user=Transaction::where('token',\request()->token)->latest()->first();
             if ($user){
