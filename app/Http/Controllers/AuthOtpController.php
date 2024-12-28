@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Code;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -157,6 +158,26 @@ class AuthOtpController extends Controller
 
     }
     public function receipt(Request $request){
+        $status=$request->State ?? 'NO';
+        $token=null;
+        if ($status == 'OK'){
+            $token=$request->Token;
+            $transaction=Transaction::where('Token',$token)->latest()->first();
+            if ($transaction){
+                $user=User::find($transaction->user_id);
+
+                $transaction->update([
+                   'status'=>1,
+                   'description'=>$request->all(),
+                ]);
+                $user->update([
+                    'status'=>3,
+                ]);
+                return redirect()->route('profile.index');
+            }
+        }else{
+            return redirect()->route('forbiden.403',['message'=>'تراکنش ناموفق با بخش مدیریت تماس بگیرید']);
+        }
         Log::info($request->all());
     }
 }

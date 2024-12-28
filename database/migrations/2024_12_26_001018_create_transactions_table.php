@@ -16,6 +16,8 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->string('tr_code');
             $table->string('token')->nullable();
+            $table->boolean('status')->default(0);
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

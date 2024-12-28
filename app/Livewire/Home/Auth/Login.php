@@ -23,32 +23,47 @@ class Login extends Component
     //href="{{route('profile.index')}}"
     public function cost()
     {
-        $tr_code=$this->generate_tr_code();
-        Transaction::create([
-            'user_id'=>\auth()->user()->id,
-            'tr_code'=>$tr_code,
-        ]);
-        $client = new Client();
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Cookie' => 'ASP.NET_SessionId=2qmo5itwkocpuw2i2utadqd0; SEP01edab9f=017cb00b00b7a5f03d97258d4208398b390c9d35ec9afc833b40fcdc2e4cba452a7b91e00d1ad5fae10351182ef0a3b612954ece596d96ac0313fb333a80af0416520c4320'
-        ];
-        $dynamicResNum =$tr_code; // مقدار پویا برای ResNum
-        $dynamicCellNumber = \auth()->user()->phone; // مقدار پویا برای CellNumber
-        $body = json_encode([
-            "action" => "token",
-            "TerminalId" => "14615539",
-            "Amount" => 12000,
-            "ResNum" => $dynamicResNum,
-            "RedirectUrl" => "https://mottahedzarrin.ir/home/receipt",
-            "CellNumber" => $dynamicCellNumber
-        ]);
-        $request = new Request('POST', 'https://sep.shaparak.ir/onlinepg/onlinepg', $headers, $body);
-        $res = $client->sendAsync($request)->wait();
-        $response = json_decode($res->getBody()->getContents(), true);
-        $token = $response['token'];
-        $getMethod = '';
-        return redirect()->route('redirect',['token'=>$token,'method'=>$getMethod]);
+        if (\auth()->user()->status == 2){
+            $tr_code=$this->generate_tr_code();
+            $client = new Client();
+            $headers = [
+                'Content-Type' => 'application/json',
+                'Cookie' => 'ASP.NET_SessionId=2qmo5itwkocpuw2i2utadqd0; SEP01edab9f=017cb00b00b7a5f03d97258d4208398b390c9d35ec9afc833b40fcdc2e4cba452a7b91e00d1ad5fae10351182ef0a3b612954ece596d96ac0313fb333a80af0416520c4320'
+            ];
+            $dynamicResNum =$tr_code; // مقدار پویا برای ResNum
+            $dynamicCellNumber = \auth()->user()->phone; // مقدار پویا برای CellNumber
+            $body = json_encode([
+                "action" => "token",
+                "TerminalId" => "14615539",
+                "Amount" => 12000,
+                "ResNum" => $dynamicResNum,
+                "RedirectUrl" => "https://mottahedzarrin.ir/home/receipt",
+                "CellNumber" => $dynamicCellNumber
+            ]);
+            $request = new Request('POST', 'https://sep.shaparak.ir/onlinepg/onlinepg', $headers, $body);
+            $res = $client->sendAsync($request)->wait();
+            $response = json_decode($res->getBody()->getContents(), true);
+            $token = $response['token'] ?? 0;
+
+            if ($token){
+                Transaction::create([
+                    'user_id'=>\auth()->user()->id,
+                    'tr_code'=>$tr_code,
+                    'token'=>$token,
+                ]);
+                $getMethod = '';
+                return redirect()->route('redirect',['token'=>$token,'method'=>$getMethod]);
+            }else{
+                return redirect()->route('forbiden.403',['message'=>'تراکنش ناموفق با بخش مدیریت تماس بگیرید']);
+
+            }
+
+        }else{
+            return redirect()->route('profile.index');
+
+        }
+
+
     }
     public function generate_tr_code()
     {
