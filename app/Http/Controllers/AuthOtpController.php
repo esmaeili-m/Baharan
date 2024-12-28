@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Code;
 use App\Models\Transaction;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -180,5 +181,76 @@ class AuthOtpController extends Controller
             return redirect()->route('forbiden.403',['message'=>'تراکنش ناموفق با بخش مدیریت تماس بگیرید']);
         }
         Log::info($request->all());
+    }
+
+    public function cost(Request $request)
+    {
+        $this->validate($request,
+            [
+                'user' => ['required'],
+
+            ]);
+        $user=User::find($request->user);
+        if (($user->status ?? 0) == 2){
+            $tr_code=$this->generate_tr_code();
+            $client = new Client();
+            $headers = [
+                'Content-Type' => 'application/json',
+                'Cookie' => 'ASP.NET_SessionId=2qmo5itwkocpuw2i2utadqd0; SEP01edab9f=017cb00b00b7a5f03d97258d4208398b390c9d35ec9afc833b40fcdc2e4cba452a7b91e00d1ad5fae10351182ef0a3b612954ece596d96ac0313fb333a80af0416520c4320'
+            ];
+            $dynamicResNum =$tr_code; // مقدار پویا برای ResNum
+            $dynamicCellNumber = $user->phone; // مقدار پویا برای CellNumber
+            $body = json_encode([
+                "action" => "token",
+                "TerminalId" => "14615539",
+                "Amount" => 12000,
+                "ResNum" => $dynamicResNum,
+                "RedirectUrl" => "https://mottahedzarrin.ir/home/receipt",
+                "CellNumber" => $dynamicCellNumber
+            ]);
+            $request = new \GuzzleHttp\Psr7\Request('POST', 'https://sep.shaparak.ir/onlinepg/onlinepg', $headers, $body);
+            $res = $client->sendAsync($request)->wait();
+            $response = json_decode($res->getBody()->getContents(), true);
+            $token = $response['token'] ?? 0;
+            if ($token){
+                $data=Transaction::create([
+                    'user_id'=>$user->id,
+                    'tr_code'=>$tr_code,
+                    'token'=>$token,
+                ]);
+                $getMethod = '';
+                return response()->json([
+                    'message' => 'اطلاغات با موفقیت ثبت شد',
+                    'data' => $data,
+                ], 200);
+            }else{
+                return response()->json([
+                    'message' => 'کد نامعتبر می باشد',
+                    'errors' => [
+                        'code' => 'کد نامعتبر می باشد',
+                    ],
+                ], 422);
+
+            }
+
+        }else{
+            return response()->json([
+                'message' => 'کاربر تایید شده است',
+                'errors' => [
+                    'code' => 'کاربر تایید شده است',
+                ],
+            ], 422);
+
+        }
+
+
+    }
+    public function generate_tr_code()
+    {
+        do {
+            $trCode = rand(10000, 99999).Str::random(6);
+            $exists = Transaction::where('tr_code', $trCode)->exists();
+        } while ($exists);
+        return $trCode;
     }
 }

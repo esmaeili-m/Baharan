@@ -40,7 +40,7 @@ Route::post('/chat/create_message',[\App\Http\Controllers\ChatController::class,
 Route::post('/chat/messages',[\App\Http\Controllers\ChatController::class,'messages'])->middleware('check_token');
 Route::get('/chat/chats',[\App\Http\Controllers\ChatController::class,'chats'])->middleware('check_token');
 //------------------------------------->Setting
-
 Route::get('/setting',[\App\Http\Controllers\ChatController::class,'setting'])->middleware('check_token');
-
+//------------------------------------->cost
+Route::get('/cost',[\App\Http\Controllers\AuthOtpController::class,'cost']);
 
