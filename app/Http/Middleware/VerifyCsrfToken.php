@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'dashboard/upload-image-tinymce',
         'check-order-status',
+        'home/receipt',
     ];
 }
