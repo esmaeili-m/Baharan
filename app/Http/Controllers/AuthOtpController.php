@@ -162,7 +162,7 @@ class AuthOtpController extends Controller
         $token=null;
         if ($status == 'OK'){
             $token=$request->Token;
-            $transaction=Transaction::where('Token',$token)->latest()->first();
+            $transaction=Transaction::where('token',$token)->latest()->first();
             if ($transaction){
                 $user=User::find($transaction->user_id);
 
@@ -173,7 +173,7 @@ class AuthOtpController extends Controller
                 $user->update([
                     'status'=>3,
                 ]);
-                return redirect()->route('profile.index');
+                return redirect()->route('profile.index',['token',$token]);
             }
         }else{
             return redirect()->route('forbiden.403',['message'=>'تراکنش ناموفق با بخش مدیریت تماس بگیرید']);

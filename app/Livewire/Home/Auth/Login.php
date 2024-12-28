@@ -346,7 +346,16 @@ class Login extends Component
     }
     public function mount()
     {
-        if (\session()->has('register')){
+        if (\request()->has('token')){
+            $user=Transaction::where('token',\request()->token)->latest()->first();
+            if ($user){
+                $this->user=User::find($user->user_id);
+                auth()->login($this->user);
+            }else{
+                $user=false;
+            }
+        }
+        if (\session()->has('register') || $user){
             $this->submit_information=1;
             if (auth()->check()){
                 $this->user=User::where('phone',session()->get('register'))->first();
