@@ -45,5 +45,5 @@ Route::get('/chat/chats',[\App\Http\Controllers\ChatController::class,'chats'])-
 Route::get('/setting',[\App\Http\Controllers\ChatController::class,'setting'])->middleware('check_token');
 //------------------------------------->cost
 Route::get('/cost',[\App\Http\Controllers\AuthOtpController::class,'cost'])->middleware('check_token');
-Route::get('/redirect/{token}/{method?}',\App\Livewire\Home\Redirect::class)->name('redirect.api')->middleware('check_token');
+Route::get('/redirect/{token}/{method?}',\App\Livewire\Home\Redirect::class)->name('redirect.api');
 
