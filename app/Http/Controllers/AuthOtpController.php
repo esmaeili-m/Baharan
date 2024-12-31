@@ -190,7 +190,7 @@ class AuthOtpController extends Controller
                 'user' => ['required'],
 
             ]);
-        $user=User::find($request->user);
+        $user=$request->user;
         if (($user->status ?? 0) == 2){
             $tr_code=$this->generate_tr_code();
             $client = new Client();
