@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',\App\Livewire\Home\Auth\Login::class)->name('user.login');
 Route::get('/forbiden/403/',\App\Livewire\Home\Forbiden::class)->name('forbiden.403');
-Route::get('/redirect/{token}/{method?}',\App\Livewire\Home\Redirect::class)->name('redirect');
+Route::get('/redirect/{token}/{method?}',\App\Livewire\Home\Redirect::class)->name('redirect')->middleware('auth');
 
 Route::prefix('home')->group(function (){
     Route::post('home/get_code',[\App\Http\Controllers\LoginController::class,'get_code'])->name('get_code');
@@ -26,6 +26,6 @@ Route::prefix('home')->group(function (){
     ///////////////////////////Profile//////////////////////////////////
     Route::get('profile',\App\Livewire\Home\Profile\Index::class)->name('profile.index')->middleware('auth');
     //////
-    Route::post('/receipt',[\App\Http\Controllers\AuthOtpController::class,'receipt']);
+    Route::post('/receipt',[\App\Http\Controllers\AuthOtpController::class,'receipt'])->middleware('auth');
     ///
 });

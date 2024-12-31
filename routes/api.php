@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 //------------------------------------->Users
 Route::post('/get_code',[\App\Http\Controllers\AuthOtpController::class,'get_code']);
 Route::post('/check_code',[\App\Http\Controllers\AuthOtpController::class,'check_code']);
 Route::post('/user/create',[\App\Http\Controllers\AuthOtpController::class,'create']);
+
 //------------------------------------->Category
 Route::get('/categories',[\App\Http\Controllers\CategoryController::class,'categories']);
 Route::get('/category/{id}',[\App\Http\Controllers\CategoryController::class,'category']);
@@ -42,5 +44,6 @@ Route::get('/chat/chats',[\App\Http\Controllers\ChatController::class,'chats'])-
 //------------------------------------->Setting
 Route::get('/setting',[\App\Http\Controllers\ChatController::class,'setting'])->middleware('check_token');
 //------------------------------------->cost
-Route::get('/cost',[\App\Http\Controllers\AuthOtpController::class,'cost']);
+Route::get('/cost',[\App\Http\Controllers\AuthOtpController::class,'cost'])->middleware('check_token');
+Route::get('/redirect/{token}/{method?}',\App\Livewire\Home\Redirect::class)->name('redirect.api')->middleware('check_token');
 
