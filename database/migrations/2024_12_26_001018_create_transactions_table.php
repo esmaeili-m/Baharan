@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('tr_code');
+            $table->integer('type')->default(0);
             $table->string('token')->nullable();
             $table->boolean('status')->default(0);
             $table->longText('description')->nullable();

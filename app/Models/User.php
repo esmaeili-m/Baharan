@@ -78,4 +78,10 @@ class User extends Authenticatable
         } while (User::where('token', $token)->exists());
         return $token;
     }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class,'user_id','id')->whereNull('description');
+
+    }
 }

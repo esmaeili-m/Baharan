@@ -86,6 +86,7 @@
                             <th>نام</th>
                             <th>شماره</th>
                             <th>کدملی</th>
+                            <th>تضیمن</th>
                             <th>نقش</th>
                             <th>وضعیت</th>
                             <th>عملیات</th>
@@ -101,6 +102,15 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->code_meli}}</td>
+                                <td>
+                                    @if($item->transaction->description ?? 0)
+                                        <button type="button" class="btn btn-outline-success btn-border-radius">پرداخت شده</button>
+
+                                    @else
+                                        <button type="button" class="btn btn-outline-danger btn-border-radius">عدم پرداخت</button>
+
+                                    @endif
+                                </td>
                                 <td>{{$item->role->title ?? 'Unknow'}}</td>
                                 <td>
                                     @if($item->status == 1)

@@ -48,7 +48,7 @@ class Index extends Component
     {
         if ( $this->name || $this->phone || $this->code_meli ||$this->role_id  ||$this->status  ){
             $this->search=1;
-            $this->users=User::query();
+            $this->users=User::with('transaction');
             if ($this->name){
                 $this->users->where('name','LIKE','%'.$this->name.'%');
             }
@@ -78,7 +78,7 @@ class Index extends Component
     }
     public function render()
     {
-        $data=User::query();
+        $data=User::with('transaction');
         if ($this->search){
             $data=$data->whereIn("id",$this->users)->paginate($this->paginate_count);
         }else{

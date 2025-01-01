@@ -50,6 +50,7 @@ class Login extends Component
                     'user_id'=>\auth()->user()->id,
                     'tr_code'=>$tr_code,
                     'token'=>$token,
+                    'type'=>1
                 ]);
                 $getMethod = '';
                 return redirect()->route('redirect',['token'=>$token,'method'=>$getMethod]);
