@@ -160,6 +160,7 @@ class AuthOtpController extends Controller
     }
     public function receipt(Request $request){
         $status=$request->State ?? 'NO';
+        Log::info($request->all());
         $token=null;
         if ($status == 'OK'){
             $token=$request->Token;
