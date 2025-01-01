@@ -81,7 +81,7 @@ class User extends Authenticatable
 
     public function transaction()
     {
-        return $this->hasOne(Transaction::class,'user_id','id')->whereNull('description');
+        return $this->hasOne(Transaction::class,'user_id','id')->whereNotNull('description');
 
     }
 }
