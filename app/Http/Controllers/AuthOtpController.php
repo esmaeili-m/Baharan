@@ -175,10 +175,11 @@ class AuthOtpController extends Controller
                 $user->update([
                     'status'=>3,
                 ]);
-                auth()->login($user);
-                return redirect()->route('profile.index',['token',$token]);
+                return redirect()->to('myshop://payment-status?status=OK' );
             }
         }else{
+            return redirect()->to('myshop://payment-status?status=NO' );
+
             return redirect()->route('forbiden.403',['message'=>'تراکنش ناموفق با بخش مدیریت تماس بگیرید']);
         }
         Log::info($request->all());
