@@ -26,6 +26,6 @@ Route::prefix('home')->group(function (){
     ///////////////////////////Profile//////////////////////////////////
     Route::get('profile',\App\Livewire\Home\Profile\Index::class)->name('profile.index')->middleware('auth');
     //////
-    Route::post('/receipt',[\App\Http\Controllers\AuthOtpController::class,'receipt'])->middleware('auth');
+    Route::post('/receipt',[\App\Http\Controllers\AuthOtpController::class,'receipt']);
     ///
 });
