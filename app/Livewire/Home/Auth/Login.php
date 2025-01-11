@@ -35,7 +35,7 @@ class Login extends Component
             $body = json_encode([
                 "action" => "token",
                 "TerminalId" => "14615539",
-                "Amount" => 12000,
+                "Amount" => 10000000,
                 "ResNum" => $dynamicResNum,
                 "RedirectUrl" => "https://mottahedzarrin.ir/home/receipt",
                 "CellNumber" => $dynamicCellNumber
