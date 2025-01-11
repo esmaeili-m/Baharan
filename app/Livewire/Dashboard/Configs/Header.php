@@ -9,6 +9,7 @@ class Header extends Component
     public function logout()
     {
         auth()->logout();
+        session()->flush();
         return redirect()->route('user.login');
     }
     public function render()
