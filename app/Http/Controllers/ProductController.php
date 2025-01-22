@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function products()
     {
-        $data=Product::where('status',2)->get();
+        $data=Product::where('status',2)->orderBy('name', 'asc')->get();
         return response()->json([
             'message' => 'Get All Products Successfully',
             'data' => $data,
@@ -34,7 +34,7 @@ class ProductController extends Controller
     }
     public function products_category()
     {
-        $data=Product::where('status',2)->with('category')->get();
+        $data=Product::where('status',2)->orderBy('name', 'asc')->with('category')->get();
         return response()->json([
             'message' => 'Get Products With Category Successfully',
             'data' => $data,

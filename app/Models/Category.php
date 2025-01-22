@@ -13,6 +13,6 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class,'category_id','id')->where('status',2);
+        return $this->hasMany(Product::class,'category_id','id')->where('status',2)->orderBy('name', 'asc');
     }
 }

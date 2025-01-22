@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function categories()
     {
-        $data=Category::where('status',2)->get();
+        $data=Category::where('status',2)->orderBy('title', 'asc')->get();
         return response()->json([
             'message' => 'Get All Categories Successfully',
             'data' => $data,
@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
     }
     public function category_products(){
-        $data=Category::where('status',2)->with('products')->get();
+        $data=Category::where('status',2)->with('products')->orderBy('title', 'asc')->get();
         return response()->json([
             'message' => 'Get Category With Products Successfully',
             'data' => $data,
