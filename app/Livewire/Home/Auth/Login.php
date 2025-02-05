@@ -149,7 +149,7 @@ class Login extends Component
                 \session()->put('register',$this->phone);
                 Auth::login($this->user);
                 if ($this->user->status == 3){
-                    if ($this->user->role == 1){
+                    if ($this->user->role_id == 1){
                         return redirect()->route('profile.index');
                     }else{
                         return redirect()->route('dashboard');
